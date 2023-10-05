@@ -1,0 +1,60 @@
+{
+    "stats": [
+        {
+            "index": 1,
+            "hp": 100.0,
+            "damage": 15.0,
+            "defense": 5.0,
+            "movespeed": 8.0,
+            "tracespeed": 10.0,
+            "tracerange": 8.0,
+            "attackrange": 2.0,
+            "attackdelay": 1.0,
+            "mingold": 50,
+            "maxgold": 100,
+            "exp": 30.0
+        },
+        {
+            "index": 2,
+            "hp": 150.0,
+            "damage": 18.0,
+            "defense": 8.0,
+            "movespeed": 8.0,
+            "tracespeed": 10.0,
+            "tracerange": 8.0,
+            "attackrange": 2.0,
+            "attackdelay": 1.0,
+            "mingold": 75,
+            "maxgold": 150,
+            "exp": 50.0
+        },
+        {
+            "index": 3,
+            "hp": 180.0,
+            "damage": 25.0,
+            "defense": 5.0,
+            "movespeed": 8.0,
+            "tracespeed": 10.0,
+            "tracerange": 8.0,
+            "attackrange": 2.0,
+            "attackdelay": 1.5,
+            "mingold": 100,
+            "maxgold": 200,
+            "exp": 75.0
+        },
+        {
+            "index": 4,
+            "hp": 200.0,
+            "damage": 20.0,
+            "defense": 12.0,
+            "movespeed": 8.0,
+            "tracespeed": 10.0,
+            "tracerange": 8.0,
+            "attackrange": 2.0,
+            "attackdelay": 1.0,
+            "mingold": 125,
+            "maxgold": 250,
+            "exp": 90.0
+        }
+    ]
+}
