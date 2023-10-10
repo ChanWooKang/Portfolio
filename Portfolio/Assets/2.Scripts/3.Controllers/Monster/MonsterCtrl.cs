@@ -12,6 +12,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     CapsuleCollider _colider;
     Renderer[] _meshs;
     NavMeshAgent _agent;
+    public UI_HPBar _hpBar;
 
     public eMonster mType = eMonster.Unknown;
     public SODropTable _dropTable;
@@ -60,7 +61,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         InitComponent();
         InitState(this, MonsterStateInitial._inst);
-        
+        _hpBar = Managers._ui.MakeWorldSpace<UI_HPBar>(transform);
     }
 
     void Update()
@@ -287,13 +288,17 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     public void OnDeadEvent()
     {
+        if(_hpBar != null)
+        {
+            
+            _hpBar.CoroutineStop();            
+            _hpBar = null;
+        }        
         SpawnManager._inst.MonsterDespawn(gameObject);
         ChangeColor(Color.white);
         ChangeState(MonsterStateDisable._inst);
         _dropTable.ItemDrop(transform, _stat.Gold);
-        _dropTable.ItemDrop(transform);
-
-        //InventoryManager._inst.OnChangeStat?.Invoke();
+        _dropTable.ItemDrop(transform);        
     }
 
     public void OnResurrectEvent()

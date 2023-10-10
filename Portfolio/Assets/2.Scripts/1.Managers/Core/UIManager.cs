@@ -46,6 +46,9 @@ public class UIManager
 
         if (parent != null)
             go.transform.SetParent(parent);
+        else
+            go.transform.SetParent(Managers._ui.Root.transform);
+
         Canvas canvas = go.GetOrAddComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
         canvas.worldCamera = Camera.main;

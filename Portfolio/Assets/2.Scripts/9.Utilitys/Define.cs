@@ -67,7 +67,8 @@ namespace Define
     {
         Monster,
         RootItem,
-        Effect
+        Effect,
+        UI,
     }
 
     public enum eInteract

@@ -15,7 +15,13 @@ MonoBehaviour:
   list_Items:
   - item: {fileID: 0}
     weight: 200
-  - item: {fileID: 0}
+  - item: {fileID: 11400000, guid: 6b6a09ea1e146f74ab8a9f6766059cd5, type: 2}
+    weight: 80
+  - item: {fileID: 11400000, guid: 54ea0ff160ff28b49a3b6d0ebe9870ba, type: 2}
     weight: 50
-  pickCnt_Weights: c80000001e000000
+  - item: {fileID: 11400000, guid: 1c00051014f78f343b56e5eab2c1bb76, type: 2}
+    weight: 30
+  - item: {fileID: 11400000, guid: 269daa27764b4a84c8415fb3e8b9287e, type: 2}
+    weight: 10
+  pickCnt_Weights: c800000050000000
   GoldItem: {fileID: 11400000, guid: bda98e6c556c2d542988d1d5f30b9c33, type: 2}
