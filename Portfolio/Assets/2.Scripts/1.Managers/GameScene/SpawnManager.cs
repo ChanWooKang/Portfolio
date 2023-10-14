@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public Action<eMonster, int> OnSpawnEvent;
     public List<SpawnPoint> points;
 
+    [SerializeField] SOItem testItem;
     PoolingManager pool;
 
     void Awake()
@@ -26,6 +27,16 @@ public class SpawnManager : MonoBehaviour
     public void Init()
     {
         pool = PoolingManager._pool;
+    }
+
+
+    private void Update()
+    {
+        // Test
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Spawn(testItem,transform);
+        }
     }
 
     public void Clear()

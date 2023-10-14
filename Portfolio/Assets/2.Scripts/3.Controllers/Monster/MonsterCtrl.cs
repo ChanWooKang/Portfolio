@@ -60,8 +60,9 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     void Start()
     {
         InitComponent();
-        InitState(this, MonsterStateInitial._inst);
         _hpBar = Managers._ui.MakeWorldSpace<UI_HPBar>(transform);
+        InitState(this, MonsterStateInitial._inst);
+        
     }
 
     void Update()
@@ -94,6 +95,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         isDead = false;
         isAttack = false;
         isReturnHome = false;
+        _hpBar.CoroutineStart();
     }
 
 
@@ -287,13 +289,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     }
 
     public void OnDeadEvent()
-    {
-        if(_hpBar != null)
-        {
-            
-            _hpBar.CoroutineStop();            
-            _hpBar = null;
-        }        
+    {      
         SpawnManager._inst.MonsterDespawn(gameObject);
         ChangeColor(Color.white);
         ChangeState(MonsterStateDisable._inst);

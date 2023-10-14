@@ -1,7 +1,22 @@
 {
-    "InvenArrayNumber": [],
-    "InvenItemName": [],
-    "InvenItemCount": [],
-    "EquipArrayNumber": [],
-    "EquipItemName": []
+    "InvenArrayNumber": [
+        0,
+        1
+    ],
+    "InvenItemName": [
+        "BigSword",
+        "BigShield"
+    ],
+    "InvenItemCount": [
+        1,
+        1
+    ],
+    "EquipArrayNumber": [
+        5,
+        4
+    ],
+    "EquipItemName": [
+        "BigSword",
+        "BigShield"
+    ]
 }

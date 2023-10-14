@@ -109,6 +109,7 @@ namespace Define
         Unknown = 0,
         Slash,
         Heal,
+        Spin,
         
         Dodge,
     }

@@ -74,6 +74,9 @@ public class PlayerCtrl : MonoBehaviour
                             case eSkill.Slash:
                                 _anim.CrossFade("Slash", 0.1f, -1, 0);
                                 break;
+                            case eSkill.Spin:
+                                _anim.CrossFade("Spin", 0.1f);
+                                break;
                         }
                     }
                     break;
@@ -243,6 +246,12 @@ public class PlayerCtrl : MonoBehaviour
                         dict_bool[PlayerBools.ContinueAttack] = false;
                 }
                 break;
+            case PlayerState.Skill:
+                {
+                    if (_sType == eSkill.Spin)
+                        OnMouseEvent_SPINMOVE(evt);
+                }
+                break;
         }
     }
 
@@ -264,6 +273,35 @@ public class PlayerCtrl : MonoBehaviour
                             _locktarget = rhit.collider.gameObject;
                         else
                             _locktarget = null;
+                    }
+                }
+                break;
+            case MouseEvent.Press:
+                {
+                    if (_locktarget == null && hit)
+                        _destPos = rhit.point;
+                }
+                break;
+            case MouseEvent.PointerUp:
+                dict_bool[PlayerBools.ContinueAttack] = false;
+                break;
+        }
+    }
+
+    void OnMouseEvent_SPINMOVE(MouseEvent evt)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool hit = Physics.Raycast(ray, out RaycastHit rhit, 100, 1 << (int)eLayer.Ground);
+        switch (evt)
+        {
+            case MouseEvent.PointerDown:
+                {
+                    if (hit)
+                    {
+                        _destPos = rhit.point;
+                        if (State != PlayerState.Move)
+                            State = PlayerState.Move;
+                        dict_bool[PlayerBools.ContinueAttack] = true;
                     }
                 }
                 break;

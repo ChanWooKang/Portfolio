@@ -123,8 +123,11 @@ public class PlayerStat : BaseStat
             _level = stat.level;
             if(Managers._data.Dict_Stat.TryGetValue(_level, out DataByLevel DBL))
             {
-                SetPlayerData(stat.nowhp, DBL.hp, stat.nowmp, DBL.mp, DBL.damage, DBL.defense, stat.nowexp, stat.gold);
+                SetPlayerData(DBL.hp, DBL.mp, DBL.damage, DBL.defense, stat.nowexp, stat.gold);
                 SetPlusData(stat.plushp, stat.plusmp, stat.plusdamage, stat.plusdefense);
+
+                _hp = Mathf.Min(stat.nowhp, _maxhp);
+                _mp = Mathf.Min(stat.nowmp, _maxmp);
             }
             else
             {
@@ -158,10 +161,8 @@ public class PlayerStat : BaseStat
         return save;
     }
 
-    void SetPlayerData(float hp, float maxhp, float mp, float maxmp, float damage,float defense, float exp, int gold)
+    void SetPlayerData(float maxhp,float maxmp, float damage,float defense, float exp, int gold)
     {
-        _hp = Mathf.Min(hp, maxhp);
-        _mp = Mathf.Min(mp, maxmp);
         _maxhp = maxhp;
         _maxmp = maxmp;
         _damage = damage;

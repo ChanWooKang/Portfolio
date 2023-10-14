@@ -11,18 +11,24 @@ public class UI_HPBar : UI_Base
     }
 
     MonsterCtrl mc;
-    Image HP;    
+    Image HP;
+
+    void Start()
+    {
+        Init();
+    }
 
     public override void Init()
     {
         Bind<Image>(typeof(Images));
-        
-        HP = GetImage((int)Images.HP);                
+        HP = GetImage((int)Images.HP);
+        mc = GetComponentInParent<MonsterCtrl>();
+        StartCoroutine(Setting());
     }
 
     IEnumerator Setting()
     {
-        while(mc.isDead == false)
+        while (mc.isDead == false)
         {
             Transform parent = transform.parent;
             transform.position = parent.position + Vector3.up * (mc.Agent.height);
@@ -39,18 +45,15 @@ public class UI_HPBar : UI_Base
         HP.fillAmount = ratio;
     }
 
-    public void CoroutineStart(MonsterCtrl _mc)
+    public void CoroutineStart()
     {
-        Init();
-        mc = _mc;
-        SetHPBar(1);
-        StopCoroutine(Setting());
-        StartCoroutine(Setting());
-    }
+        if (mc == null)
+            return;
 
-    public void CoroutineStop()
-    {
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+        if(mc.isDead == false)
+        {
+            StopCoroutine(Setting());
+            StartCoroutine(Setting());
+        }
     }
 }

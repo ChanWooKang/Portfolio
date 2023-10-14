@@ -55,10 +55,15 @@ public class InventoryManager : MonoBehaviour
     void ChangeEquipment(eEquipment type, SOItem item, bool isWear= true)
     {
         if (item == null)
+        {
             return;
+        }
+            
         if (ActiveChangeEquip)
+        {
             return;
-
+        }
+            
         StopCoroutine(ChangeCoroutine(type, item, isWear));
         StartCoroutine(ChangeCoroutine(type, item, isWear));
 
@@ -66,7 +71,6 @@ public class InventoryManager : MonoBehaviour
 
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)
     {
-        yield return null;
         ActiveChangeEquip = true;
         if(isWear == false)
         {
@@ -91,34 +95,34 @@ public class InventoryManager : MonoBehaviour
             if(item != null && dict_Equip.ContainsKey(type))
             {
                 //장착 되어 있으면 장착 해제 후 임시 데이터 저장
-                if(dict_Equip[type] != null)
+                if (dict_Equip[type] != null)
                 {
                     tempItem = dict_Equip[type];
                     //장비 추가 스텟 차감
-                    if(tempItem.sList != null)
+                    if (tempItem.sList != null)
                     {
                         tempStat = tempItem.sList;
-                        for(int i = 0; i < tempStat.Count; i++)
+                        for (int i = 0; i < tempStat.Count; i++)
                         {
                             PlayerCtrl._inst._stat.AddPlusStat(tempStat[i].statType, -tempStat[i].sValue);
                         }
                     }
-
-                    //장착 할 아이템 추가 스텟 적용
-                    if(item.sList != null)
-                    {
-                        tempStat = item.sList;
-                        for (int i = 0; i < tempStat.Count; i++)
-                        {
-                            PlayerCtrl._inst._stat.AddPlusStat(tempStat[i].statType, tempStat[i].sValue);
-                        }
-                    }
-
-                    if (tempItem != null)
-                        AddInvenItem(tempItem);
-                    AddEquipItem(type, item);
-                    dict_Equip[type] = item;
                 }
+                //장착 할 아이템 추가 스텟 적용
+                if(item.sList != null)
+                {
+                    tempStat = item.sList;
+                    for (int i = 0; i < tempStat.Count; i++)
+                    {
+                        PlayerCtrl._inst._stat.AddPlusStat(tempStat[i].statType, tempStat[i].sValue);
+                    }
+                }
+
+                if (tempItem != null)
+                    AddInvenItem(tempItem);
+                AddEquipItem(type, item);
+                dict_Equip[type] = item;
+                
             }
 
         }

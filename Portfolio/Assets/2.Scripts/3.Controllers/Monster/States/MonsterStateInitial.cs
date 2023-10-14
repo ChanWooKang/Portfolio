@@ -11,7 +11,6 @@ public class MonsterStateInitial : TSingleton<MonsterStateInitial>, IFSMState<Mo
         m._stat.SetStat(m.mType);
         m.SetTarget();
         m.InitData();
-        
         m.ChangeState(MonsterStatePatrol._inst);
         
     }
