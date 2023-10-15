@@ -64,4 +64,14 @@ public class UI_Equipment : UI_Base
             }
         }
     }
+
+    // Test¿ë
+    public void ClearEquip()
+    {
+        foreach(var slot in Equip_Slots)
+        {
+            slot.Value.ClearSlot();
+        }
+            
+    }
 }

@@ -9,7 +9,9 @@ public class SOSkill : ScriptableObject
     public eSkill type;
     public string skillName;
     public KeyCode key;
+    public float useMp;
     public float cool;
+    public float duration;
     public float effectValue;
     public List<STAT> sList = new List<STAT>();
 

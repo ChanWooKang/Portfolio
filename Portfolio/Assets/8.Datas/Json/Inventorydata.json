@@ -4,19 +4,13 @@
         1
     ],
     "InvenItemName": [
-        "BigSword",
-        "BigShield"
+        "LongSword",
+        "SmallShield"
     ],
     "InvenItemCount": [
         1,
         1
     ],
-    "EquipArrayNumber": [
-        5,
-        4
-    ],
-    "EquipItemName": [
-        "BigSword",
-        "BigShield"
-    ]
+    "EquipArrayNumber": [],
+    "EquipItemName": []
 }

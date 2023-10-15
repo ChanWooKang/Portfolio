@@ -75,6 +75,11 @@ public class MonsterStat : BaseStat
         return base.GetHit(attacker);
     }
 
+    public override bool GetHit(float damage)
+    {
+        return base.GetHit(damage);
+    }
+
     public void DeadFunc(PlayerStat stat)
     {
         if (stat != null)

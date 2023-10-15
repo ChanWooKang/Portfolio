@@ -31,6 +31,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     MonsterState _nowState = MonsterState.Idle;
     eCombo _nowCombo = eCombo.Hit1;
 
+
     public NavMeshAgent Agent
     {
         get
@@ -237,6 +238,9 @@ public class MonsterCtrl : FSM<MonsterCtrl>
             return;
         }
 
+        if (player.Bools[PlayerBools.ActDodge])
+            return;
+
         _agent.avoidancePriority = 51;
         State = MonsterState.Attack;
         isAttack = true;
@@ -247,7 +251,8 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         if (target != null && player.State != PlayerState.Die)
         {
             if (IsCloseTarget(target.position, _stat.AttackRange))
-            {
+            {                
+
                 player.OnDamage(_stat);
             }
         }
@@ -303,5 +308,33 @@ public class MonsterCtrl : FSM<MonsterCtrl>
             _colider.enabled = true;
         ChangeLayer(eLayer.Monster);
         ChangeState(MonsterStateInitial._inst);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon") || other.CompareTag("Cry") || other.CompareTag("Slash"))
+        {
+            float damage = 0;
+            if (other.CompareTag("Weapon"))
+            {
+                damage = other.transform.GetComponent<WeaponCtrl>().Damage;
+            }
+            else if (other.CompareTag("Cry"))
+            {
+                damage = other.transform.GetComponent<SkillCryCtrl>().Damage;
+            }
+            else
+            {                
+                damage = other.transform.GetComponent<SkillSlashCtrl>().Damage;
+                Debug.Log($"SLASH{damage}");
+            }
+                
+            if (damage > 0)
+                isDead = _stat.GetHit(damage);
+            else
+                return;
+            StopCoroutine(OnDamageEvent());
+            StartCoroutine(OnDamageEvent());
+        }
     }
 }

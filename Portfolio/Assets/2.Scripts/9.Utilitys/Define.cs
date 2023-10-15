@@ -42,7 +42,8 @@ namespace Define
         Ground,
         Player,
         Monster,
-        Interact
+        Interact,
+        Weapon
     }
 
     public enum MouseEvent 
@@ -100,6 +101,7 @@ namespace Define
         Dead = 0,
         ContinueAttack,
         ActDodge,
+        ActSkill,
 
         Max_Cnt,
     }
@@ -110,7 +112,7 @@ namespace Define
         Slash,
         Heal,
         Spin,
-        
+        Cry,        
         Dodge,
     }
 

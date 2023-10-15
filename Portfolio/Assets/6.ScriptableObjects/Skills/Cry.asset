@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e42d2e3fcf77e4fb677bbde258540a, type: 3}
+  m_Name: Cry
+  m_EditorClassIdentifier: 
+  type: 4
+  skillName: Cry
+  key: 114
+  useMp: 150
+  cool: 30
+  duration: 10
+  effectValue: 3
+  sList:
+  - statType: 0
+    statName: HP
+    descName: "\uCCB4\uB825 \uC5C5"
+    sValue: 50
+  - statType: 2
+    statName: Damage
+    descName: "\uACF5\uACA9\uB825 \uC5C5"
+    sValue: 20
+  icon: {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
+  krName: 

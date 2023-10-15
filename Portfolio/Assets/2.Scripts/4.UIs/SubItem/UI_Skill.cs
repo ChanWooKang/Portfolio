@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Define;
 
 
 public class UI_Skill : UI_Base
@@ -11,8 +12,10 @@ public class UI_Skill : UI_Base
         Cool_Img
     }
 
+    PlayerCtrl player;
+
     public SOSkill _skill;
-   Image Cool_Img;
+    Image Cool_Img;
 
     void Start()
     {
@@ -26,10 +29,14 @@ public class UI_Skill : UI_Base
         Managers._input.KeyAction -= OnKeyBoardEvent;
         Managers._input.KeyAction += OnKeyBoardEvent;
         ClearCool();
+        player = PlayerCtrl._inst;
     }
 
     void OnKeyBoardEvent()
     {
+        if (player.Bools[PlayerBools.Dead])
+            return;
+
         if (Input.GetKeyDown(_skill.key))
         {
             OnSkill();
@@ -53,6 +60,23 @@ public class UI_Skill : UI_Base
     {
         if (Cool_Img.fillAmount > 0)
             return;
+
+        switch (_skill.type) 
+        {
+            case eSkill.Dodge:
+                {
+                    if (player.Bools[PlayerBools.ActSkill])
+                        return;
+                }
+                break;
+            default:
+                if (player.Bools[PlayerBools.ActDodge])
+                    return;
+
+                if (player.UseMP(_skill.useMp) == false)
+                    return;
+                break;
+        }
 
         //스킬 처리
         PlayerCtrl._inst.SkillEvent(_skill.type, _skill);

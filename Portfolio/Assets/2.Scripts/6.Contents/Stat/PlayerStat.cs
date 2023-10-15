@@ -4,6 +4,7 @@ using UnityEngine;
 using Define;
 using DataContents;
 
+
 public class PlayerStat : BaseStat
 {
     protected float _mp;
@@ -88,7 +89,7 @@ public class PlayerStat : BaseStat
     }
 
     #endregion [ Property ]
-
+  
     void Init()
     {
         _level = 1;
@@ -108,11 +109,13 @@ public class PlayerStat : BaseStat
     public void SetStat(int level)
     {
         DataByLevel stat = Managers._data.Dict_Stat[level];
-        _hp = _maxhp = stat.hp;
-        _mp = _maxmp = stat.mp;
+       _maxhp = stat.hp;
+       _maxmp = stat.mp;
         _damage = stat.damage;
         _defense = stat.defense;
         SetMaxData();
+        _hp = _maxhp;
+        _mp = _maxmp;
     }
 
     public void LoadPlayer()
@@ -138,6 +141,7 @@ public class PlayerStat : BaseStat
         {
             Init();
         }
+        
     }
 
     public PlayerData SavePlayer()
@@ -230,5 +234,18 @@ public class PlayerStat : BaseStat
     public override bool GetHit(BaseStat attacker)
     {
         return base.GetHit(attacker);
+    }
+
+    public bool UseMP(float value)
+    {
+        if(_mp >= value)
+        {
+            _mp -= value;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

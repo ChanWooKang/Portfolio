@@ -15,8 +15,14 @@ MonoBehaviour:
   type: 3
   skillName: Spin
   key: 101
-  cool: 20
-  effectValue: 4
-  sList: []
+  useMp: 70
+  cool: 15
+  duration: 3
+  effectValue: 0.35
+  sList:
+  - statType: 2
+    statName: Damage
+    descName: "\uB370\uBBF8\uC9C0"
+    sValue: 10
   icon: {fileID: 21300000, guid: 0389074d1deba1c448d45812db40c0df, type: 3}
   krName: "\uD720 \uC708\uB4DC"

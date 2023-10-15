@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BaseStat
@@ -30,6 +31,20 @@ public class BaseStat
         //float damage = Mathf.Max(0.5f, attacker._damage - _defense);
         
         if(_hp > damage)
+        {
+            _hp -= damage;
+            return false;
+        }
+        else
+        {
+            _hp = 0;
+            return true;
+        }
+    }
+
+    public virtual bool GetHit(float damage)
+    {        
+        if (_hp > damage)
         {
             _hp -= damage;
             return false;

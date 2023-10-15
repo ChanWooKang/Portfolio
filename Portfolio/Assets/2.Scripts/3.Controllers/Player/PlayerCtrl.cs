@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Define;
+using System;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PlayerCtrl : MonoBehaviour
     Rigidbody _rb;
     NavMeshAgent _agent;
     Renderer[] _meshs;
+
+    WeaponCtrl _weapon;
+    SkillCryCtrl _cry;
+    SkillHealCtrl _heal;
 
     //레이어 마스크 
     int _clickMask;
@@ -77,6 +82,9 @@ public class PlayerCtrl : MonoBehaviour
                             case eSkill.Spin:
                                 _anim.CrossFade("Spin", 0.1f);
                                 break;
+                            case eSkill.Cry:
+                                _anim.CrossFade("Cry", 0.1f, -1, 0);
+                                break;
                         }
                     }
                     break;
@@ -121,6 +129,9 @@ public class PlayerCtrl : MonoBehaviour
                         case eSkill.Slash:
                             UpdateSkill();
                             break;
+                        case eSkill.Spin:
+                            UpdateMoveDuringSKill();
+                            break;
                     }
                 }
                 break;
@@ -140,8 +151,16 @@ public class PlayerCtrl : MonoBehaviour
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
-        _meshs = GetComponentsInChildren<Renderer>();
+        _meshs = transform.GetChild(0).GetComponentsInChildren<Renderer>();
         _stat = new PlayerStat();
+
+        //스킬 관련 처리
+        // 휠윈드 기능
+        _weapon = GetComponentInChildren<WeaponCtrl>();
+        // 함성 기능
+        _cry = GetComponentInChildren<SkillCryCtrl>();
+        // 힐링 기능
+        _heal = GetComponentInChildren<SkillHealCtrl>();
     }
 
     void InitData()
@@ -160,6 +179,8 @@ public class PlayerCtrl : MonoBehaviour
         dict_bool = new Dictionary<PlayerBools, bool>();
         for (int i = 0; i < (int)PlayerBools.Max_Cnt; i++)
             dict_bool.Add((PlayerBools)i, false);
+
+        StartCoroutine(RegenerateStat());
     }
 
     void FreezeRotate()
@@ -295,25 +316,14 @@ public class PlayerCtrl : MonoBehaviour
         switch (evt)
         {
             case MouseEvent.PointerDown:
+            case MouseEvent.Press:
                 {
                     if (hit)
                     {
-                        _destPos = rhit.point;
-                        if (State != PlayerState.Move)
-                            State = PlayerState.Move;
-                        dict_bool[PlayerBools.ContinueAttack] = true;
+                        _destPos = rhit.point;                        
                     }
                 }
-                break;
-            case MouseEvent.Press:
-                {
-                    if (_locktarget == null && hit)
-                        _destPos = rhit.point;
-                }
-                break;
-            case MouseEvent.PointerUp:
-                dict_bool[PlayerBools.ContinueAttack] = false;
-                break;
+                break;            
         }
     }
 
@@ -348,6 +358,26 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    void UpdateMoveDuringSKill()
+    {
+        Vector3 dir = _destPos - transform.position;
+        dir.y = 0;
+        if (dir.sqrMagnitude >= 0.01f)
+        {
+            float dist = Mathf.Clamp(_stat.MoveSpeed * Time.deltaTime, 0, dir.sqrMagnitude);
+            _agent.Move(dir.normalized * dist);
+
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, dir, 1.0f, _blockMask))
+                return;
+
+            if(dir != Vector3.zero)
+            {
+                Quaternion rot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 20.0f * Time.deltaTime);
+            }
+        }
+    }
+
     void UpdateAttack()
     {
         if(_locktarget != null)
@@ -367,7 +397,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             Quaternion rot = Quaternion.LookRotation(_mouseWorldPoint);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f * Time.deltaTime);
-
         }
     }
     #endregion [ Update By State ]
@@ -463,6 +492,11 @@ public class PlayerCtrl : MonoBehaviour
         _stat.BuffEvent(type, value);
     }
 
+    public bool UseMP(float value)
+    {
+        return _stat.UseMP(value);
+    }
+
     #endregion [ Stat Event ]
 
     #region [ Skill Event ]
@@ -477,6 +511,12 @@ public class PlayerCtrl : MonoBehaviour
             case eSkill.Heal:
                 HealEvent(skill);
                 break;
+            case eSkill.Spin:
+                SpinEvent(skill);
+                break;
+            case eSkill.Cry:
+                CryEvent(skill);
+                break;
             case eSkill.Dodge:
                 DodgeEvent(skill);
                 break;
@@ -487,8 +527,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (CheckMousePoint())
         {
-            StopCoroutine(OnSlashEvent(skill));
-            StartCoroutine(OnSlashEvent(skill));
+            StopCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
+            StartCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
         }
     }
 
@@ -496,9 +536,20 @@ public class PlayerCtrl : MonoBehaviour
     {
         float value = _stat.MaxHP * skill.effectValue;
         UsePotion(eStat.HP, value);
-        //StopCoroutine(OnHealEvent(skill.skillName));
-        //StartCoroutine(OnHealEvent(skill.skillName));
+        _heal.HealEffect();
+    }
 
+    void SpinEvent(SOSkill skill)
+    {
+        // 연동 및 세팅
+        StopCoroutine(OnSpinEvent(skill, skill.duration));
+        StartCoroutine(OnSpinEvent(skill, skill.duration));
+    }
+
+    void CryEvent(SOSkill skill)
+    {       
+        StopCoroutine(OnCryEvent(skill, skill.duration));
+        StartCoroutine(OnCryEvent(skill,skill.duration));
     }
 
     void DodgeEvent(SOSkill skill)
@@ -508,11 +559,42 @@ public class PlayerCtrl : MonoBehaviour
             StopCoroutine(OnDodgeEvent(skill.effectValue, _mouseWorldPoint));
             StartCoroutine(OnDodgeEvent(skill.effectValue, _mouseWorldPoint));
         }
+        
+    }
+
+    public void EndSkillAnim()
+    {
+        _sType = eSkill.Unknown;
+        Vector3 dir = _destPos - transform.position;
+        dir.y = 0;
+
+        if (dir.sqrMagnitude < 0.01f)
+            State = PlayerState.Idle;
+        else
+            State = PlayerState.Move;
     }
 
     #endregion [ Skill Event ]
 
     #region [ Coroutine ]
+
+    IEnumerator RegenerateStat()
+    {
+        while (dict_bool[PlayerBools.Dead] == false)
+        {
+            if (_stat.HP < _stat.MaxHP)
+            {
+                _stat.HP = Mathf.Min(_stat.HP + 5, _stat.MaxHP);
+            }
+
+            if (_stat.MP < _stat.MaxMP)
+            {
+                _stat.MP = Mathf.Min(_stat.MP + 15, _stat.MaxMP);                
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+    }
 
     IEnumerator OnDamageEvent()
     {
@@ -531,23 +613,80 @@ public class PlayerCtrl : MonoBehaviour
 
     }
 
-    IEnumerator OnSlashEvent(SOSkill skill)
-    {
-        yield return null;
+    IEnumerator OnSlashEvent(SOSkill skill, Vector3 dir)
+    {       
+
+        dict_bool[PlayerBools.ActSkill] = true;
+
+        Quaternion rot = Quaternion.LookRotation(_mouseWorldPoint);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f);
+
+
+        _sType = eSkill.Slash;
+        State = PlayerState.Skill;
+        
+        yield return new WaitForSeconds(0.2f);
+        //Test
+        GameObject go = PoolingManager._pool.InstantiateAPS(skill.skillName);
+        SkillSlashCtrl ssc = go.GetComponent<SkillSlashCtrl>();
+        ssc.SlashEvent(skill, transform, dir);
+
+        dict_bool[PlayerBools.ActSkill] = false;
+
+        _sType = eSkill.Unknown;
+        State = PlayerState.Move;
+
+        yield return new WaitForSeconds(2.0f);
+        go.DestroyAPS();
     }
 
-    IEnumerator OnHealEvent(string name)
+    IEnumerator OnSpinEvent(SOSkill skill, float time)
     {
-        GameObject go = PoolingManager._pool.InstantiateAPS(name, transform.position, Quaternion.identity, Vector3.one, transform);
-        ParticleSystem ps = go.GetComponentInChildren<ParticleSystem>();
-        ps.Play(true);
+        dict_bool[PlayerBools.ActSkill] = true;
+        _sType = eSkill.Spin;
+        State = PlayerState.Skill;
 
-        while (ps.IsAlive(true))
+        float damage = _stat.Damage * skill.effectValue;
+
+        //콜라이더 생성
+        _weapon.WeaponUse(damage, skill.duration);
+
+        yield return new WaitForSeconds(time);
+
+        dict_bool[PlayerBools.ActSkill] = false;
+
+        _sType = eSkill.Unknown;
+
+        Vector3 dir = _destPos - transform.position;
+        dir.y = 0;
+
+        if (dir.sqrMagnitude < 0.01f)
+            State = PlayerState.Idle;
+        else
+            State = PlayerState.Move;
+
+    }
+
+    IEnumerator OnCryEvent(SOSkill skill, float time)
+    {
+        _sType = eSkill.Cry;
+        State = PlayerState.Skill;        
+        yield return new WaitForSeconds(0.53f);
+        float damage = _stat.Damage * skill.effectValue;
+        _cry.CryActive(damage, skill.duration);
+
+        List<STAT> list = skill.sList;
+        for(int i = 0; i < list.Count; i++)
         {
-            yield return null;
+            AddPlusStat(list[i].statType, list[i].sValue);
         }
 
-        go.DestroyAPS();
+        yield return new WaitForSeconds(time);
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            AddPlusStat(list[i].statType, -list[i].sValue);
+        }
     }
 
     IEnumerator OnDodgeEvent(float power, Vector3 dir)

@@ -29,16 +29,6 @@ public class SpawnManager : MonoBehaviour
         pool = PoolingManager._pool;
     }
 
-
-    private void Update()
-    {
-        // Test
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Spawn(testItem,transform);
-        }
-    }
-
     public void Clear()
     {
        

@@ -37,7 +37,8 @@ public class UI_HPBar : UI_Base
             float ratio = mc._stat.HP / mc._stat.MaxHP;
             HP.fillAmount = ratio;
             yield return null;
-        }        
+        }
+        SetHPBar(0);
     }
 
     public void SetHPBar(float ratio)

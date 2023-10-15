@@ -43,6 +43,17 @@ public class InventoryManager : MonoBehaviour
         OnChangeEvent += ChangeEquipment;
     }
 
+    // Test용
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Delete))
+        {
+            //인벤 초기화
+            equip.ClearEquip();
+            inven.ResetAllSlots();
+        }
+    }
+
     public void Init()
     {
         equip = FindObjectOfType<UI_Equipment>();
@@ -54,7 +65,7 @@ public class InventoryManager : MonoBehaviour
 
     void ChangeEquipment(eEquipment type, SOItem item, bool isWear= true)
     {
-        if (item == null)
+        if (item == null || PlayerCtrl._inst.Bools[PlayerBools.Dead])
         {
             return;
         }
