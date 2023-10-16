@@ -325,8 +325,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
             }
             else
             {                
-                damage = other.transform.GetComponent<SkillSlashCtrl>().Damage;
-                Debug.Log($"SLASH{damage}");
+                damage = other.transform.GetComponent<SkillSlashCtrl>().Damage;                
             }
                 
             if (damage > 0)
