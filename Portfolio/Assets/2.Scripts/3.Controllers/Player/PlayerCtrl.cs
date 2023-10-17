@@ -21,6 +21,7 @@ public class PlayerCtrl : MonoBehaviour
     WeaponCtrl _weapon;
     SkillCryCtrl _cry;
     SkillHealCtrl _heal;
+    PotionEffect _potion;
 
     //레이어 마스크 
     int _clickMask;
@@ -95,6 +96,7 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject LockTarget { get { return _locktarget; } set { _locktarget = value; } }
     public Dictionary<PlayerBools,bool> Bools { get { return dict_bool; } }
 
+    public NavMeshAgent Agent { get { return _agent; } }
     #endregion [ Property ]
 
     void Awake()
@@ -156,11 +158,13 @@ public class PlayerCtrl : MonoBehaviour
 
         //스킬 관련 처리
         // 휠윈드 기능
-        _weapon = GetComponentInChildren<WeaponCtrl>();
+        _weapon = FindObjectOfType<WeaponCtrl>();
         // 함성 기능
-        _cry = GetComponentInChildren<SkillCryCtrl>();
+        _cry = FindObjectOfType<SkillCryCtrl>();
         // 힐링 기능
-        _heal = GetComponentInChildren<SkillHealCtrl>();
+        _heal = FindObjectOfType<SkillHealCtrl>();
+        // 포션 섭취시 
+        _potion = FindObjectOfType<PotionEffect>();
     }
 
     void InitData()
@@ -574,6 +578,11 @@ public class PlayerCtrl : MonoBehaviour
             State = PlayerState.Move;
     }
 
+    public void PotionEvent(ePotion type)
+    {
+        _potion.EffectPlay(type);
+    }
+
     #endregion [ Skill Event ]
 
     #region [ Coroutine ]
@@ -598,6 +607,7 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator OnDamageEvent()
     {
+        FloatText.Create("FloatText", false, transform.position, (int)_stat.AttackedDamage);
         if (dict_bool[PlayerBools.Dead])
         {
             State = PlayerState.Die;

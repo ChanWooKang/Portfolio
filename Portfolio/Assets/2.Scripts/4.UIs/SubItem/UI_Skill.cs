@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Define;
 
 
-public class UI_Skill : UI_Base
+
+public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
 {
     enum GameObjects
     {
@@ -13,7 +15,7 @@ public class UI_Skill : UI_Base
     }
 
     PlayerCtrl player;
-
+    
     public SOSkill _skill;
     Image Cool_Img;
 
@@ -101,5 +103,17 @@ public class UI_Skill : UI_Base
             yield return null;
         }
         ClearCool();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+        UI_SkillInfo._inst.SetInformation(_skill, transform.position);
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_SkillInfo._inst.OffInforMation();
     }
 }

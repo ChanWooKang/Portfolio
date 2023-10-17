@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
     #region [ UI Component ]
     UI_Inventory inven;
     UI_Equipment equip;
-
+    UI_HotKey hotkey;
 
     #endregion [ UI Component ]
 
@@ -51,6 +51,7 @@ public class InventoryManager : MonoBehaviour
             //인벤 초기화
             equip.ClearEquip();
             inven.ResetAllSlots();
+            hotkey.ClearSlot();
         }
     }
 
@@ -58,8 +59,10 @@ public class InventoryManager : MonoBehaviour
     {
         equip = FindObjectOfType<UI_Equipment>();
         inven = FindObjectOfType<UI_Inventory>();
+        hotkey = FindObjectOfType<UI_HotKey>();
         equip.Init();
         inven.Init();
+        hotkey.Init();
         InventoryLoad();
     }
 
@@ -79,6 +82,7 @@ public class InventoryManager : MonoBehaviour
         StartCoroutine(ChangeCoroutine(type, item, isWear));
 
     }
+
 
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)
     {
@@ -145,9 +149,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public bool CheckSlotFull(SOItem _item, int cnt = 1)
-    {
-        
-
+    {        
         if (inven.CheckSlotFull(_item, cnt))
         {
             return true;
@@ -160,6 +162,26 @@ public class InventoryManager : MonoBehaviour
 
     public void AddInvenItem(SOItem _item, int cnt = 1)
     {
+        if (hotkey.item != null && _item.iType == eItem.Potion)
+        {
+            if (hotkey.item == _item)
+            {
+                int value = hotkey.AccquireItem(cnt);
+                if(value > 0)
+                {
+                    cnt = value;
+                }
+                else if ( value == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Error");
+                }
+            }
+        }
+        
         inven.AcquireItem(_item, cnt);
     }
     
@@ -172,10 +194,10 @@ public class InventoryManager : MonoBehaviour
     {
         if(_item.sList != null)
         {
+            PlayerCtrl._inst.PotionEvent(_item.pType);
             for(int i = 0; i < _item.sList.Count; i++)
             {
                 PlayerCtrl._inst.UsePotion(_item.sList[i].statType, _item.sList[i].sValue);
-                //OnChangeStat?.Invoke();
             }
         }
     }
@@ -204,6 +226,12 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        if(hotkey.item != null)
+        {
+            saveData.HotKeyItemName = hotkey.item.Name;
+            saveData.HotKeyItemCount = hotkey.itemCount;
+        }
+
         return saveData;
     }
 
@@ -211,7 +239,7 @@ public class InventoryManager : MonoBehaviour
     {
         equip.SettingSlot();
         inven.ResetAllSlots();
-
+        hotkey.ClearSlot();
 
         if(Managers._data.invenData != null)
         {
@@ -229,6 +257,9 @@ public class InventoryManager : MonoBehaviour
                 eEquipment index = (eEquipment)SaveData.EquipArrayNumber[i];
                 equip.LoadToEquip(index, SaveData.EquipItemName[i]);
             }
+
+            //핫키 로드
+            hotkey.LoadItem(SaveData.HotKeyItemName, SaveData.HotKeyItemCount);
         }
 
         dict_Equip = equip.GetEquipSlot();

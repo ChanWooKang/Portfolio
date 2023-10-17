@@ -3,28 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using Define;
 
-public class SoundManager
+public class SoundManager : MonoBehaviour
 {
     AudioSource[] audioSources = new AudioSource[(int)eSound.Max_Cnt];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+
+    [SerializeField]List<Audios> _audios;
+
+    [System.Serializable]
+    class Audios
+    {
+        public string name;
+        public AudioClip clip;
+    }
+
+    static SoundManager _uniqueInstance;
+    public static SoundManager _inst { get {return _uniqueInstance; } }
+
+    public Dictionary<string, AudioClip> Clips { get { return _audioClips; } }
+
+    void Awake()
+    {
+        _uniqueInstance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        Init();
+    }
+
+    
+
     public void Init()
     {
-        GameObject root = GameObject.Find("@Sound");
-        if (root == null)
+
+        string[] soundName = System.Enum.GetNames(typeof(eSound));
+        for (int i = 0; i < soundName.Length - 1; i++)
         {
-            root = new GameObject { name = "@Sound" };
-            Object.DontDestroyOnLoad(root);
-
-            string[] soundName = System.Enum.GetNames(typeof(eSound));
-            for (int i = 0; i < soundName.Length - 1; i++)
-            {
-                GameObject go = new GameObject { name = soundName[i] };
-                audioSources[i] = go.AddComponent<AudioSource>();
-                go.transform.parent = root.transform;
-            }
-
-            audioSources[(int)eSound.BGM].loop = true;
+            GameObject go = new GameObject { name = soundName[i] };
+            audioSources[i] = go.AddComponent<AudioSource>();
+            go.transform.parent = transform;
         }
+
+        audioSources[(int)eSound.BGM].loop = true;
 
     }
 
@@ -43,7 +65,6 @@ public class SoundManager
         {
             _audioClips.Clear();
         }
-
     }
 
     public void Play(string path, eSound type = eSound.SFX, float pitch = 1.0f)

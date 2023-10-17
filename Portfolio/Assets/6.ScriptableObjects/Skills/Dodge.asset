@@ -15,9 +15,13 @@ MonoBehaviour:
   type: 5
   skillName: Dodge
   key: 32
+  useMp: 0
   cool: 5
   duration: 0
   effectValue: 13
   sList: []
   icon: {fileID: 21300000, guid: c67fbf9375ad5c34399c2849430ca7f7, type: 3}
-  krName: "\uD68C\uD53C!"
+  krName: "\uD68C\uD53C"
+  description: "\uC810\uD504\uB97C \uD558\uC5EC \uC801\uB4E4\uC758 \uACF5\uACA9\uC744
+    \uD68C\uD53C\uD55C\uB2E4."
+  effect: "\uD68C\uD53C \uB3D9\uC791 \uB3D9\uC548 \uBB34\uC801"

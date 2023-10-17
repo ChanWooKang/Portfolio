@@ -279,6 +279,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     IEnumerator OnDamageEvent()
     {
+        FloatText.Create("FloatText", true, transform.position, (int)_stat.AttackedDamage);
         if (isDead)
         {
             _colider.enabled = false;

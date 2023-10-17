@@ -12,7 +12,6 @@ public class Managers : MonoBehaviour
     InputManager Input = new InputManager();
     ResourceManager Resource = new ResourceManager();
     SceneManagerEx Scene = new SceneManagerEx();
-    SoundManager Sound = new SoundManager();
     UIManager UI = new UIManager();
 
     public static DataManager _data { get { return _inst.Data; } }
@@ -20,7 +19,6 @@ public class Managers : MonoBehaviour
     public static InputManager _input { get { return _inst.Input; } }
     public static ResourceManager _resource { get { return _inst.Resource; } }
     public static SceneManagerEx _scene { get { return _inst.Scene; } }
-    public static SoundManager _sound { get { return _inst.Sound; } }
     public static UIManager _ui { get { return _inst.UI; } }
 
     static void Init()
@@ -40,7 +38,6 @@ public class Managers : MonoBehaviour
             _uniqueInstance.File.Init();
             _uniqueInstance.Data.Init();
             _uniqueInstance.Scene.Init();
-            //_uniqueInstance.Sound.Init();
         }
     }
 
@@ -48,8 +45,6 @@ public class Managers : MonoBehaviour
     {
         _input.Clear();
         _scene.Clear();
-        //_sound.Clear();
-
     }
 
     void Start()

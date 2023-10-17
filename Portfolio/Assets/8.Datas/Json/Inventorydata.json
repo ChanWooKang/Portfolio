@@ -1,16 +1,39 @@
 {
     "InvenArrayNumber": [
         0,
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
     ],
     "InvenItemName": [
         "LongSword",
-        "SmallShield"
+        "LongSword",
+        "LongSword",
+        "LongSword",
+        "LongSword",
+        "SmallHPPotion",
+        "SmallHPPotion"
     ],
     "InvenItemCount": [
         1,
-        1
+        1,
+        1,
+        1,
+        1,
+        999,
+        4
     ],
-    "EquipArrayNumber": [],
-    "EquipItemName": []
+    "EquipArrayNumber": [
+        5,
+        4
+    ],
+    "EquipItemName": [
+        "BigSword",
+        "SmallShield"
+    ],
+    "HotKeyItemName": "SmallHPPotion",
+    "HotKeyItemCount": 999
 }

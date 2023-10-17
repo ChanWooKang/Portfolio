@@ -116,6 +116,14 @@ namespace Define
         Dodge,
     }
 
+    public enum ePotion
+    {
+        Unknown = 0,
+        HP,
+        MP,
+        Double
+    }
+
     public enum eMonster
     {
         Unknown = 0,

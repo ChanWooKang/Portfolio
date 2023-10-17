@@ -11,6 +11,7 @@ public class BaseStat
     protected float _damage;
     protected float _defense;
     protected float _moveSpeed;
+    protected float _attackedDamage;
 
     #region [ Property ]
 
@@ -21,6 +22,7 @@ public class BaseStat
     public float Defense { get { return _defense; } set { _defense = value; } }
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
 
+    public float AttackedDamage{ get { return _attackedDamage; } }
     #endregion [ Property ]
 
     public virtual bool GetHit(BaseStat attacker)
@@ -29,7 +31,7 @@ public class BaseStat
         float damage = Mathf.Max(0.5f, attacker._damage * ((_defense * per) / (1 + per * _defense)));
 
         //float damage = Mathf.Max(0.5f, attacker._damage - _defense);
-        
+        _attackedDamage = damage;
         if(_hp > damage)
         {
             _hp -= damage;
@@ -43,7 +45,8 @@ public class BaseStat
     }
 
     public virtual bool GetHit(float damage)
-    {        
+    {
+        _attackedDamage = damage;
         if (_hp > damage)
         {
             _hp -= damage;

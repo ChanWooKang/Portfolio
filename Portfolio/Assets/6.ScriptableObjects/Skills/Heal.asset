@@ -21,4 +21,6 @@ MonoBehaviour:
   effectValue: 0.5
   sList: []
   icon: {fileID: 21300000, guid: bb67b03c2969d104caba950c446f8c8d, type: 3}
-  krName: "\uD788\uC774\uC774\uC77C !!"
+  krName: "\uCCB4\uB825 \uD68C\uBCF5"
+  description: "\uB9C8\uB098\uB97C \uC18C\uBAA8\uD558\uC5EC \uCCB4\uB825\uC744 \uD68C\uBCF5\uD55C\uB2E4."
+  effect: "\uCCB4\uB825 \uD68C\uBCF5 + 50%"

@@ -25,6 +25,7 @@ public class BaseScene : MonoBehaviour
 
     public virtual void Clear() 
     {
+        SoundManager._inst.Clear();
         PoolingManager._pool.Clear();
         PrevScene = CurrScene; 
     }

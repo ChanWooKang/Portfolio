@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Define;
 
-public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public eEquipment slotType;
     public SOItem item = null;
@@ -58,6 +58,8 @@ public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, ID
         {
             if (item != null)
             {
+                UI_ItemInfo._inst.OffInforMation();
+
                 if (InventoryManager.ActiveChangeEquip == false)
                 {
                     if (InventoryManager._inst.CheckSlotFull(item) == false)
@@ -83,6 +85,8 @@ public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, ID
             {
                 if (InventoryManager._inst.CheckSlotFull(item) == false)
                 {
+                    UI_ItemInfo._inst.OffInforMation();
+
                     DragSlot._inst.isFormInven = false;
                     DragSlot._inst.Slot_Equip = this;
                     DragSlot._inst.DragSetImage(Image_Item);
@@ -123,5 +127,19 @@ public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, ID
                 }
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            UI_ItemInfo._inst.SetInforMation(item, transform.position, true);
+        }
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_ItemInfo._inst.OffInforMation();
     }
 }

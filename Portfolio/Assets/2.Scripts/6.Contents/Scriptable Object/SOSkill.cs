@@ -18,4 +18,8 @@ public class SOSkill : ScriptableObject
     //UIs
     public Sprite icon;
     public string krName;
+    [Multiline]
+    public string description;
+    [Multiline]
+    public string effect;
 }

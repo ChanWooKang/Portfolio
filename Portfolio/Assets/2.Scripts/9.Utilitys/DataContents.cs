@@ -55,6 +55,8 @@ namespace DataContents
         public List<int> InvenItemCount = new List<int>();
         public List<int> EquipArrayNumber = new List<int>();
         public List<string> EquipItemName = new List<string>();
+        public string HotKeyItemName;
+        public int HotKeyItemCount;
     }
 
     [System.Serializable]

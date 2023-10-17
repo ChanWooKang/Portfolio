@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Define;
 
-public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     enum GameObjects
     {
@@ -37,6 +37,33 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
         Color color = Item_Image.color;
         color.a = alpha;
         Item_Image.color = color;
+    }
+
+    public bool CheckSlotRest(SOItem _item,int cnt)
+    {
+        if(item != null)
+        {
+            int value = itemCount + cnt;
+            if (item.maxStack >= value)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(_item.maxStack >= cnt)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public void SetSlotCount(int cnt)
@@ -97,6 +124,9 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
         {
             if(item != null)
             {
+                //Test 
+                UI_ItemInfo._inst.OffInforMation();
+
                 switch (item.iType)
                 {
                     case eItem.Equipment:
@@ -123,6 +153,9 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
     {
         if (item != null)
         {
+            //Test 
+            UI_ItemInfo._inst.OffInforMation();
+
             DragSlot._inst.isFormInven = true;
             DragSlot._inst.SetCanvas(false);
             DragSlot._inst.Slot_Inven = this;
@@ -166,5 +199,26 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
                 }
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(item != null)
+        {
+            if(item.iType == eItem.Equipment)
+            {
+                UI_ItemInfo._inst.SetInforMation(item, transform.position, true);
+            }
+            else
+            {
+                UI_ItemInfo._inst.SetInforMation(item, transform.position, false, itemCount);
+            }
+        }
+        
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_ItemInfo._inst.OffInforMation();
     }
 }

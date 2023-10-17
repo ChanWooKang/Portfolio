@@ -104,16 +104,20 @@ public class UI_Inventory : UI_Base
                 {
                     if (slots[i].item.Name == _item.Name)
                     {
-                        if (slots[i].itemCount + _count <= slots[i].item.maxStack)
+                        
+                        if (slots[i].CheckSlotRest(_item, _count))
                         {
                             slots[i].SetSlotCount(_count);
                             return;
                         }
                         else
                         {
+
+                            int value = _item.maxStack - slots[i].itemCount;
+                            slots[i].SetSlotCount(value);
+                            _count -= value;
                             continue;
-                        }
-                            
+                        }   
                     }
                 }
             }

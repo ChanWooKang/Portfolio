@@ -15,13 +15,15 @@ MonoBehaviour:
   Name: LongSword
   iType: 2
   eType: 5
+  pType: 0
   maxStack: 1
   sList:
   - statType: 2
     statName: Damage
-    descName: "\uB370\uBBF8\uC9C0"
+    descName: "\uACF5\uACA9\uB825"
     sValue: 10
   icon: {fileID: 21300000, guid: 38d5dde8fb892364296297a3a5c97a20, type: 3}
   krName: "\uB871\uC18C\uB4DC"
-  description: "\uAE30\uC774\uB2E4\uB780 \uAC80"
+  description: "\uAE30\uC774\uB2E4\uB780 \uAC80\n\uAE30\uB2E4\uB780\uAC80\n\uBA40\uD2F0\uB77C\uC778
+    \uD14C\uC2A4\uD2B8"
   price: 5000
