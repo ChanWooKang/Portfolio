@@ -6,34 +6,61 @@
         3,
         4,
         5,
-        6
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
     ],
     "InvenItemName": [
         "LongSword",
         "LongSword",
         "LongSword",
         "LongSword",
-        "LongSword",
+        "SmallShield",
         "SmallHPPotion",
-        "SmallHPPotion"
-    ],
-    "InvenItemCount": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        999,
-        4
-    ],
-    "EquipArrayNumber": [
-        5,
-        4
-    ],
-    "EquipItemName": [
+        "SmallHPPotion",
+        "SmallHPPotion",
         "BigSword",
+        "LongSword",
+        "LongSword",
+        "LongSword",
+        "LongSword",
+        "SmallShield",
+        "LongSword",
+        "LongSword",
+        "LongSword",
         "SmallShield"
     ],
-    "HotKeyItemName": "SmallHPPotion",
-    "HotKeyItemCount": 999
+    "InvenItemCount": [
+        500,
+        1,
+        1,
+        1,
+        500,
+        999,
+        999,
+        1,
+        1,
+        1,
+        500,
+        500,
+        1,
+        1,
+        500,
+        500,
+        500,
+        500
+    ],
+    "EquipArrayNumber": [],
+    "EquipItemName": [],
+    "HotKeyItemName": "",
+    "HotKeyItemCount": 0
 }

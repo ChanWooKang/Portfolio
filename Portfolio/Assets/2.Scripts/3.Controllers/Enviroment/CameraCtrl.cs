@@ -15,6 +15,17 @@ public class CameraCtrl : MonoBehaviour
         {
             transform.position = _target.position + _offSet;
             transform.LookAt(_target);
+
+            //if (Physics.Raycast(_target.transform.position, _offSet, out RaycastHit rhit, _offSet.sqrMagnitude, 1 << (int)eLayer.Block))
+            //{
+            //    float dist = (rhit.point - _target.position).magnitude * 0.9f;
+            //    transform.position = _target.transform.position + _offSet.normalized * dist;
+            //}
+            //else
+            //{
+            //    transform.position = _target.position + _offSet;
+            //    transform.LookAt(_target);
+            //}
         }
     }
 

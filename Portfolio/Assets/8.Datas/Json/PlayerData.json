@@ -1,11 +1,11 @@
 {
-    "level": 20,
-    "nowhp": 705.0,
-    "nowmp": 580.0,
-    "nowexp": 5880.0,
-    "gold": 5075,
-    "plushp": 125.0,
+    "level": 34,
+    "nowhp": 910.0,
+    "nowmp": 860.0,
+    "nowexp": 10040.0,
+    "gold": 9165,
+    "plushp": 50.0,
     "plusmp": 0.0,
-    "plusdamage": 48.0,
-    "plusdefense": 5.0
+    "plusdamage": 40.0,
+    "plusdefense": 0.0
 }
