@@ -171,7 +171,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         _stat.LoadPlayer();
         _clickMask = (1 << (int)eLayer.Ground) | (1 << (int)eLayer.Monster);
-        _blockMask = (1 << (int)eLayer.Block);
+        _blockMask = (1 << (int)eLayer.Block) | (1 << (int)eLayer.TransBlock);
 
         _destPos = transform.position;
         _mouseWorldPoint = transform.position;
@@ -245,6 +245,9 @@ public class PlayerCtrl : MonoBehaviour
         if (dict_bool[PlayerBools.Dead])
             return;
 
+        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory)
+            return;
+
         if (dict_bool[PlayerBools.ActDodge])
             return;
 
@@ -254,6 +257,9 @@ public class PlayerCtrl : MonoBehaviour
     void OnMouseEvent(MouseEvent evt)
     {
         if (dict_bool[PlayerBools.Dead])
+            return;
+
+        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory)
             return;
 
         if (dict_bool[PlayerBools.ActDodge])
@@ -298,6 +304,11 @@ public class PlayerCtrl : MonoBehaviour
                             _locktarget = rhit.collider.gameObject;
                         else
                             _locktarget = null;
+                    }
+                    else
+                    {
+                        if (State == PlayerState.Move)
+                            State = PlayerState.Idle;
                     }
                 }
                 break;

@@ -24,9 +24,9 @@ TagManager:
   - Disable
   - Monster
   - Item
-  - 
-  - 
-  - 
+  - TransBlock
+  - MainCam
+  - MinimapCam
   - 
   - 
   - 

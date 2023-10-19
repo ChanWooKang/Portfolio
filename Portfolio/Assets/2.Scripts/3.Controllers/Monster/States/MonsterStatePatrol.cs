@@ -15,6 +15,9 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
 
     public void Execute(MonsterCtrl m)
     {
+        if (UI_WorldMap.ActivatedWorldMap)
+            return;
+
         if (m.isReturnHome)
         {
             m.isReturnHome = m.ReturnHome();

@@ -184,6 +184,11 @@ public class InventoryManager : MonoBehaviour
         
         inven.AcquireItem(_item, cnt);
     }
+
+    public void AddHotKeyToInven(SOItem _item, int cnt = 1)
+    {
+        inven.AcquireItem(_item, cnt);
+    }
     
     public void AddEquipItem(eEquipment type, SOItem item)
     {

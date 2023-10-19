@@ -69,6 +69,9 @@ public class UI_Inventory : UI_Base
 
     void TryOpenInventory()
     {
+        if (UI_WorldMap.ActivatedWorldMap)
+            return;
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (ActivatedInventory == false)
@@ -88,6 +91,7 @@ public class UI_Inventory : UI_Base
     public void CloseInventory()
     {
         ActivatedInventory = false;
+        UI_ItemInfo._inst.OffInforMation();
         Inventory_Base.SetActive(false);
     }
 

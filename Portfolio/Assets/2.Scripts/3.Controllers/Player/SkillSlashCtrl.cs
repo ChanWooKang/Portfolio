@@ -45,7 +45,7 @@ public class SkillSlashCtrl : MonoBehaviour
     void SetPosition(Transform pos)
     {
         Vector3 position = pos.position;
-        position.y = _offSetPosY;
+        position.y += _offSetPosY;
         transform.position = position + pos.forward;
         _ps.transform.rotation = Quaternion.LookRotation(pos.forward);
     }
@@ -75,34 +75,5 @@ public class SkillSlashCtrl : MonoBehaviour
     }
 
 
-    //PlayerCtrl player;
-    //BoxCollider _colider;
-    //public float Damage;
-
-    //void Init()
-    //{
-    //    player = PlayerCtrl._inst;
-    //    transform.position = Vector3.zero;
-    //    _colider = GetComponent<BoxCollider>();
-    //    Damage = 0;
-    //    SetEnable(false);
-    //}
-
-    //void SetEnable(bool check)
-    //{
-    //    _colider.enabled = check;
-    //}
-
-
-    //public void InitSetting(SOSkill skill,Vector3 dir)
-    //{
-    //    transform.position = player.transform.position;
-
-        
-    //}
-
-    //IEnumerator ShootFire(SOSkill skill,Vector3 dir)
-    //{
-    //    yield return null;
-    //}
+    
 }

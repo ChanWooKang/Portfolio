@@ -34,7 +34,8 @@ namespace Define
         Block   = 8,
         Disable = 9,
         Monster = 10,
-        Item    = 11
+        Item    = 11,
+        TransBlock = 12,
     }
 
     public enum eTag

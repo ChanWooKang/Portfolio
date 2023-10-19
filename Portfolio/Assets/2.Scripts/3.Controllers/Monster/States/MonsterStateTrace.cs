@@ -13,6 +13,9 @@ public class MonsterStateTrace : TSingleton<MonsterStateTrace>, IFSMState<Monste
 
     public void Execute(MonsterCtrl m)
     {
+        if (UI_WorldMap.ActivatedWorldMap)
+            return;
+
         if (m.IsTooFar())
         {
             m.ChangeState(MonsterStatePatrol._inst);
