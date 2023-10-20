@@ -77,7 +77,7 @@ public class Item : MonoBehaviour
         {
             if(InventoryManager._inst.CheckSlotFull(itemSO) == false)
             {
-                InventoryManager._inst.AddInvenItem(itemSO,500);
+                InventoryManager._inst.AddInvenItem(itemSO,1);
                 Despawn();
                 return true;
             }

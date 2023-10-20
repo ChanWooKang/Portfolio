@@ -14,15 +14,15 @@ public class SkillSlashCtrl : MonoBehaviour
     [SerializeField] float power;
     bool isShoot = false;
 
+    Coroutine SlashCoroutine = null;
+
     
     void FixedUpdate()
     {
-        //if(isShoot && direction != Vector3.zero)
-        //    _rb.AddForce(direction * power, ForceMode.Acceleration);
         if (isShoot && direction != Vector3.zero)
         {
             _rb.velocity = Vector3.zero;            
-            _rb.AddForce(direction * power, ForceMode.Impulse);           
+            _rb.AddForce(transform.forward * power, ForceMode.Impulse);           
             isShoot = false;
         }
     }
@@ -47,7 +47,7 @@ public class SkillSlashCtrl : MonoBehaviour
         Vector3 position = pos.position;
         position.y += _offSetPosY;
         transform.position = position + pos.forward;
-        _ps.transform.rotation = Quaternion.LookRotation(pos.forward);
+        transform.rotation = Quaternion.LookRotation(pos.forward);
     }
 
     public void SlashEvent(SOSkill skill, Transform player,Vector3 destination)
@@ -56,11 +56,10 @@ public class SkillSlashCtrl : MonoBehaviour
         SetPosition(player);
         direction = destination;
         direction.y = 0;
-        //direction = direction.normalized;
         Damage = skill.effectValue * PlayerCtrl._inst._stat.Damage;
-        //Debug.Log(Damage);
-        StopCoroutine(OnSlashEvent());
-        StartCoroutine(OnSlashEvent());
+        if(SlashCoroutine != null)
+            StopCoroutine(OnSlashEvent());
+        SlashCoroutine = StartCoroutine(OnSlashEvent());
     }
 
     IEnumerator OnSlashEvent()
@@ -74,6 +73,19 @@ public class SkillSlashCtrl : MonoBehaviour
         SetEnable(false);             
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Block")|| other.CompareTag("Ground"))
+        {
+           
+            if (SlashCoroutine != null)
+            {
+                Debug.Log("Hit");
+                StopCoroutine(OnSlashEvent());
+                SetEnable(false);
+                PlayerCtrl._inst.CancelSlash(this.gameObject);
+            }
+        }
+    }
 
-    
 }

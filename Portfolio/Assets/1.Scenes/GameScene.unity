@@ -1270,7 +1270,7 @@ GameObject:
   - component: {fileID: 143287013}
   m_Layer: 12
   m_Name: Rock Formation Variant (18)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11922,6 +11922,115 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308635872}
   m_CullTransparentMesh: 1
+--- !u!1 &1327938142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1327938143}
+  - component: {fileID: 1327938147}
+  - component: {fileID: 1327938146}
+  - component: {fileID: 1327938145}
+  - component: {fileID: 1327938144}
+  m_Layer: 12
+  m_Name: Rock Formation Variant (20)
+  m_TagString: Block
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1327938143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327938142}
+  m_LocalRotation: {x: -0.00000009735161, y: 0.32845995, z: -6.237267e-10, w: 0.9445179}
+  m_LocalPosition: {x: 321.6, y: 16.7, z: 345.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4961262847514783558}
+  m_RootOrder: 71
+  m_LocalEulerAnglesHint: {x: 0, y: 38.351, z: 0}
+--- !u!114 &1327938144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327938142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56fec994c52ec045a438c1664a39e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &1327938145
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327938142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8892430645304857787, guid: 59dcad0695d138948a1210c55b540211, type: 3}
+--- !u!23 &1327938146
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327938142}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 80ed1afb6b1e2a44eb55f2644216cd36, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 2
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1327938147
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327938142}
+  m_Mesh: {fileID: 8892430645304857787, guid: 59dcad0695d138948a1210c55b540211, type: 3}
 --- !u!1 &1334242173
 GameObject:
   m_ObjectHideFlags: 0
@@ -12306,7 +12415,7 @@ GameObject:
   - component: {fileID: 1403534084}
   m_Layer: 6
   m_Name: Footbridge Variant (11)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12405,7 +12514,7 @@ GameObject:
   - component: {fileID: 1444481424}
   m_Layer: 12
   m_Name: Rock Formation Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12978,6 +13087,115 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468818207}
   m_CullTransparentMesh: 1
+--- !u!1 &1469033926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469033927}
+  - component: {fileID: 1469033931}
+  - component: {fileID: 1469033930}
+  - component: {fileID: 1469033929}
+  - component: {fileID: 1469033928}
+  m_Layer: 12
+  m_Name: Rock_6 Variant (9)
+  m_TagString: Block
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1469033927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469033926}
+  m_LocalRotation: {x: -0.00000007157574, y: -0.67783505, z: -0.000000065989695, w: 0.7352141}
+  m_LocalPosition: {x: 317.51862, y: 18.970083, z: 256.7}
+  m_LocalScale: {x: 5.869701, y: 5.8697, z: 5.869701}
+  m_Children: []
+  m_Father: {fileID: 4961262847514783558}
+  m_RootOrder: 72
+  m_LocalEulerAnglesHint: {x: 0, y: -85.349, z: 0}
+--- !u!114 &1469033928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469033926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56fec994c52ec045a438c1664a39e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &1469033929
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469033926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1357455909473023696, guid: 653bc4ebf3bd8a5449a2cbeb914ad684, type: 3}
+--- !u!23 &1469033930
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469033926}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 80ed1afb6b1e2a44eb55f2644216cd36, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 2
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1469033931
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469033926}
+  m_Mesh: {fileID: -1357455909473023696, guid: 653bc4ebf3bd8a5449a2cbeb914ad684, type: 3}
 --- !u!1 &1474179104
 GameObject:
   m_ObjectHideFlags: 0
@@ -15000,12 +15218,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1d10c25680cc64b88519b6ca54e26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mark_Player: {fileID: 2661287422718933935, guid: e8cf31f41d3e23243932cb988818ec4a, type: 3}
+  Mark_Monster: {fileID: 2208387142877418353, guid: 430eee1bee7ca6840aa58a276b5549c3, type: 3}
   x: 1
   y: 0
   z: 1
   _target: {fileID: 8878173489297350806}
   MiniMapTexture: {fileID: 8400000, guid: 6e57503efc5a23e45a204489d54fa1a0, type: 2}
   WorldMapTexture: {fileID: 8400000, guid: 6f0ab7d2c3abfef4db95b8475622ab50, type: 2}
+  worldSize: 130
+  worldPos: {x: -60, y: 240, z: 10}
 --- !u!20 &1739273461
 Camera:
   m_ObjectHideFlags: 0
@@ -15329,11 +15551,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4049549268166513169}
+    m_TransformParent: {fileID: 9035778891686451284}
     m_Modifications:
     - target: {fileID: 67188817654446321, guid: 64dedcb1c1fb7b74ea5a7f4088910140, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 67
       objectReference: {fileID: 0}
     - target: {fileID: 67188817654446321, guid: 64dedcb1c1fb7b74ea5a7f4088910140, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15357,7 +15579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 67188817654446321, guid: 64dedcb1c1fb7b74ea5a7f4088910140, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 67188817654446321, guid: 64dedcb1c1fb7b74ea5a7f4088910140, type: 3}
       propertyPath: m_LocalRotation.z
@@ -15404,7 +15626,7 @@ GameObject:
   - component: {fileID: 1756681708}
   m_Layer: 6
   m_Name: Footbridge Variant (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -17727,7 +17949,7 @@ GameObject:
   - component: {fileID: 1969820372}
   m_Layer: 6
   m_Name: Footbridge Variant (10)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18560,88 +18782,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 5}
   m_SizeDelta: {x: 40, y: 22.5}
   m_Pivot: {x: 1, y: 0}
---- !u!1 &2031611123
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2031611124}
-  - component: {fileID: 2031611125}
-  m_Layer: 14
-  m_Name: MiniMap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2031611124
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031611123}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8878173489297350806}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!212 &2031611125
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031611123}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6f8ede139a8ae0948aaf9e46b5710230, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &2035841879
 GameObject:
   m_ObjectHideFlags: 0
@@ -20354,7 +20494,7 @@ GameObject:
   - component: {fileID: 163824803919333667}
   m_Layer: 12
   m_Name: Building_2_Wall_On_2 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20386,7 +20526,7 @@ GameObject:
   - component: {fileID: 163824804568868415}
   m_Layer: 12
   m_Name: Building_2_Wall_On_2 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25473,7 +25613,7 @@ GameObject:
   - component: {fileID: 622300985717403583}
   m_Layer: 12
   m_Name: Rock_2 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25505,7 +25645,7 @@ GameObject:
   - component: {fileID: 622300985855555282}
   m_Layer: 12
   m_Name: Rock_2 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25537,7 +25677,7 @@ GameObject:
   - component: {fileID: 622300986290882612}
   m_Layer: 12
   m_Name: Rock_2 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25569,7 +25709,7 @@ GameObject:
   - component: {fileID: 622300986569725366}
   m_Layer: 12
   m_Name: Rock_2 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25601,7 +25741,7 @@ GameObject:
   - component: {fileID: 622300987229457124}
   m_Layer: 12
   m_Name: Rock_2 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25633,7 +25773,7 @@ GameObject:
   - component: {fileID: 622300987421033894}
   m_Layer: 12
   m_Name: Rock_2 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27672,7 +27812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675886262698205593}
   m_LocalRotation: {x: -0.00000009722534, y: -0.051314455, z: 0.000000004995644, w: 0.99868256}
-  m_LocalPosition: {x: 291.98, y: 16.7, z: 350.72}
+  m_LocalPosition: {x: 291.98, y: 16.7, z: 354.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4961262847514783558}
@@ -27693,7 +27833,7 @@ GameObject:
   - component: {fileID: 675886262698205596}
   m_Layer: 12
   m_Name: Rock Formation Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27829,7 +27969,7 @@ GameObject:
   - component: {fileID: 675886263257981465}
   m_Layer: 12
   m_Name: Rock Formation Variant (17)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27867,13 +28007,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675886263257981464}
-  m_LocalRotation: {x: 0.00000009188391, y: -0.9881183, z: 0.00000003217266, w: -0.1536955}
-  m_LocalPosition: {x: 303.74, y: 12.95, z: 259.78}
+  m_LocalRotation: {x: 0.00000009640205, y: -0.9990944, z: 0.000000013578891, w: 0.042547744}
+  m_LocalPosition: {x: 291.3, y: 12.95, z: 253.1}
   m_LocalScale: {x: 1.7732, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4961262847514783558}
   m_RootOrder: 68
-  m_LocalEulerAnglesHint: {x: 0, y: -197.682, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -175.123, z: 0}
 --- !u!33 &675886263339225545
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27911,7 +28051,7 @@ GameObject:
   - component: {fileID: 675886263339225552}
   m_Layer: 12
   m_Name: Rock Formation Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -31665,7 +31805,7 @@ GameObject:
   - component: {fileID: 6652242960555944835}
   m_Layer: 6
   m_Name: Island_1 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -31684,7 +31824,7 @@ GameObject:
   - component: {fileID: 6652242960585419703}
   m_Layer: 6
   m_Name: Island_1 Variant
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33761,7 +33901,7 @@ GameObject:
   - component: {fileID: 1221454253595784229}
   m_Layer: 12
   m_Name: Building_3_Wall_OFF Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33793,7 +33933,7 @@ GameObject:
   - component: {fileID: 1221454254412668667}
   m_Layer: 12
   m_Name: Building_3_Wall_OFF Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34783,7 +34923,7 @@ GameObject:
   - component: {fileID: 7716631103346391139}
   m_Layer: 8
   m_Name: Stone_3 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34802,7 +34942,7 @@ GameObject:
   - component: {fileID: 7716631103258286899}
   m_Layer: 8
   m_Name: Stone_3 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34821,7 +34961,7 @@ GameObject:
   - component: {fileID: 7716631104782197656}
   m_Layer: 8
   m_Name: Stone_3 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35122,7 +35262,7 @@ GameObject:
   - component: {fileID: 409186680007817967}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (21)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35141,7 +35281,7 @@ GameObject:
   - component: {fileID: 409186680157856547}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (36)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35160,7 +35300,7 @@ GameObject:
   - component: {fileID: 409186679693603121}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (32)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35179,7 +35319,7 @@ GameObject:
   - component: {fileID: 409186679694006415}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35198,7 +35338,7 @@ GameObject:
   - component: {fileID: 409186679713158719}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (31)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35217,7 +35357,7 @@ GameObject:
   - component: {fileID: 409186679724495664}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (30)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35236,7 +35376,7 @@ GameObject:
   - component: {fileID: 409186680570982070}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35255,7 +35395,7 @@ GameObject:
   - component: {fileID: 409186680601539170}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (10)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35274,7 +35414,7 @@ GameObject:
   - component: {fileID: 409186680615292479}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35293,7 +35433,7 @@ GameObject:
   - component: {fileID: 409186680652742545}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35312,7 +35452,7 @@ GameObject:
   - component: {fileID: 409186680702784252}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (34)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35331,7 +35471,7 @@ GameObject:
   - component: {fileID: 409186680223662706}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (18)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35350,7 +35490,7 @@ GameObject:
   - component: {fileID: 409186680211456032}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (33)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35369,7 +35509,7 @@ GameObject:
   - component: {fileID: 409186680329754132}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (29)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35388,7 +35528,7 @@ GameObject:
   - component: {fileID: 409186680329459601}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (22)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35407,7 +35547,7 @@ GameObject:
   - component: {fileID: 409186680351390006}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (27)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35426,7 +35566,7 @@ GameObject:
   - component: {fileID: 409186680337529774}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35445,7 +35585,7 @@ GameObject:
   - component: {fileID: 409186680389214541}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35464,7 +35604,7 @@ GameObject:
   - component: {fileID: 409186681050265857}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35483,7 +35623,7 @@ GameObject:
   - component: {fileID: 409186681134072663}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35502,7 +35642,7 @@ GameObject:
   - component: {fileID: 409186681162317323}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (28)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35521,7 +35661,7 @@ GameObject:
   - component: {fileID: 409186681243924749}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35540,7 +35680,7 @@ GameObject:
   - component: {fileID: 409186680758546177}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35559,7 +35699,7 @@ GameObject:
   - component: {fileID: 409186680764809467}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35578,7 +35718,7 @@ GameObject:
   - component: {fileID: 409186680865527617}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (23)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35597,7 +35737,7 @@ GameObject:
   - component: {fileID: 409186680923691098}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (14)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35616,7 +35756,7 @@ GameObject:
   - component: {fileID: 409186680943436207}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35635,7 +35775,7 @@ GameObject:
   - component: {fileID: 409186681002825919}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35654,7 +35794,7 @@ GameObject:
   - component: {fileID: 409186680970352005}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (12)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35673,7 +35813,7 @@ GameObject:
   - component: {fileID: 409186681597717449}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (24)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35692,7 +35832,7 @@ GameObject:
   - component: {fileID: 409186681598993917}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (26)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35711,7 +35851,7 @@ GameObject:
   - component: {fileID: 409186681663275706}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (17)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35730,7 +35870,7 @@ GameObject:
   - component: {fileID: 409186681360389625}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35749,7 +35889,7 @@ GameObject:
   - component: {fileID: 409186681419842883}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (25)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35768,7 +35908,7 @@ GameObject:
   - component: {fileID: 409186681498085073}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35787,7 +35927,7 @@ GameObject:
   - component: {fileID: 409186681476730934}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (13)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35806,7 +35946,7 @@ GameObject:
   - component: {fileID: 409186681539518661}
   m_Layer: 8
   m_Name: Fence_1_1 1 Variant (35)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39079,7 +39219,7 @@ GameObject:
   - component: {fileID: 3380863768557021953}
   m_Layer: 6
   m_Name: Land_1 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39098,7 +39238,7 @@ GameObject:
   - component: {fileID: 3380863768297800025}
   m_Layer: 6
   m_Name: Land_1 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39117,7 +39257,7 @@ GameObject:
   - component: {fileID: 3380863768211199864}
   m_Layer: 6
   m_Name: Land_1 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39136,7 +39276,7 @@ GameObject:
   - component: {fileID: 3380863768964141712}
   m_Layer: 6
   m_Name: Land_1 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39155,7 +39295,7 @@ GameObject:
   - component: {fileID: 3380863767482866337}
   m_Layer: 6
   m_Name: Land_1 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39174,7 +39314,7 @@ GameObject:
   - component: {fileID: 3380863767420130418}
   m_Layer: 6
   m_Name: Land_1 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39193,7 +39333,7 @@ GameObject:
   - component: {fileID: 3380863767242499858}
   m_Layer: 6
   m_Name: Land_1 Variant
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39212,7 +39352,7 @@ GameObject:
   - component: {fileID: 3380863767796950308}
   m_Layer: 6
   m_Name: Land_1 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46006,7 +46146,7 @@ GameObject:
   - component: {fileID: 2133176263780707216}
   m_Layer: 12
   m_Name: Rock_7 Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46038,7 +46178,7 @@ GameObject:
   - component: {fileID: 2133176263923715755}
   m_Layer: 12
   m_Name: Rock_7 Variant (26)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46070,7 +46210,7 @@ GameObject:
   - component: {fileID: 2133176263940447147}
   m_Layer: 12
   m_Name: Rock_7 Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46102,7 +46242,7 @@ GameObject:
   - component: {fileID: 2133176263993826594}
   m_Layer: 12
   m_Name: Rock_7 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46134,7 +46274,7 @@ GameObject:
   - component: {fileID: 2133176264463414309}
   m_Layer: 12
   m_Name: Rock_7 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46166,7 +46306,7 @@ GameObject:
   - component: {fileID: 2133176264762611173}
   m_Layer: 12
   m_Name: Rock_7 Variant (21)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46198,7 +46338,7 @@ GameObject:
   - component: {fileID: 2133176264808691419}
   m_Layer: 12
   m_Name: Rock_7 Variant (17)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46230,7 +46370,7 @@ GameObject:
   - component: {fileID: 2133176264835856291}
   m_Layer: 12
   m_Name: Rock_7 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46262,7 +46402,7 @@ GameObject:
   - component: {fileID: 2133176264838357456}
   m_Layer: 12
   m_Name: Rock_7 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46294,7 +46434,7 @@ GameObject:
   - component: {fileID: 2133176265131585062}
   m_Layer: 12
   m_Name: Rock_7 Variant (22)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46326,7 +46466,7 @@ GameObject:
   - component: {fileID: 2133176265206205896}
   m_Layer: 12
   m_Name: Rock_7 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46358,7 +46498,7 @@ GameObject:
   - component: {fileID: 2133176265407049019}
   m_Layer: 12
   m_Name: Rock_7 Variant (28)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46390,7 +46530,7 @@ GameObject:
   - component: {fileID: 2133176265411309920}
   m_Layer: 12
   m_Name: Rock_7 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46422,7 +46562,7 @@ GameObject:
   - component: {fileID: 2133176265679393967}
   m_Layer: 12
   m_Name: Rock_7 Variant (29)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46454,7 +46594,7 @@ GameObject:
   - component: {fileID: 2133176265699528165}
   m_Layer: 12
   m_Name: Rock_7 Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46486,7 +46626,7 @@ GameObject:
   - component: {fileID: 2135654874370878207}
   m_Layer: 12
   m_Name: Rock_5 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46518,7 +46658,7 @@ GameObject:
   - component: {fileID: 2135654874559240199}
   m_Layer: 12
   m_Name: Rock_5 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46550,7 +46690,7 @@ GameObject:
   - component: {fileID: 2135654874931033735}
   m_Layer: 12
   m_Name: Rock_5 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46582,7 +46722,7 @@ GameObject:
   - component: {fileID: 2135654875065177749}
   m_Layer: 12
   m_Name: Rock_5 Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46614,7 +46754,7 @@ GameObject:
   - component: {fileID: 2135654875100599589}
   m_Layer: 12
   m_Name: Rock_5 Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46646,7 +46786,7 @@ GameObject:
   - component: {fileID: 2135654875363973363}
   m_Layer: 12
   m_Name: Rock_5 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46678,7 +46818,7 @@ GameObject:
   - component: {fileID: 2135654875720180721}
   m_Layer: 12
   m_Name: Rock_5 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46710,7 +46850,7 @@ GameObject:
   - component: {fileID: 2135654875749028367}
   m_Layer: 12
   m_Name: Rock_5 Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -46742,7 +46882,7 @@ GameObject:
   - component: {fileID: 2135654875892894644}
   m_Layer: 12
   m_Name: Rock_5 Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48188,7 +48328,7 @@ GameObject:
   - component: {fileID: 2548956933023403664}
   m_Layer: 12
   m_Name: Building_3_Wall_On_1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48362,7 +48502,7 @@ GameObject:
   - component: {fileID: 2888232360587384681}
   m_Layer: 8
   m_Name: Stone_2 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48414,7 +48554,7 @@ GameObject:
   - component: {fileID: 584113838198746717}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48433,7 +48573,7 @@ GameObject:
   - component: {fileID: 584113838225785550}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48452,7 +48592,7 @@ GameObject:
   - component: {fileID: 584113838214311163}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48471,7 +48611,7 @@ GameObject:
   - component: {fileID: 584113838042939735}
   m_Layer: 8
   m_Name: Fence_1_1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48490,7 +48630,7 @@ GameObject:
   - component: {fileID: 584113838404193665}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48509,7 +48649,7 @@ GameObject:
   - component: {fileID: 584113837564338232}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (12)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48528,7 +48668,7 @@ GameObject:
   - component: {fileID: 584113837196784520}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (10)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48547,7 +48687,7 @@ GameObject:
   - component: {fileID: 584113837021103896}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48566,7 +48706,7 @@ GameObject:
   - component: {fileID: 584113836567479846}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48585,7 +48725,7 @@ GameObject:
   - component: {fileID: 584113836653139106}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (14)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48604,7 +48744,7 @@ GameObject:
   - component: {fileID: 584113836466098242}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48623,7 +48763,7 @@ GameObject:
   - component: {fileID: 584113836479913650}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48642,7 +48782,7 @@ GameObject:
   - component: {fileID: 584113836526646930}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48661,7 +48801,7 @@ GameObject:
   - component: {fileID: 584113836902759889}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48680,7 +48820,7 @@ GameObject:
   - component: {fileID: 584113836816670793}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -48699,7 +48839,7 @@ GameObject:
   - component: {fileID: 584113836771731425}
   m_Layer: 8
   m_Name: Fence_1_1 Variant (13)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -49043,7 +49183,7 @@ GameObject:
   - component: {fileID: 4961262847514783558}
   m_Layer: 12
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -49994,7 +50134,7 @@ GameObject:
   - component: {fileID: 2938791773020798896}
   m_Layer: 12
   m_Name: Barn_Wood Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56400,7 +56540,7 @@ GameObject:
   - component: {fileID: 3823846743460730365}
   m_Layer: 12
   m_Name: Rock Formation Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56432,7 +56572,7 @@ GameObject:
   - component: {fileID: 3823846743642127280}
   m_Layer: 12
   m_Name: Rock Formation Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56464,7 +56604,7 @@ GameObject:
   - component: {fileID: 3823846743682158402}
   m_Layer: 12
   m_Name: Rock Formation Variant (10)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56496,7 +56636,7 @@ GameObject:
   - component: {fileID: 3823846744220847868}
   m_Layer: 12
   m_Name: Rock Formation Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56528,7 +56668,7 @@ GameObject:
   - component: {fileID: 3823846744531657765}
   m_Layer: 12
   m_Name: Rock Formation Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56560,7 +56700,7 @@ GameObject:
   - component: {fileID: 3823846744555750187}
   m_Layer: 12
   m_Name: Rock Formation Variant (13)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56592,7 +56732,7 @@ GameObject:
   - component: {fileID: 3823846744692808003}
   m_Layer: 12
   m_Name: Rock Formation Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56624,7 +56764,7 @@ GameObject:
   - component: {fileID: 3823846744706080836}
   m_Layer: 12
   m_Name: Rock Formation Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56656,7 +56796,7 @@ GameObject:
   - component: {fileID: 3823846744722570479}
   m_Layer: 12
   m_Name: Rock Formation Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56688,7 +56828,7 @@ GameObject:
   - component: {fileID: 3823846744845158759}
   m_Layer: 12
   m_Name: Rock Formation Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56720,7 +56860,7 @@ GameObject:
   - component: {fileID: 3823846744897109960}
   m_Layer: 12
   m_Name: Rock Formation Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56752,7 +56892,7 @@ GameObject:
   - component: {fileID: 3823846744936255336}
   m_Layer: 12
   m_Name: Rock Formation Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56784,7 +56924,7 @@ GameObject:
   - component: {fileID: 3823846744940457895}
   m_Layer: 12
   m_Name: Rock Formation Variant (14)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56816,7 +56956,7 @@ GameObject:
   - component: {fileID: 3823846745131593735}
   m_Layer: 12
   m_Name: Rock Formation Variant (12)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56848,7 +56988,7 @@ GameObject:
   - component: {fileID: 3823846745170200018}
   m_Layer: 12
   m_Name: Rock Formation Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57075,7 +57215,6 @@ Transform:
   - {fileID: 9035778891686451284}
   - {fileID: 3568102446837538054}
   - {fileID: 2056305178423527799}
-  - {fileID: 1754547343}
   m_Father: {fileID: 5423540412562580291}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57840,7 +57979,7 @@ GameObject:
   - component: {fileID: 4335997194036244338}
   m_Layer: 12
   m_Name: Rock_4 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57872,7 +58011,7 @@ GameObject:
   - component: {fileID: 4335997194175757456}
   m_Layer: 12
   m_Name: Rock_4 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57904,7 +58043,7 @@ GameObject:
   - component: {fileID: 4335997194513528911}
   m_Layer: 12
   m_Name: Rock_4 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57936,7 +58075,7 @@ GameObject:
   - component: {fileID: 4335997194863204490}
   m_Layer: 12
   m_Name: Rock_4 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57968,7 +58107,7 @@ GameObject:
   - component: {fileID: 4335997194875686574}
   m_Layer: 12
   m_Name: Rock_4 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -58000,7 +58139,7 @@ GameObject:
   - component: {fileID: 4335997194890613616}
   m_Layer: 12
   m_Name: Rock_4 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -58032,7 +58171,7 @@ GameObject:
   - component: {fileID: 4335997195235518364}
   m_Layer: 12
   m_Name: Rock_4 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -58064,7 +58203,7 @@ GameObject:
   - component: {fileID: 4335997195640193160}
   m_Layer: 12
   m_Name: Rock_4 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -63250,13 +63389,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823846744940457894}
-  m_LocalRotation: {x: -0.000000095254315, y: -0.55435026, z: -0.000000020108827, w: 0.83228356}
-  m_LocalPosition: {x: 319.6, y: 16.7, z: 280.7}
+  m_LocalRotation: {x: -0.00000009376315, y: -0.6067511, z: -0.000000026195847, w: 0.79489195}
+  m_LocalPosition: {x: 325.9, y: 16.7, z: 280.7}
   m_LocalScale: {x: 1.7732, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4961262847514783558}
   m_RootOrder: 65
-  m_LocalEulerAnglesHint: {x: 0, y: -67.332, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -74.71, z: 0}
 --- !u!4 &4493142130432529885
 Transform:
   m_ObjectHideFlags: 0
@@ -63363,7 +63502,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823846744555750186}
   m_LocalRotation: {x: -0.00000009280937, y: 0.69824487, z: 0.000000029396443, w: 0.715859}
-  m_LocalPosition: {x: 323.85, y: 16.73, z: 312.87}
+  m_LocalPosition: {x: 329.7, y: 16.73, z: 312.87}
   m_LocalScale: {x: 1.7732, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4961262847514783558}
@@ -63391,7 +63530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823846745131593734}
   m_LocalRotation: {x: -0.00000009594132, y: 0.16971424, z: -0.000000016522291, w: 0.9854933}
-  m_LocalPosition: {x: 311.2, y: 16.7, z: 345.3}
+  m_LocalPosition: {x: 314.5, y: 16.7, z: 352}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4961262847514783558}
@@ -65295,7 +65434,7 @@ GameObject:
   - component: {fileID: 6125687074582948609}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -65314,7 +65453,7 @@ GameObject:
   - component: {fileID: 6125687074412073077}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -65333,7 +65472,7 @@ GameObject:
   - component: {fileID: 6125687073041446431}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -65352,7 +65491,7 @@ GameObject:
   - component: {fileID: 6125687073049055191}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -65371,7 +65510,7 @@ GameObject:
   - component: {fileID: 6125687073006582859}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -65390,7 +65529,7 @@ GameObject:
   - component: {fileID: 6125687073352583444}
   m_Layer: 6
   m_Name: Landscape_Hill_1 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -69681,6 +69820,8 @@ Transform:
   - {fileID: 675886263257981467}
   - {fileID: 143287009}
   - {fileID: 1444481420}
+  - {fileID: 1327938143}
+  - {fileID: 1469033927}
   m_Father: {fileID: 4049549268166513169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80076,7 +80217,7 @@ GameObject:
   - component: {fileID: 9108125239340309453}
   m_Layer: 8
   m_Name: Fence_2_1 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -80095,7 +80236,7 @@ GameObject:
   - component: {fileID: 9108125239336590501}
   m_Layer: 8
   m_Name: Fence_2_1 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -80114,7 +80255,7 @@ GameObject:
   - component: {fileID: 9108125239151264449}
   m_Layer: 8
   m_Name: Fence_2_1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -80133,7 +80274,7 @@ GameObject:
   - component: {fileID: 9108125238844079784}
   m_Layer: 8
   m_Name: Fence_2_1 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -80152,7 +80293,7 @@ GameObject:
   - component: {fileID: 9108125238546382052}
   m_Layer: 8
   m_Name: Fence_2_1 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -80171,7 +80312,7 @@ GameObject:
   - component: {fileID: 9108125238093868691}
   m_Layer: 8
   m_Name: Fence_2_1 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86465,7 +86606,7 @@ GameObject:
   - component: {fileID: 456679478272447842}
   m_Layer: 8
   m_Name: Fence_Bar Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86484,7 +86625,7 @@ GameObject:
   - component: {fileID: 456679478526300079}
   m_Layer: 8
   m_Name: Fence_Bar Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86503,7 +86644,7 @@ GameObject:
   - component: {fileID: 456679478812991332}
   m_Layer: 8
   m_Name: Fence_Bar Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86522,7 +86663,7 @@ GameObject:
   - component: {fileID: 456679476857050212}
   m_Layer: 8
   m_Name: Fence_Bar Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86541,7 +86682,7 @@ GameObject:
   - component: {fileID: 456679477395709527}
   m_Layer: 8
   m_Name: Fence_Bar Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86560,7 +86701,7 @@ GameObject:
   - component: {fileID: 456679477228324837}
   m_Layer: 8
   m_Name: Fence_Bar Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86579,7 +86720,7 @@ GameObject:
   - component: {fileID: 456679477634878032}
   m_Layer: 8
   m_Name: Fence_Bar Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92757,7 +92898,7 @@ GameObject:
   - component: {fileID: 2013492375639122973}
   m_Layer: 8
   m_Name: Tower Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92776,7 +92917,7 @@ GameObject:
   - component: {fileID: 2013492375905869007}
   m_Layer: 8
   m_Name: Tower Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92795,7 +92936,7 @@ GameObject:
   - component: {fileID: 2013492375846816057}
   m_Layer: 8
   m_Name: Tower Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92814,7 +92955,7 @@ GameObject:
   - component: {fileID: 2013492375808460207}
   m_Layer: 8
   m_Name: Tower Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92833,7 +92974,7 @@ GameObject:
   - component: {fileID: 2013492376037523692}
   m_Layer: 8
   m_Name: Tower Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92852,7 +92993,7 @@ GameObject:
   - component: {fileID: 2013492374351190615}
   m_Layer: 8
   m_Name: Tower Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92871,7 +93012,7 @@ GameObject:
   - component: {fileID: 2013492374642128878}
   m_Layer: 8
   m_Name: Tower Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92890,7 +93031,7 @@ GameObject:
   - component: {fileID: 2013492374925097481}
   m_Layer: 8
   m_Name: Tower Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92909,7 +93050,7 @@ GameObject:
   - component: {fileID: 2013492374868094096}
   m_Layer: 8
   m_Name: Tower Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92928,7 +93069,7 @@ GameObject:
   - component: {fileID: 1436710587143555345}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92947,7 +93088,7 @@ GameObject:
   - component: {fileID: 1436710587131033011}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92966,7 +93107,7 @@ GameObject:
   - component: {fileID: 1436710586884105072}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (33)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -92985,7 +93126,7 @@ GameObject:
   - component: {fileID: 1436710586982005308}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93004,7 +93145,7 @@ GameObject:
   - component: {fileID: 1436710586783405129}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (13)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93023,7 +93164,7 @@ GameObject:
   - component: {fileID: 1436710586621599343}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (23)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93042,7 +93183,7 @@ GameObject:
   - component: {fileID: 1436710586696159269}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93061,7 +93202,7 @@ GameObject:
   - component: {fileID: 1436710586709113392}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93080,7 +93221,7 @@ GameObject:
   - component: {fileID: 1436710586684437686}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (32)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93099,7 +93240,7 @@ GameObject:
   - component: {fileID: 1436710586688572700}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (14)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93118,7 +93259,7 @@ GameObject:
   - component: {fileID: 1436710586578020696}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (26)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93137,7 +93278,7 @@ GameObject:
   - component: {fileID: 1436710586581816076}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (17)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93156,7 +93297,7 @@ GameObject:
   - component: {fileID: 1436710586287854935}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (24)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93175,7 +93316,7 @@ GameObject:
   - component: {fileID: 1436710586092750353}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93194,7 +93335,7 @@ GameObject:
   - component: {fileID: 1436710586165412335}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (21)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93213,7 +93354,7 @@ GameObject:
   - component: {fileID: 1436710586205031145}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (40)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93232,7 +93373,7 @@ GameObject:
   - component: {fileID: 1436710588115173049}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (37)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93251,7 +93392,7 @@ GameObject:
   - component: {fileID: 1436710588170685493}
   m_Layer: 8
   m_Name: Fence_1_3 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93270,7 +93411,7 @@ GameObject:
   - component: {fileID: 1436710588194065398}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (36)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93289,7 +93430,7 @@ GameObject:
   - component: {fileID: 1436710587960841283}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (30)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93308,7 +93449,7 @@ GameObject:
   - component: {fileID: 1436710588039065284}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (35)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93327,7 +93468,7 @@ GameObject:
   - component: {fileID: 1436710588062036068}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93346,7 +93487,7 @@ GameObject:
   - component: {fileID: 1436710587840112482}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (27)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93365,7 +93506,7 @@ GameObject:
   - component: {fileID: 1436710587864802624}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (31)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93384,7 +93525,7 @@ GameObject:
   - component: {fileID: 1436710587818223671}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93403,7 +93544,7 @@ GameObject:
   - component: {fileID: 1436710587790578201}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (38)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93422,7 +93563,7 @@ GameObject:
   - component: {fileID: 1436710587645626372}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (18)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93441,7 +93582,7 @@ GameObject:
   - component: {fileID: 1436710587430633478}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (39)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93460,7 +93601,7 @@ GameObject:
   - component: {fileID: 1436710587294547324}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93479,7 +93620,7 @@ GameObject:
   - component: {fileID: 1436710587297858113}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (22)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93498,7 +93639,7 @@ GameObject:
   - component: {fileID: 1436710587341732150}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (34)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93517,7 +93658,7 @@ GameObject:
   - component: {fileID: 1436710587321432888}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93536,7 +93677,7 @@ GameObject:
   - component: {fileID: 1436710587323692582}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (10)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93555,7 +93696,7 @@ GameObject:
   - component: {fileID: 1436710587351201906}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93574,7 +93715,7 @@ GameObject:
   - component: {fileID: 1436710587408225912}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (12)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93593,7 +93734,7 @@ GameObject:
   - component: {fileID: 1436710587383188463}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (28)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93612,7 +93753,7 @@ GameObject:
   - component: {fileID: 1436710587395996168}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93631,7 +93772,7 @@ GameObject:
   - component: {fileID: 1436710587180254464}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (29)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93650,7 +93791,7 @@ GameObject:
   - component: {fileID: 1436710587162078040}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93669,7 +93810,7 @@ GameObject:
   - component: {fileID: 1436710587232580563}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (25)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -93688,7 +93829,7 @@ GameObject:
   - component: {fileID: 1436710587264137202}
   m_Layer: 8
   m_Name: Fence_1_3 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -97856,7 +97997,7 @@ GameObject:
   - component: {fileID: 7222033990587033163}
   m_Layer: 12
   m_Name: Rock_3 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -97888,7 +98029,7 @@ GameObject:
   - component: {fileID: 7222033990626024618}
   m_Layer: 12
   m_Name: Rock_3 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -97920,7 +98061,7 @@ GameObject:
   - component: {fileID: 7222033990702523561}
   m_Layer: 12
   m_Name: Rock_3 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -97952,7 +98093,7 @@ GameObject:
   - component: {fileID: 7222033991620683938}
   m_Layer: 12
   m_Name: Rock_3 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -97984,7 +98125,7 @@ GameObject:
   - component: {fileID: 7222033991720172168}
   m_Layer: 12
   m_Name: Rock_3 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -98016,7 +98157,7 @@ GameObject:
   - component: {fileID: 7222033992075201601}
   m_Layer: 12
   m_Name: Rock_3 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -98048,7 +98189,7 @@ GameObject:
   - component: {fileID: 7222033992290350712}
   m_Layer: 12
   m_Name: Rock_3 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -102802,7 +102943,7 @@ GameObject:
   - component: {fileID: 7583569476271255223}
   m_Layer: 12
   m_Name: Building_1_Wall_Off Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -102834,7 +102975,7 @@ GameObject:
   - component: {fileID: 7583569476692110509}
   m_Layer: 12
   m_Name: Building_1_Wall_Off Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -104760,7 +104901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &7665609319691339234
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -106651,7 +106792,7 @@ GameObject:
   - component: {fileID: 7875779505846133598}
   m_Layer: 6
   m_Name: Footbridge Variant (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -109923,7 +110064,7 @@ GameObject:
   - component: {fileID: 8069444082815326185}
   m_Layer: 12
   m_Name: Building_2_Wall_On_1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -110920,7 +111061,7 @@ GameObject:
   - component: {fileID: 3832660718421975926}
   m_Layer: 8
   m_Name: Stone_4 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -110939,7 +111080,7 @@ GameObject:
   - component: {fileID: 3832660716967032394}
   m_Layer: 8
   m_Name: Stone_4 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120269,7 +120410,7 @@ GameObject:
   - component: {fileID: 6005520044701582927}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120288,7 +120429,7 @@ GameObject:
   - component: {fileID: 6005520044573843959}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (7)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120307,7 +120448,7 @@ GameObject:
   - component: {fileID: 6005520044605742810}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (12)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120326,7 +120467,7 @@ GameObject:
   - component: {fileID: 6005520044491950759}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (21)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120345,7 +120486,7 @@ GameObject:
   - component: {fileID: 6005520044273823187}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120364,7 +120505,7 @@ GameObject:
   - component: {fileID: 6005520044282653218}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120383,7 +120524,7 @@ GameObject:
   - component: {fileID: 6005520044129687440}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (17)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120402,7 +120543,7 @@ GameObject:
   - component: {fileID: 6005520043971140341}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (13)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120421,7 +120562,7 @@ GameObject:
   - component: {fileID: 6005520043910400666}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (35)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120440,7 +120581,7 @@ GameObject:
   - component: {fileID: 6005520043724031858}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (9)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120459,7 +120600,7 @@ GameObject:
   - component: {fileID: 6005520043761398748}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (19)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120478,7 +120619,7 @@ GameObject:
   - component: {fileID: 6005520043787425888}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (33)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120497,7 +120638,7 @@ GameObject:
   - component: {fileID: 6005520043798848952}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120516,7 +120657,7 @@ GameObject:
   - component: {fileID: 6005520043606202594}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (32)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120535,7 +120676,7 @@ GameObject:
   - component: {fileID: 6005520043671784110}
   m_Layer: 8
   m_Name: Fence_1_2 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120554,7 +120695,7 @@ GameObject:
   - component: {fileID: 6005520043476717240}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120573,7 +120714,7 @@ GameObject:
   - component: {fileID: 6005520043496287186}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (22)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120592,7 +120733,7 @@ GameObject:
   - component: {fileID: 6005520043506931768}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (23)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120611,7 +120752,7 @@ GameObject:
   - component: {fileID: 6005520043561677398}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (10)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120630,7 +120771,7 @@ GameObject:
   - component: {fileID: 6005520043366685882}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (26)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120649,7 +120790,7 @@ GameObject:
   - component: {fileID: 6005520043427433506}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (24)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120668,7 +120809,7 @@ GameObject:
   - component: {fileID: 6005520043179806203}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (20)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120687,7 +120828,7 @@ GameObject:
   - component: {fileID: 6005520043189738132}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (28)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120706,7 +120847,7 @@ GameObject:
   - component: {fileID: 6005520043233118093}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (36)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120725,7 +120866,7 @@ GameObject:
   - component: {fileID: 6005520043266811515}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (14)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120744,7 +120885,7 @@ GameObject:
   - component: {fileID: 6005520043057899658}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120763,7 +120904,7 @@ GameObject:
   - component: {fileID: 6005520043087468008}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (27)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120782,7 +120923,7 @@ GameObject:
   - component: {fileID: 6005520043113337654}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (34)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120801,7 +120942,7 @@ GameObject:
   - component: {fileID: 6005520043138549230}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (30)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120820,7 +120961,7 @@ GameObject:
   - component: {fileID: 6005520043143493088}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (16)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120839,7 +120980,7 @@ GameObject:
   - component: {fileID: 6005520042998505906}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (18)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120858,7 +120999,7 @@ GameObject:
   - component: {fileID: 6005520042784333507}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (15)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120877,7 +121018,7 @@ GameObject:
   - component: {fileID: 6005520042792071295}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (29)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120896,7 +121037,7 @@ GameObject:
   - component: {fileID: 6005520042797186774}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (11)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120915,7 +121056,7 @@ GameObject:
   - component: {fileID: 6005520042835645403}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (31)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120934,7 +121075,7 @@ GameObject:
   - component: {fileID: 6005520042687391731}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (25)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120953,7 +121094,7 @@ GameObject:
   - component: {fileID: 6005520042750398185}
   m_Layer: 8
   m_Name: Fence_1_2 Variant (4)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -133190,6 +133331,7 @@ Transform:
   - {fileID: 2385678363250327957}
   - {fileID: 6870190164520872340}
   - {fileID: 1340916358395419189}
+  - {fileID: 1754547343}
   m_Father: {fileID: 4049549268166513169}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -135047,7 +135189,7 @@ GameObject:
   - component: {fileID: 9150296377043619506}
   m_Layer: 12
   m_Name: Rock_6 Variant (2)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135079,7 +135221,7 @@ GameObject:
   - component: {fileID: 9150296377240011458}
   m_Layer: 12
   m_Name: Rock_6 Variant (6)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135111,7 +135253,7 @@ GameObject:
   - component: {fileID: 9150296377794818927}
   m_Layer: 12
   m_Name: Rock_6 Variant (5)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135143,7 +135285,7 @@ GameObject:
   - component: {fileID: 9150296378307981023}
   m_Layer: 12
   m_Name: Rock_6 Variant (1)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135175,7 +135317,7 @@ GameObject:
   - component: {fileID: 9150296378566970683}
   m_Layer: 12
   m_Name: Rock_6 Variant (8)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135207,7 +135349,7 @@ GameObject:
   - component: {fileID: 9150296378778673403}
   m_Layer: 12
   m_Name: Rock_6 Variant (3)
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -135239,7 +135381,7 @@ GameObject:
   - component: {fileID: 9167223615616178748}
   m_Layer: 12
   m_Name: Building_2_Wall_Off_1 Variant
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

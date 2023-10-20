@@ -11,6 +11,7 @@ TagManager:
   - Skill
   - Cry
   - Slash
+  - Block
   layers:
   - Default
   - TransparentFX

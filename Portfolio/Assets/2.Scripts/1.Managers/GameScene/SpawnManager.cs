@@ -24,16 +24,6 @@ public class SpawnManager : MonoBehaviour
         Init();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GameObject go = PoolingManager._pool.InstantiateAPS("SmallHPPotion");
-            go.transform.position = PlayerCtrl._inst.transform.position + Vector3.forward + Vector3.up;
-            go.GetComponent<Item>().Spawn();
-        }
-    }
-
     public void Init()
     {
         pool = PoolingManager._pool;
@@ -73,6 +63,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         GameObject go = pool.InstantiateAPS(Util.ConvertEnum(type), tr.position, tr.rotation, Vector3.one);
+
         if(go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
         {
             Destroy(go);

@@ -10,6 +10,8 @@ public class AutoRespawnManager : MonoBehaviour
     SpawnManager spawn;
     Queue<eMonster> _monsterQ;
 
+    const string Mark = "Mark";
+
     int _currAmount = 0;
     int _totalAmount = 0;
     int _reserveAmount = 0;
@@ -90,6 +92,11 @@ public class AutoRespawnManager : MonoBehaviour
         }
         if (mc.isDead)
             mc.OnResurrectEvent();
+        else
+        {
+            MinimapCamera._inst.InstiatieMarker(false, mc.transform);
+        }
+            
 
         go.transform.position = randPos;
         _reserveAmount--;

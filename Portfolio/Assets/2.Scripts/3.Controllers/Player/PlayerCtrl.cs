@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Define;
 using System;
+using UnityEditor.Experimental.GraphView;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class PlayerCtrl : MonoBehaviour
     eSkill _sType = eSkill.Unknown;
 
     Dictionary<PlayerBools, bool> dict_bool;
+
+    Coroutine SlashCoroutine;
 
     #endregion [ Data ]
 
@@ -184,6 +187,7 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < (int)PlayerBools.Max_Cnt; i++)
             dict_bool.Add((PlayerBools)i, false);
 
+        MinimapCamera._inst.InstiatieMarker(true, transform);
         StartCoroutine(RegenerateStat());
     }
 
@@ -542,8 +546,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (CheckMousePoint())
         {
-            StopCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
-            StartCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
+            if(SlashCoroutine != null)
+                StopCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
+            SlashCoroutine = StartCoroutine(OnSlashEvent(skill, _mouseWorldPoint));
         }
     }
 
@@ -592,6 +597,15 @@ public class PlayerCtrl : MonoBehaviour
     public void PotionEvent(ePotion type)
     {
         _potion.EffectPlay(type);
+    }
+
+    public void CancelSlash(GameObject go)
+    {
+        if (SlashCoroutine != null)
+            StopCoroutine(SlashCoroutine);
+
+        if (go.activeSelf)
+            go.DestroyAPS();
     }
 
     #endregion [ Skill Event ]
