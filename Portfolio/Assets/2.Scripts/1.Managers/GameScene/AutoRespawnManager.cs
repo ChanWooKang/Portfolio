@@ -46,8 +46,15 @@ public class AutoRespawnManager : MonoBehaviour
 
             for (int j = 0; j < pool._poolingUnits[i].amount; j++)
             {
-                MonsterCtrl mc = pool._poolingUnits[i].prefab.GetComponent<MonsterCtrl>();
-                _monsterQ.Enqueue(mc.mType);
+                if(pool._poolingUnits[i].prefab.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc))
+                {
+                    _monsterQ.Enqueue(mc.mType);
+                }
+                else if(pool._poolingUnits[i].prefab.TryGetComponent<BossCtrl>(out BossCtrl bc))
+                {
+                    _monsterQ.Enqueue(bc.mType);
+                }
+                
             }
             SetKeepMonsterCount(pool._poolingUnits[i].amount);
         }
@@ -76,29 +83,53 @@ public class AutoRespawnManager : MonoBehaviour
         }
         eMonster type = _monsterQ.Dequeue();
         GameObject go = spawn.Spawn(type);
-        MonsterCtrl mc = go.GetComponent<MonsterCtrl>();
-        Vector3 randPos = new Vector3();
-        if (go.TryGetComponent<NavMeshAgent>(out NavMeshAgent na) == false)
-            na = go.AddComponent<NavMeshAgent>();
 
-        while (true)
+        if(type != eMonster.Boss)
         {
-            Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
-            randDir.y = 0;
-            randPos = go.transform.position + randDir;
-            NavMeshPath path = new NavMeshPath();
-            if (na.CalculatePath(randPos, path))
-                break;
+            MonsterCtrl mc = go.GetComponent<MonsterCtrl>();
+            Vector3 randPos = new Vector3();
+            if (go.TryGetComponent<NavMeshAgent>(out NavMeshAgent na) == false)
+                na = go.AddComponent<NavMeshAgent>();
+
+            while (true)
+            {
+                Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
+                randDir.y = 0;
+                randPos = go.transform.position + randDir;
+                NavMeshPath path = new NavMeshPath();
+                if (na.CalculatePath(randPos, path))
+                    break;
+            }
+            if (mc.isDead)
+                mc.OnResurrectEvent();
+            else
+            {
+                MinimapCamera._inst.InstiatieMarker(false, mc.transform);
+            }
+            go.transform.position = randPos;
         }
-        if (mc.isDead)
-            mc.OnResurrectEvent();
         else
         {
-            MinimapCamera._inst.InstiatieMarker(false, mc.transform);
-        }
-            
+            BossCtrl bc = go.GetComponent<BossCtrl>();
+            Vector3 randPos = new Vector3();
+            if (go.TryGetComponent<NavMeshAgent>(out NavMeshAgent na) == false)
+                na = go.AddComponent<NavMeshAgent>();
 
-        go.transform.position = randPos;
+            while (true)
+            {
+                Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
+                randDir.y = 0;
+                randPos = go.transform.position + randDir;
+                NavMeshPath path = new NavMeshPath();
+                if (na.CalculatePath(randPos, path))
+                    break;
+            }
+            if (bc.isDead == false)
+            {
+                MinimapCamera._inst.InstiatieMarker(false, bc.transform, eMonster.Boss);
+            }
+            go.transform.position = randPos;
+        }
         _reserveAmount--;
     }
 }

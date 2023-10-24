@@ -7,16 +7,19 @@ public class BossStateDie : TSingleton<BossStateDie>, IFSMState<BossCtrl>
 {
     public void Enter(BossCtrl m)
     {
-        throw new System.NotImplementedException();
+        m.ChangeLayer(eLayer.Disable);
+        m.Agent.destination = m.transform.position;
+        m.State = BossState.Die;
+        
     }
 
     public void Execute(BossCtrl m)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Exit(BossCtrl m)
     {
-        throw new System.NotImplementedException();
+       
     }
 }

@@ -44,6 +44,12 @@ public class UI_TargetInfo : UI_Base
                         float ratio = mc._stat.HP / mc._stat.MaxHP;
                         GetObject((int)GameObjects.TargetHP).GetComponent<Image>().fillAmount = ratio;
                     }
+                    else if(go.TryGetComponent<BossCtrl>(out BossCtrl bc))
+                    {
+                        GetObject((int)GameObjects.TargetName).GetComponent<Text>().text = Util.ConvertEnum((TranslateMonsterName)bc.mType);
+                        float ratio = bc._stat.HP / bc._stat.MaxHP;
+                        GetObject((int)GameObjects.TargetHP).GetComponent<Image>().fillAmount = ratio;
+                    }
                 }
             }
             else

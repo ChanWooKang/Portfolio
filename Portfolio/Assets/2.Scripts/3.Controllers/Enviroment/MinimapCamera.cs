@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Define;
 
 public class MinimapCamera : MonoBehaviour
 {
@@ -85,7 +85,7 @@ public class MinimapCamera : MonoBehaviour
         IsWorldMap = false;
     }
 
-    public void InstiatieMarker(bool isPlayer, Transform tr)
+    public void InstiatieMarker(bool isPlayer, Transform tr, eMonster type = eMonster.Unknown)
     {
         GameObject go = null;
         if (isPlayer)
@@ -104,8 +104,13 @@ public class MinimapCamera : MonoBehaviour
         }
         else
         {
-            go = Instantiate(Mark_Monster, tr);
-            
+            if(type != eMonster.Boss)
+                go = Instantiate(Mark_Monster, tr);
+            else
+            {
+                // Test
+                go = Instantiate(Mark_Monster, tr);
+            }
             if (IsWorldMap)
             {
                 go.transform.localScale = Vector3.one * 4;

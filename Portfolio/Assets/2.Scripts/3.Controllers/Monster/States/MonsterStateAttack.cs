@@ -23,7 +23,6 @@ public class MonsterStateAttack : TSingleton<MonsterStateAttack>, IFSMState<Mons
                 if (m.cntTime > m._stat.AttackDelay && m.isAttack == false)
                 {
                     m.AttackFunc();
-                    m.cntTime = 0;
                 }
             }
             else

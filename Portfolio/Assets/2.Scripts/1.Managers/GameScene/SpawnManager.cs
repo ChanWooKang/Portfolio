@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public Action<eMonster, int> OnSpawnEvent;
     public List<SpawnPoint> points;
 
+    [SerializeField] BossField bf;
     [SerializeField] SOItem testItem;
     PoolingManager pool;
 
@@ -64,13 +65,29 @@ public class SpawnManager : MonoBehaviour
 
         GameObject go = pool.InstantiateAPS(Util.ConvertEnum(type), tr.position, tr.rotation, Vector3.one);
 
-        if(go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
+        if (type != eMonster.Boss)
         {
-            Destroy(go);
-            return null;
+            if (go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
+            {
+                Debug.Log("昏力");
+                Destroy(go);
+                return null;
+            }
+            mc._defPos = tr.position;
+        }
+        else
+        {
+            if (go.TryGetComponent<BossCtrl>(out BossCtrl bc) == false)
+            {
+                Debug.Log("昏力");
+                Destroy(go);
+                return null;
+            }
+            bc._defPos = tr.position;
+            bc.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            bf.SettingBoss(bc);
         }
 
-        mc._defPos = tr.position;
         OnSpawnEvent?.Invoke(type, 1);
         return go;
     }
@@ -121,12 +138,22 @@ public class SpawnManager : MonoBehaviour
         return go;
     }
 
-    public void MonsterDespawn(GameObject go)
+    public void MonsterDespawn(GameObject go , bool isBoss = false)
     {
-        eMonster type = GetMonsterType(go);
-        if (type == eMonster.Unknown || type == eMonster.Max_Cnt)
-            return;
-        OnSpawnEvent?.Invoke(type, -1);
+        if(!isBoss)
+        {
+            eMonster type = GetMonsterType(go);
+            if (type == eMonster.Unknown || type == eMonster.Max_Cnt)
+                return;
+            OnSpawnEvent?.Invoke(type, -1);
+        }
+        else
+        {
+            OnSpawnEvent?.Invoke(eMonster.Boss, -1);
+
+            //霸烙概聪历 积己 饶 贸府 傈价
+
+        }
         go.DestroyAPS();
     }
 }

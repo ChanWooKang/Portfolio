@@ -171,6 +171,8 @@ namespace Define
         Trace,
         Return,
         Attack,
+        HandAttack,
+        FlameAttack,
         Disable
     }
 

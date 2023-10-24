@@ -29,8 +29,9 @@ public class BossCtrl : FSM<BossCtrl>
 
     [SerializeField]
     int[] _patternWeight;
-    [SerializeField]
-    int _totalRate;
+
+    Coroutine FlameCoroutine = null;
+    Coroutine DamageCoroutine = null;
 
     public NavMeshAgent Agent { get { if(_agent == null) _agent = GetComponent<NavMeshAgent>(); return _agent; } }
     public BossState State
@@ -39,6 +40,7 @@ public class BossCtrl : FSM<BossCtrl>
         set
         {
             _nowState = value;
+            ChangeAnim(_nowState);
         }
     }
 
@@ -46,8 +48,8 @@ public class BossCtrl : FSM<BossCtrl>
 
     void Start()
     {
-
-        InitState(this, BossStateIdle._inst);
+        InitComponent();
+        InitState(this, BossStateInitial._inst);
     }
 
     void Update()
@@ -66,6 +68,7 @@ public class BossCtrl : FSM<BossCtrl>
         _rb = GetComponent<Rigidbody>();
         _colliders = GetComponentsInChildren<Collider>();
         _meshs = GetComponentsInChildren<Renderer>();
+        _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _stat = new MonsterStat();
     }
@@ -74,9 +77,10 @@ public class BossCtrl : FSM<BossCtrl>
     {
         //targetPos = Vector3.zero;
         _stat.HP = _stat.MaxHP;
+        Debug.Log(_stat.HP);
         isDead = false;
         isAttack = false;
-
+        SetCollider(true);
     }
 
     //보스가 필드 외 지역 으로 갔을때 전환 용
@@ -97,6 +101,15 @@ public class BossCtrl : FSM<BossCtrl>
     {
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+    }
+
+    void SetCollider(bool isOn)
+    {
+        if(_colliders.Length > 0)
+        {
+            foreach (Collider coli in _colliders)
+                coli.enabled = isOn;
+        }
     }
 
     void ChangeColor(Color color)
@@ -122,6 +135,7 @@ public class BossCtrl : FSM<BossCtrl>
             return true;
         return false;
     }
+
 
     public BossPattern PickPattern()
     {
@@ -162,6 +176,20 @@ public class BossCtrl : FSM<BossCtrl>
             case BossState.Scream:
                 _ani.CrossFade("Scream", 0.1f, -1, 0);
                 break;
+            case BossState.Trace:
+            case BossState.Return:
+                _ani.CrossFade("Walk", 0.1f);
+                break;
+            case BossState.Attack:
+                _ani.CrossFade("Attack", 0.1f, -1, 0);
+                break;
+            case BossState.HandAttack:
+                SetCollider(false);
+                _ani.CrossFade("Hand", 0.1f, -1, 0);
+                break;
+            case BossState.FlameAttack:
+                _ani.CrossFade("Flame", 0.1f, -1, 0);
+                break;
         }
     }
 
@@ -199,6 +227,150 @@ public class BossCtrl : FSM<BossCtrl>
 
     public void AttackEvent()
     {
+        if(target == null || player.State == PlayerState.Die)
+        {
+            if (target != null)
+                target = null;
+
+            return;
+        }
+
         BossPattern nowPattern = PickPattern();
+        _agent.avoidancePriority = 51;
+        isAttack = true;
+
+        switch (nowPattern)
+        {
+            case BossPattern.Basic:
+                State = BossState.Attack;
+                break;
+            case BossPattern.Hand:
+                State = BossState.HandAttack;
+                break;
+            case BossPattern.Flame:
+                State = BossState.FlameAttack;
+                break;
+        }
     }
+
+    // 기본 공격
+    public void OnAttackEvent()
+    {
+        if(target != null && player.State != PlayerState.Die)
+        {
+            if (IsCloseTarget(target.position, _stat.AttackRange))
+            {
+                player.OnDamage(_stat);
+            }
+        }
+    }
+
+
+    //이동 공격
+    public void OnHandAttackEvent()
+    {
+        if (target != null && player.State != PlayerState.Die)
+        {
+            if (IsCloseTarget(target.position, _stat.AttackRange + 2))
+            {
+                player.OnDamage(_stat);
+            }
+        }
+    }
+
+    //화염 발사 공격
+    public void OnFlameAttackEvent()
+    {
+        if (FlameCoroutine != null)
+            StopCoroutine(FlameCoroutine);
+
+        //코루틴 시작
+        FlameCoroutine = StartCoroutine(FlameEvent());
+    }
+
+    IEnumerator FlameEvent()
+    {
+        yield return null;
+    }
+
+    public void OffHandAttackEvent()
+    {
+        SetCollider(true);
+        OffAttackEvent();
+    }
+
+    public void OffFlameEvent()
+    {
+        if (FlameCoroutine != null)
+            StopCoroutine(FlameCoroutine);
+        FlameCoroutine = null;
+
+        OffAttackEvent();
+    }
+
+    public void OffAttackEvent()
+    {
+        _agent.avoidancePriority = 50;
+        cntTime = 0;
+        isAttack = false;
+        
+    }
+
+    public bool OnDamage(BaseStat stat)
+    {
+        if (isDead)
+            return true;
+
+        isDead = _stat.GetHit(stat);
+        if (DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
+        DamageCoroutine = StartCoroutine(OnDamageEvent());
+
+        return isDead;
+    }
+
+    public bool OnDamage(float damage)
+    {
+        if (isDead)
+            return true;
+
+        isDead = _stat.GetHit(damage);
+        if (DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
+        DamageCoroutine = StartCoroutine(OnDamageEvent());
+
+        return isDead;
+    }
+
+    IEnumerator OnDamageEvent()
+    {
+        FloatText.Create("FloatText", true, transform.position, (int)_stat.AttackedDamage);
+
+        if (isDead)
+        {
+            SetCollider(false);
+            _agent.SetDestination(transform.position);
+            _stat.DeadFunc(player._stat);
+            ChangeColor(Color.gray);
+            ChangeState(BossStateDie._inst);
+            yield break;
+        }
+        ChangeColor(Color.red);
+        yield return new WaitForSeconds(0.3f);
+        ChangeColor(Color.white);
+    }
+
+    public void OnDeadEvent()
+    {
+        SpawnManager._inst.MonsterDespawn(gameObject,true);
+        ChangeColor(Color.white);
+        ChangeState(BossStateDisable._inst);
+        _dropTable.ItemDrop(transform, _stat.Gold);
+        _dropTable.ItemDrop(transform);
+    }
+    
 }

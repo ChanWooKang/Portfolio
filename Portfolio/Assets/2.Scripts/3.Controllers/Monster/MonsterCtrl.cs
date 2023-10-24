@@ -261,8 +261,9 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     public void OffAttackEvent()
     {
         _agent.avoidancePriority = 50;
+        cntTime = 0;
         isAttack = false;
-        State = MonsterState.Trace;
+        //State = MonsterState.Trace;
     }
 
     public bool OnDamage(BaseStat stat)
@@ -333,6 +334,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
                 isDead = _stat.GetHit(damage);
             else
                 return;
+
             StopCoroutine(OnDamageEvent());
             StartCoroutine(OnDamageEvent());
         }

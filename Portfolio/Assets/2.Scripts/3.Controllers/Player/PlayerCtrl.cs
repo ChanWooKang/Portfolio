@@ -305,7 +305,16 @@ public class PlayerCtrl : MonoBehaviour
                             State = PlayerState.Move;
                         dict_bool[PlayerBools.ContinueAttack] = true;
                         if (rhit.collider.gameObject.layer == (int)eLayer.Monster)
-                            _locktarget = rhit.collider.gameObject;
+                        {
+                            if (rhit.collider.CompareTag("Boss"))
+                            {
+                                _locktarget = rhit.transform.GetComponentInParent<BossCtrl>().gameObject;
+                            }
+                            else
+                            {
+                                _locktarget = rhit.collider.gameObject;
+                            }
+                        }
                         else
                             _locktarget = null;
                     }
@@ -458,6 +467,15 @@ public class PlayerCtrl : MonoBehaviour
             {
                 mc.OnDamage(_stat);
                 if (mc.isDead)
+                {
+                    _locktarget = null;
+                    dict_bool[PlayerBools.ContinueAttack] = false;
+                }
+            }
+            else if(_locktarget.TryGetComponent<BossCtrl>(out BossCtrl bc))
+            {
+                bc.OnDamage(_stat);
+                if (bc.isDead)
                 {
                     _locktarget = null;
                     dict_bool[PlayerBools.ContinueAttack] = false;

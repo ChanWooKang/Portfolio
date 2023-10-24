@@ -12,6 +12,7 @@ TagManager:
   - Cry
   - Slash
   - Block
+  - Boss
   layers:
   - Default
   - TransparentFX

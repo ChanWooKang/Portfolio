@@ -939,6 +939,9 @@ MonoBehaviour:
     targetType: 3
   - target: {fileID: 1806853496}
     targetType: 4
+  - target: {fileID: 878864202}
+    targetType: 5
+  bf: {fileID: 878864204}
   testItem: {fileID: 11400000, guid: 1c00051014f78f343b56e5eab2c1bb76, type: 2}
 --- !u!4 &105673297
 Transform:
@@ -955,6 +958,7 @@ Transform:
   - {fileID: 807990900}
   - {fileID: 2001040625}
   - {fileID: 1806853496}
+  - {fileID: 878864202}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8542,6 +8546,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874751963}
   m_CullTransparentMesh: 1
+--- !u!1 &878864201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878864202}
+  - component: {fileID: 878864203}
+  - component: {fileID: 878864204}
+  m_Layer: 0
+  m_Name: SpawnPoint(Boss)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &878864202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878864201}
+  m_LocalRotation: {x: -0.00000009735359, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 62.4, y: -0, z: 91.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 105673297}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &878864203
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878864201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &878864204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878864201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bb4516f14c6b548b5ee3c5962c5d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &902821070
 GameObject:
   m_ObjectHideFlags: 0
@@ -14930,6 +14991,10 @@ MonoBehaviour:
     type: 3
     prefab: {fileID: 8275724606446279574, guid: 5b59fd2064456d744bc567b3530cafaa, type: 3}
     amount: 5
+  - name: Boss
+    type: 0
+    prefab: {fileID: 2721975057702104399, guid: 2c6fd45da3aadd94aa52327541035106, type: 3}
+    amount: 1
   _defPoolAmount: 5
   _canPoolExpand: 1
 --- !u!1 &1691341699
@@ -64120,7 +64185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4935837246301668767, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -161.16
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4935837246301668767, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: m_LocalPosition.y
@@ -64128,7 +64193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4935837246301668767, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -89.33
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4935837246301668767, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: m_LocalRotation.w
