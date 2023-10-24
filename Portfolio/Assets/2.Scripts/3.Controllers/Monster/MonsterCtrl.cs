@@ -6,7 +6,7 @@ using Define;
 
 public class MonsterCtrl : FSM<MonsterCtrl>
 {
-    public MonsterStat _stat = new MonsterStat();
+    public MonsterStat _stat;
     Animator _anim;
     Rigidbody _rb;
     CapsuleCollider _colider;

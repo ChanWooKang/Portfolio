@@ -132,6 +132,10 @@ namespace Define
         Mushroom,
         Slime,
         TurtleShell,
+
+
+
+        Boss,
         Max_Cnt
     }
     public enum TranslateMonsterName
@@ -141,6 +145,9 @@ namespace Define
         ¹ö¼¸¸ó,
         ½½¶óÀÓ,
         °¡½Ã°ÅºÏ,
+
+
+        µå·¡°ï,
         Max_Cnt,
     }
 
@@ -154,6 +161,27 @@ namespace Define
         Attack,
         Disable
     }
+
+    #region [ Boss ]
+    public enum BossState
+    {
+        Die,
+        Idle,
+        Scream,
+        Trace,
+        Return,
+        Attack,
+        Disable
+    }
+
+    public enum BossPattern
+    {
+        Basic,
+        Hand,
+        Flame
+    }
+
+    #endregion [ Boss ]
 
     public enum eCombo
     {
