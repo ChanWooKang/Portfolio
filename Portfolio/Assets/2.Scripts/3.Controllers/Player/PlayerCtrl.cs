@@ -526,7 +526,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void UsePotion(eStat type, float value)
     {
-        _stat.BuffEvent(type, value);
+        _stat.UsePotion(type, value);
     }
 
     public bool UseMP(float value)

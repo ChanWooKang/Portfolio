@@ -218,15 +218,15 @@ public class PlayerStat : BaseStat
         }
     }
 
-    public void BuffEvent(eStat type, float value)
+    public void UsePotion(eStat type, float value)
     {
         switch (type)
         {
             case eStat.HP:
-                _hp = Mathf.Min(_hp + value, _maxhp);
+                _hp = Mathf.Min(_hp + _maxhp * value, _maxhp);
                 break;
             case eStat.MP:
-                _mp = Mathf.Min(_mp + value, _maxhp);
+                _mp = Mathf.Min(_mp + _maxmp * value, _maxhp);
                 break;
         }
     }

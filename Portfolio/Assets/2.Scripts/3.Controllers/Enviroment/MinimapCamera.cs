@@ -91,14 +91,14 @@ public class MinimapCamera : MonoBehaviour
         if (isPlayer)
         {
             go = Instantiate(Mark_Player, tr);
-           
+
             if (IsWorldMap)
             {
-                go.transform.localScale = Vector3.one * 5;
+                go.transform.localScale = Vector3.one * 4;
             }
             else
             {
-                go.transform.localScale = Vector3.one * 3;
+                go.transform.localScale = Vector3.one * 2;
             }
             AddMarkSetting(go, true);
         }
@@ -108,16 +108,16 @@ public class MinimapCamera : MonoBehaviour
                 go = Instantiate(Mark_Monster, tr);
             else
             {
-                // Test
                 go = Instantiate(Mark_Monster, tr);
             }
+
             if (IsWorldMap)
             {
-                go.transform.localScale = Vector3.one * 4;
+                go.transform.localScale = Vector3.one * 3;
             }
             else
             {
-                go.transform.localScale = Vector3.one * 2;
+                go.transform.localScale = Vector3.one * 1;
             }
             AddMarkSetting(go, false);
         }
