@@ -166,6 +166,7 @@ namespace Define
     public enum BossState
     {
         Die,
+        Sleep,
         Idle,
         Scream,
         Trace,

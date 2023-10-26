@@ -12,6 +12,7 @@ public class MonsterStateInitial : TSingleton<MonsterStateInitial>, IFSMState<Mo
         m.SetTarget();
         m.InitData();
         m.ChangeState(MonsterStatePatrol._inst);
+        m.BaseNavSetting();
         
     }
 

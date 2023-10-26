@@ -8589,7 +8589,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 40
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &878864204
 MonoBehaviour:
@@ -14931,6 +14931,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolingUnits:
+  - name: Boss
+    type: 0
+    prefab: {fileID: 1895073923916741002, guid: 2186485761affb14a93a86c00027d0c0, type: 3}
+    amount: 1
   - name: Cactus
     type: 0
     prefab: {fileID: 2862990797729395252, guid: 3daa0b1cdb37f9a468b87060b5f4b52f, type: 3}
@@ -14991,10 +14995,6 @@ MonoBehaviour:
     type: 3
     prefab: {fileID: 8275724606446279574, guid: 5b59fd2064456d744bc567b3530cafaa, type: 3}
     amount: 5
-  - name: Boss
-    type: 0
-    prefab: {fileID: 2721975057702104399, guid: 2c6fd45da3aadd94aa52327541035106, type: 3}
-    amount: 1
   _defPoolAmount: 5
   _canPoolExpand: 1
 --- !u!1 &1691341699

@@ -15,7 +15,7 @@ public class BossStateInitial : TSingleton<BossStateInitial>, IFSMState<BossCtrl
 
     public void Execute(BossCtrl m)
     {
-        
+        Debug.Log("현재 보스 상태 : Initial");
     }
 
     public void Exit(BossCtrl m)

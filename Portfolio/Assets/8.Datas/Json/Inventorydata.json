@@ -20,7 +20,10 @@
         17,
         18,
         19,
-        20
+        20,
+        21,
+        22,
+        23
     ],
     "InvenItemName": [
         "LongSword",
@@ -43,7 +46,10 @@
         "LongSword",
         "LongSword",
         "SmallHPPotion",
-        "BigShield"
+        "BigShield",
+        "SmallMPPotion",
+        "SmallGreenPotion",
+        "BigSword"
     ],
     "InvenItemCount": [
         500,
@@ -65,8 +71,11 @@
         999,
         500,
         500,
-        501,
-        500
+        502,
+        500,
+        3,
+        2,
+        1
     ],
     "EquipArrayNumber": [],
     "EquipItemName": [],

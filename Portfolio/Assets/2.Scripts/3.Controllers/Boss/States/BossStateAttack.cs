@@ -7,11 +7,14 @@ public class BossStateAttack : TSingleton<BossStateAttack>, IFSMState<BossCtrl>
 {
     public void Enter(BossCtrl m)
     {
+        m.AttackNavSetting();
         m.Agent.SetDestination(m.transform.position);
+        m.cntTime = 10;
     }
 
     public void Execute(BossCtrl m)
     {
+        Debug.Log("현재 보스 상태 : Attack");
         if (m.target == null)
             m.ChangeState(BossStateReturnHome._inst);
         else
@@ -23,6 +26,11 @@ public class BossStateAttack : TSingleton<BossStateAttack>, IFSMState<BossCtrl>
                 if (m.cntTime > m._stat.AttackDelay && m.isAttack == false)
                 {
                     m.AttackEvent();
+                }
+                else
+                {
+                    if (m.State != BossState.Idle && m.isAttack == false)
+                        m.State = BossState.Idle;
                 }
             }
             else

@@ -8,6 +8,7 @@ public class BossField : MonoBehaviour
 
     public void SettingBoss(BossCtrl bCtrl)
     {
+        Debug.Log("보스 세팅");
         bc = bCtrl;
     }
 
@@ -17,8 +18,9 @@ public class BossField : MonoBehaviour
         {
             if (bc != null)
             {
-                bc.SetTarget(other.transform);
-                bc.RecognizePlayer();
+                
+                bc.RecognizePlayer(other.transform);
+                Debug.Log("플레이어 진입");
             }
         }
 
@@ -32,6 +34,7 @@ public class BossField : MonoBehaviour
             if (bc != null)
             {
                 bc.SetTarget(null);
+                Debug.Log("플레이어 퇴장");
             }
         }
 

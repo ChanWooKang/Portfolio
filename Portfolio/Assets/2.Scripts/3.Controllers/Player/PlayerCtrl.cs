@@ -191,6 +191,22 @@ public class PlayerCtrl : MonoBehaviour
         StartCoroutine(RegenerateStat());
     }
 
+    public void BaseNavSetting()
+    {
+        _agent.ResetPath();
+        _agent.isStopped = false;
+        _agent.updatePosition = true;
+        _agent.updateRotation = false;
+    }
+
+    public void AttackNavSetting()
+    {
+        _agent.isStopped = true;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.velocity = Vector3.zero;
+    }
+
     void FreezeRotate()
     {
         if (_sType == eSkill.Dodge)
@@ -212,11 +228,33 @@ public class PlayerCtrl : MonoBehaviour
             return;
 
         _destPos = _locktarget.transform.position;
-        float dist = Vector3.SqrMagnitude(_destPos - transform.position);
-        if (dist < range * range)
+        Vector3 dir = _destPos - transform.position;
+        dir = dir.normalized;
+
+        Ray ray = new Ray(transform.position + Vector3.up, dir * range);
+        if(Physics.Raycast(ray,out RaycastHit rhit, range,(1<< (int)eLayer.Monster)))
+        {
             State = PlayerState.Attack;
+        }
+        else
+        {
+            
+        }
+
+        //float dist = Vector3.SqrMagnitude(_destPos - transform.position);
+        //if (dist < range * range)
+        //{
+        //    AttackNavSetting();
+        //    State = PlayerState.Attack;
+        //}
+            
 
         return;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position + Vector3.up, transform.forward * 2, Color.blue);
     }
 
     public void ClearNearObject()
@@ -489,7 +527,10 @@ public class PlayerCtrl : MonoBehaviour
         if (dict_bool[PlayerBools.ContinueAttack])
             State = PlayerState.Attack;
         else
+        {
             State = PlayerState.Idle;
+        }
+            
     }
 
     public void OnDamage(BaseStat stat)

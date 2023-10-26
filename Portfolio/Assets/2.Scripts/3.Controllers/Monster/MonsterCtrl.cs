@@ -99,13 +99,20 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         _hpBar.CoroutineStart();
     }
 
-
-    public bool ReturnHome()
+    public void BaseNavSetting()
     {
-        if (IsCloseTarget(_offSet, 0.5f))
-            return false;
-        MoveFunc(_offSet);
-        return true;
+        _agent.ResetPath();
+        _agent.isStopped = false;
+        _agent.updatePosition = true;
+        _agent.updateRotation = false;
+    }
+
+    public void AttackNavSetting()
+    {
+        _agent.isStopped = true;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.velocity = Vector3.zero;
     }
 
     public bool IsTooFar(float range = 20.0f)
@@ -263,19 +270,16 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         _agent.avoidancePriority = 50;
         cntTime = 0;
         isAttack = false;
-        //State = MonsterState.Trace;
     }
 
-    public bool OnDamage(BaseStat stat)
+    public void OnDamage(BaseStat stat)
     {
         if (isDead)
-            return true;
+            return;
 
         isDead = _stat.GetHit(stat);
         StopCoroutine(OnDamageEvent());
         StartCoroutine(OnDamageEvent());
-
-        return isDead;
     }
 
     IEnumerator OnDamageEvent()

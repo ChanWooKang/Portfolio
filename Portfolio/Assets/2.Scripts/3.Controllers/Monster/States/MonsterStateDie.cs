@@ -7,6 +7,7 @@ public class MonsterStateDie : TSingleton<MonsterStateDie>, IFSMState<MonsterCtr
 {
     public void Enter(MonsterCtrl m)
     {
+        m.AttackNavSetting();
         m.ChangeLayer(eLayer.Disable);
         m.Agent.destination = m.transform.position;
         m.State = MonsterState.Die;

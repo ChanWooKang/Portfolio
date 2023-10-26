@@ -11,6 +11,7 @@ public class BossCtrl : FSM<BossCtrl>
     Animator _ani;
     Rigidbody _rb;
     Collider[] _colliders;
+    BoxCollider _coli;
     Renderer[] _meshs;
     NavMeshAgent _agent;
 
@@ -26,10 +27,12 @@ public class BossCtrl : FSM<BossCtrl>
     [HideInInspector] public float cntTime;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isAttack;
+    
 
     [SerializeField]
     int[] _patternWeight;
 
+    bool isImotal = false;
     Coroutine FlameCoroutine = null;
     Coroutine DamageCoroutine = null;
 
@@ -67,6 +70,7 @@ public class BossCtrl : FSM<BossCtrl>
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _colliders = GetComponentsInChildren<Collider>();
+        //_coli = GetComponent<BoxCollider>();
         _meshs = GetComponentsInChildren<Renderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -77,10 +81,25 @@ public class BossCtrl : FSM<BossCtrl>
     {
         //targetPos = Vector3.zero;
         _stat.HP = _stat.MaxHP;
-        Debug.Log(_stat.HP);
         isDead = false;
         isAttack = false;
         SetCollider(true);
+    }
+
+    public void BaseNavSetting()
+    {
+        _agent.ResetPath();
+        _agent.isStopped = false;
+        _agent.updatePosition = true;
+        _agent.updateRotation = false;
+    }
+
+    public void AttackNavSetting()
+    {
+        _agent.isStopped = true;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.velocity = Vector3.zero;
     }
 
     //보스가 필드 외 지역 으로 갔을때 전환 용
@@ -95,6 +114,7 @@ public class BossCtrl : FSM<BossCtrl>
             target = targets;
         else
             target = null;
+
     }
 
     void FreezeRotation()
@@ -105,11 +125,17 @@ public class BossCtrl : FSM<BossCtrl>
 
     void SetCollider(bool isOn)
     {
-        if(_colliders.Length > 0)
+        isImotal = !isOn;
+        if (_colliders.Length > 0)
         {
             foreach (Collider coli in _colliders)
                 coli.enabled = isOn;
         }
+
+        //if (_coli == null)
+        //    _coli = GetComponent<BoxCollider>();
+
+        //_coli.enabled = isOn;
     }
 
     void ChangeColor(Color color)
@@ -170,6 +196,9 @@ public class BossCtrl : FSM<BossCtrl>
             case BossState.Die:
                 _ani.CrossFade("Die", 0.1f);
                 break;
+            case BossState.Sleep:
+                _ani.CrossFade("Sleep", 0.1f);
+                break;
             case BossState.Idle:
                 _ani.CrossFade("Idle", 0.1f);
                 break;
@@ -211,12 +240,12 @@ public class BossCtrl : FSM<BossCtrl>
     }
 
     //플레이어가 보스 영역에 들어왔을 경우
-    public void RecognizePlayer()
+    public void RecognizePlayer(Transform tr)
     {
-        //아이들 상태에서만 비명 지르고 추격
-        if(State == BossState.Idle)
+        if(State == BossState.Sleep || State == BossState.Idle)
         {
             State = BossState.Scream;
+            SetTarget(tr);
         }
     }
 
@@ -316,10 +345,10 @@ public class BossCtrl : FSM<BossCtrl>
         
     }
 
-    public bool OnDamage(BaseStat stat)
+    public void OnDamage(BaseStat stat)
     {
-        if (isDead)
-            return true;
+        if (isDead || isImotal)
+            return;
 
         isDead = _stat.GetHit(stat);
         if (DamageCoroutine != null)
@@ -327,8 +356,6 @@ public class BossCtrl : FSM<BossCtrl>
             StopCoroutine(DamageCoroutine);
         }
         DamageCoroutine = StartCoroutine(OnDamageEvent());
-
-        return isDead;
     }
 
     public bool OnDamage(float damage)
@@ -336,6 +363,10 @@ public class BossCtrl : FSM<BossCtrl>
         if (isDead)
             return true;
 
+        if (isImotal)
+            return false;
+
+        Debug.Log("Hit");
         isDead = _stat.GetHit(damage);
         if (DamageCoroutine != null)
         {
@@ -372,5 +403,31 @@ public class BossCtrl : FSM<BossCtrl>
         _dropTable.ItemDrop(transform, _stat.Gold);
         _dropTable.ItemDrop(transform);
     }
-    
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Weapon") || other.CompareTag("Cry") || other.CompareTag("Slash"))
+    //    {
+    //        float damage = 0;
+    //        if (other.CompareTag("Weapon"))
+    //        {
+    //            damage = other.transform.GetComponent<WeaponCtrl>().Damage;
+    //        }
+    //        else if (other.CompareTag("Cry"))
+    //        {
+    //            damage = other.transform.GetComponent<SkillCryCtrl>().Damage;
+    //        }
+    //        else
+    //        {
+    //            damage = other.transform.GetComponent<SkillSlashCtrl>().Damage;
+    //        }
+
+    //        if (damage > 0)
+    //            OnDamage(damage);
+    //        else
+    //            return;
+    //    }
+    //}
+
+
 }

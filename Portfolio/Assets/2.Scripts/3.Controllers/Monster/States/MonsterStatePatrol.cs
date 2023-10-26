@@ -7,6 +7,7 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
 {
     public void Enter(MonsterCtrl m)
     {
+        m.BaseNavSetting();
         m.targetPos = m._offSet;
         m.cntTime = 0;
         m.Agent.speed = m._stat.MoveSpeed;
@@ -18,15 +19,9 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
         if (UI_WorldMap.ActivatedWorldMap)
             return;
 
-        if (m.isReturnHome)
-        {
-            m.isReturnHome = m.ReturnHome();
-            return;
-        }
-        
         if (m.IsTooFar())
         {
-            m.isReturnHome = true;
+            m.ChangeState(MonsterStateReturn._inst);
             return;
         }
 

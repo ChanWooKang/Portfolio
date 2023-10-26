@@ -9,6 +9,7 @@ public class MonsterStateTrace : TSingleton<MonsterStateTrace>, IFSMState<Monste
     {
         m.Agent.speed = m._stat.TraceSpeed;
         m.State = MonsterState.Trace;
+        m.BaseNavSetting();
     }
 
     public void Execute(MonsterCtrl m)
@@ -18,7 +19,7 @@ public class MonsterStateTrace : TSingleton<MonsterStateTrace>, IFSMState<Monste
 
         if (m.IsTooFar())
         {
-            m.ChangeState(MonsterStatePatrol._inst);
+            m.ChangeState(MonsterStateReturn._inst);
             return;
         }
 
