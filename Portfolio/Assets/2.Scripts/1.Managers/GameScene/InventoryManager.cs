@@ -49,10 +49,15 @@ public class InventoryManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Delete))
         {
             //인벤 초기화
-            equip.ClearEquip();
-            inven.ResetAllSlots();
-            hotkey.ClearSlot();
+            ResetInventory();
         }
+    }
+
+    public void ResetInventory()
+    {
+        equip.ClearEquip();
+        inven.ResetAllSlots();
+        hotkey.ClearSlot();
     }
 
     public void Init()

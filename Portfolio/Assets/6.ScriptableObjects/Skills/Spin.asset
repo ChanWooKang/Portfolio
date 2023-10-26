@@ -16,7 +16,7 @@ MonoBehaviour:
   skillName: Spin
   key: 101
   useMp: 70
-  cool: 15
+  cool: 5
   duration: 3
   effectValue: 0.35
   sList:

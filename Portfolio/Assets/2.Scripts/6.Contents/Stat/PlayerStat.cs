@@ -90,7 +90,7 @@ public class PlayerStat : BaseStat
 
     #endregion [ Property ]
   
-    void Init()
+    public void Init()
     {
         _level = 1;
         _hp = _maxhp = 200;

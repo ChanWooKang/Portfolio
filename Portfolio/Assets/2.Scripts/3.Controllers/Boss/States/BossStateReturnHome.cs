@@ -18,7 +18,6 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
 
     public void Execute(BossCtrl m)
     {
-        Debug.Log("현재 보스 상태 : Return");
         if (m.IsCloseTarget(m._offSet, 0.5f))
         {
             if(m.target != null)
@@ -30,13 +29,16 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
                 else
                 {
                     if (m.State != BossState.Sleep)
+                    {
                         m.State = BossState.Sleep;
+                        m.OnRegenerate();
+                    }
+                        
                 }
                 
             }
             else
             {
-
                 m.ChangeState(BossStateIdle._inst);
             }
 
@@ -49,6 +51,6 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
 
     public void Exit(BossCtrl m)
     {
-        
+        m.OffRegenerate();
     }
 }

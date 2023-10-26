@@ -14,7 +14,6 @@ public class BossStateAttack : TSingleton<BossStateAttack>, IFSMState<BossCtrl>
 
     public void Execute(BossCtrl m)
     {
-        Debug.Log("현재 보스 상태 : Attack");
         if (m.target == null)
             m.ChangeState(BossStateReturnHome._inst);
         else

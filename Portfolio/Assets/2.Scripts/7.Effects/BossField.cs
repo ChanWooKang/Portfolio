@@ -8,7 +8,6 @@ public class BossField : MonoBehaviour
 
     public void SettingBoss(BossCtrl bCtrl)
     {
-        Debug.Log("보스 세팅");
         bc = bCtrl;
     }
 
@@ -19,7 +18,13 @@ public class BossField : MonoBehaviour
             if (bc != null)
             {
                 bc.RecognizePlayer(other.transform);
-                Debug.Log("플레이어 진입");
+            }
+            if (PlayerCtrl._inst != null)
+            {
+                if (!PlayerCtrl._inst.Bools[Define.PlayerBools.Dead])
+                {
+                    PlayerCtrl._inst.SetInBossField(bc.gameObject, true);
+                }
             }
         }
     }
@@ -28,9 +33,12 @@ public class BossField : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (bc != null)
+            if (PlayerCtrl._inst != null)
             {
-                Debug.Log("플레이어 퇴장");
+                if (!PlayerCtrl._inst.Bools[Define.PlayerBools.Dead])
+                {
+                    PlayerCtrl._inst.SetInBossField();
+                }
             }
         }
 
@@ -39,7 +47,6 @@ public class BossField : MonoBehaviour
             if(bc != null)
             {
                 bc.IsOutField();
-                Debug.Log("보스몹 이탈");
             }
         }
     }

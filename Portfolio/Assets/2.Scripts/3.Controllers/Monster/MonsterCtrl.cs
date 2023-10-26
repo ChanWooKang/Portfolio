@@ -17,6 +17,8 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     public eMonster mType = eMonster.Unknown;
     public SODropTable _dropTable;
 
+    [SerializeField, Range(8, 15)] float _rSpeed;
+
     [HideInInspector] public Vector3 _offSet = Vector3.zero;
     [HideInInspector] public Vector3 _defPos = Vector3.zero;
     [HideInInspector] public Transform target = null;
@@ -222,7 +224,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         Vector3 dir = pos - transform.position;
         _agent.SetDestination(pos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), _rSpeed * Time.deltaTime);
     }
 
     public void TurnTowardPlayer()
@@ -230,8 +232,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         if (player != null)
         {
             Vector3 dir = player.transform.position - transform.position;
-            Quaternion quat = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), _rSpeed * Time.deltaTime);
         }
     }
 

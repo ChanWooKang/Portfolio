@@ -59,8 +59,8 @@
         {
           "index": 5,
           "hp": 15000.0,
-          "damage": 50.0,
-          "defense": 25.0,
+          "damage": 150.0,
+          "defense": 30.0,
           "movespeed": 8.0,
           "tracespeed": 12.0,
           "tracerange": 25.0,

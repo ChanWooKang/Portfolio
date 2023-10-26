@@ -7,8 +7,12 @@ public class Boss_Flame : MonoBehaviour
     [SerializeField] ParticleSystem _flame;
     [SerializeField] BoxCollider _collider;
 
-    public void OnEffect()
+    public float Damage;
+
+
+    public void OnEffect(float dmg, float rate = 0.5f)
     {
+        Damage = dmg * rate;
         if (_flame.isPlaying)
             _flame.Stop(true);
 

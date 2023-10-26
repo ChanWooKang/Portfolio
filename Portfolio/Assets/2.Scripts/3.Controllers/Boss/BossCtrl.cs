@@ -14,10 +14,11 @@ public class BossCtrl : FSM<BossCtrl>
     Collider[] _colliders;
     Renderer[] _meshs;
     NavMeshAgent _agent;
-
+    BossColliderCheck[] _bccs;
     [SerializeField] Transform _colliderParent;
     [SerializeField] Boss_Flame _flameEffect;
     [SerializeField] float _rSpeed = 10;
+    [SerializeField,Range(0f,1.0f)] float _flameRate = 0.5f;
     BossState _nowState;
     public eMonster mType = eMonster.Boss;
 
@@ -37,7 +38,7 @@ public class BossCtrl : FSM<BossCtrl>
     bool isImotal = false;
     //Coroutine FlameCoroutine = null;
     Coroutine DamageCoroutine = null;
-
+    Coroutine RegenerateCoroutine = null;
     public NavMeshAgent Agent { get { if(_agent == null) _agent = GetComponent<NavMeshAgent>(); return _agent; } }
     public BossState State
     {
@@ -72,6 +73,7 @@ public class BossCtrl : FSM<BossCtrl>
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _colliders = _colliderParent.GetComponentsInChildren<Collider>();
+        _bccs = _colliderParent.GetComponentsInChildren<BossColliderCheck>();
         _meshs = GetComponentsInChildren<Renderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -209,7 +211,7 @@ public class BossCtrl : FSM<BossCtrl>
                 _ani.CrossFade("Attack", 0.1f, -1, 0);
                 break;
             case BossState.HandAttack:
-                SetCollider(false);
+                isImotal = true;
                 _ani.CrossFade("Hand", 0.1f, -1, 0);
                 break;
             case BossState.FlameAttack:
@@ -304,10 +306,10 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if (target != null && player.State != PlayerState.Die)
         {
-            //if (IsCloseTarget(target.position, _stat.AttackRange + 2))
-            //{
-            //    player.OnDamage(_stat);
-            //}
+            //foreach(BossColliderCheck bcc in _bccs)
+            // {
+            //     bcc.SetDamage(_stat.Damage);
+            // }
 
             Vector3 dir = target.position - transform.position;
             dir = dir.normalized;
@@ -316,7 +318,7 @@ public class BossCtrl : FSM<BossCtrl>
 
             if (Physics.Raycast(ray, out RaycastHit rhit, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
-                player.OnDamage(_stat);
+                player.OnDamage(_stat.Damage);
             }
         }
     }
@@ -324,12 +326,16 @@ public class BossCtrl : FSM<BossCtrl>
     //화염 발사 공격
     public void OnFlameAttackEvent()
     {
-        _flameEffect.OnEffect();
+        _flameEffect.OnEffect(_stat.Damage);
     }
 
     public void OffHandAttackEvent()
     {
-        SetCollider(true);
+        foreach (BossColliderCheck bcc in _bccs)
+        {
+            bcc.SetDamage(0);
+        }
+        isImotal = false;
         Invoke("OffAttackEvent", 0.5f);
     }
 
@@ -368,7 +374,6 @@ public class BossCtrl : FSM<BossCtrl>
         if (isImotal)
             return false;
 
-        Debug.Log("Hit");
         isDead = _stat.GetHit(damage);
         if (DamageCoroutine != null)
         {
@@ -381,7 +386,7 @@ public class BossCtrl : FSM<BossCtrl>
 
     IEnumerator OnDamageEvent()
     {
-        FloatText.Create("FloatText", true, transform.position, (int)_stat.AttackedDamage);
+        FloatText.Create("FloatText", true, transform.position + Vector3.up, (int)_stat.AttackedDamage);
 
         if (isDead)
         {
@@ -395,6 +400,31 @@ public class BossCtrl : FSM<BossCtrl>
         ChangeColor(Color.red);
         yield return new WaitForSeconds(0.3f);
         ChangeColor(Color.white);
+    }
+
+    public void OnRegenerate()
+    {
+        if (RegenerateCoroutine != null)
+            StopCoroutine(RegenerateCoroutine);
+        RegenerateCoroutine = StartCoroutine(RegenerateHP());
+    }
+
+    public void OffRegenerate()
+    {
+        if (RegenerateCoroutine != null)
+            StopCoroutine(RegenerateCoroutine);
+    }
+
+    IEnumerator RegenerateHP()
+    {
+        float hpRate = _stat.MaxHP * 0.15f;
+        while(_stat.HP <= _stat.MaxHP)
+        {
+            _stat.HP += hpRate;
+            yield return new WaitForSeconds(1);
+        }
+
+        _stat.HP = _stat.MaxHP;
     }
 
     public void OnDeadEvent()

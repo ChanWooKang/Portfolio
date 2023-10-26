@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2639746602409240368}
   - component: {fileID: 2639746602409240371}
+  - component: {fileID: 2433230705196633514}
   m_Layer: 0
   m_Name: FireCollider
   m_TagString: Fire
@@ -42,8 +43,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 200, y: 500, z: 800}
+  m_Size: {x: 200, y: 500, z: 1400}
   m_Center: {x: 0, y: 250, z: 2000}
+--- !u!114 &2433230705196633514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639746602409240369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faf6bcfc5c0a874e90a88b0a880c47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flame: {fileID: 4534812829394722287}
+  _collider: {fileID: 2639746602409240371}
+  Damage: 0
 --- !u!1 &4534812827812055315
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec29a29f2ce0f24495cf4e0f52aa360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
 --- !u!1 &4534812828318487019
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +258,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dropTable: {fileID: 11400000, guid: df2c6fb6febad0a4d8f4b3575fe233c8, type: 2}
   _colliderParent: {fileID: 4534812829185208798}
-  _flameEffect: {fileID: 4534812829409667068}
+  _flameEffect: {fileID: 2433230705196633514}
+  _rSpeed: 8
+  _flameRate: 0.5
   mType: 5
   _offSet: {x: 0, y: 0, z: 0}
   _defPos: {x: 0, y: 0, z: 0}
@@ -342,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec29a29f2ce0f24495cf4e0f52aa360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
 --- !u!1 &4534812829409625305
 GameObject:
   m_ObjectHideFlags: 0
@@ -5045,7 +5065,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4534812829409924917}
-  - component: {fileID: 4534812829409667068}
   m_Layer: 8
   m_Name: FlameEffect
   m_TagString: Untagged
@@ -5068,20 +5087,6 @@ Transform:
   m_Father: {fileID: 4534812828318487018}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4534812829409667068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4534812829409667069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1faf6bcfc5c0a874e90a88b0a880c47c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flame: {fileID: 4534812829394722287}
-  _collider: {fileID: 2639746602409240371}
 --- !u!1 &4534812829409814367
 GameObject:
   m_ObjectHideFlags: 0

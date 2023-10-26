@@ -80,7 +80,6 @@ public class SkillSlashCtrl : MonoBehaviour
            
             if (SlashCoroutine != null)
             {
-                Debug.Log("Hit");
                 StopCoroutine(OnSlashEvent());
                 SetEnable(false);
                 PlayerCtrl._inst.CancelSlash(this.gameObject);

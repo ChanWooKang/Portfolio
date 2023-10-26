@@ -7,6 +7,14 @@ public class BossColliderCheck : MonoBehaviour
     BossCtrl bc;
     float cntTime;
     float damage = 0;
+
+    public float Damage;
+
+    public void SetDamage(float dmg)
+    {
+        Damage = dmg;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (bc == null)

@@ -28,6 +28,15 @@ public class PlayerCtrl : MonoBehaviour
     int _clickMask;
     int _blockMask;
 
+    [SerializeField]
+    Vector3 _offSetPoint;
+
+    bool isClickMonster = false;
+    bool isBossField = false;
+    float hitcntTime = 0;
+    float hitDamage = 0;
+    [SerializeField, Range(0.2f, 0.5f)]float hitTime;
+
     // 이동 좌표
     Vector3 _destPos;
     // 스킬 입력 시 마우스 위치 월드 좌표 저장
@@ -45,6 +54,7 @@ public class PlayerCtrl : MonoBehaviour
 
     Dictionary<PlayerBools, bool> dict_bool;
 
+    Coroutine RegerectionCoroutine;
     Coroutine SlashCoroutine;
 
     #endregion [ Data ]
@@ -172,6 +182,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void InitData()
     {
+        _offSetPoint = transform.position;
         _stat.LoadPlayer();
         _clickMask = (1 << (int)eLayer.Ground) | (1 << (int)eLayer.Monster);
         _blockMask = (1 << (int)eLayer.Block) | (1 << (int)eLayer.TransBlock);
@@ -188,7 +199,7 @@ public class PlayerCtrl : MonoBehaviour
             dict_bool.Add((PlayerBools)i, false);
 
         MinimapCamera._inst.InstiatieMarker(true, transform);
-        StartCoroutine(RegenerateStat());
+        RegerectionCoroutine = StartCoroutine(RegenerateStat());
     }
 
     public void BaseNavSetting()
@@ -216,7 +227,7 @@ public class PlayerCtrl : MonoBehaviour
         _rb.angularVelocity = Vector3.zero;
     }
 
-    void ChangeColor(Color color)
+    public void ChangeColor(Color color)
     {
         foreach (Renderer mesh in _meshs)
             mesh.material.color = color;
@@ -224,8 +235,16 @@ public class PlayerCtrl : MonoBehaviour
 
     void CheckAttackable(float range = 2.0f)
     {
-        if (_locktarget == null)
+        if (isClickMonster == false)
             return;
+
+        if (_locktarget == null)
+        {
+            if (isClickMonster)
+                isClickMonster = false;
+            return;
+        }
+            
 
         _destPos = _locktarget.transform.position;
         Vector3 dir = _destPos - transform.position;
@@ -236,25 +255,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             State = PlayerState.Attack;
         }
-        else
-        {
-            
-        }
-
-        //float dist = Vector3.SqrMagnitude(_destPos - transform.position);
-        //if (dist < range * range)
-        //{
-        //    AttackNavSetting();
-        //    State = PlayerState.Attack;
-        //}
-            
-
+       
         return;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(transform.position + Vector3.up, transform.forward * 2, Color.blue);
     }
 
     public void ClearNearObject()
@@ -278,6 +280,7 @@ public class PlayerCtrl : MonoBehaviour
         return false;
     }
 
+    
     #endregion [ Sub Function ]
 
     #region [ Key Action && Mouse Action ]
@@ -321,6 +324,7 @@ public class PlayerCtrl : MonoBehaviour
                 break;
             case PlayerState.Skill:
                 {
+
                     if (_sType == eSkill.Spin)
                         OnMouseEvent_SPINMOVE(evt);
                 }
@@ -344,6 +348,7 @@ public class PlayerCtrl : MonoBehaviour
                         dict_bool[PlayerBools.ContinueAttack] = true;
                         if (rhit.collider.gameObject.layer == (int)eLayer.Monster)
                         {
+                            isClickMonster = true;
                             if (rhit.collider.CompareTag("Boss"))
                             {
                                 _locktarget = rhit.transform.GetComponentInParent<BossCtrl>().gameObject;
@@ -354,7 +359,12 @@ public class PlayerCtrl : MonoBehaviour
                             }
                         }
                         else
-                            _locktarget = null;
+                        {
+                            isClickMonster = false;
+                            if (isBossField == false)
+                                _locktarget = null;
+                        }
+                            
                     }
                     else
                     {
@@ -365,11 +375,21 @@ public class PlayerCtrl : MonoBehaviour
                 break;
             case MouseEvent.Press:
                 {
-                    if (_locktarget == null && hit)
-                        _destPos = rhit.point;
+                    if(isBossField == false)
+                    {
+                        if (_locktarget == null && hit)
+                            _destPos = rhit.point;
+                    }
+                    else
+                    {
+                        if (hit)
+                            _destPos = rhit.point;
+                    }
+                    
                 }
                 break;
             case MouseEvent.PointerUp:
+                isClickMonster = false;
                 dict_bool[PlayerBools.ContinueAttack] = false;
                 break;
         }
@@ -533,23 +553,56 @@ public class PlayerCtrl : MonoBehaviour
             
     }
 
-    public void OnDamage(BaseStat stat)
+    public void OnDamage()
     {
-        if (dict_bool[PlayerBools.Dead])
-            return;
-
-        if (dict_bool[PlayerBools.ActDodge])
-            return;
-
-        dict_bool[PlayerBools.Dead] = _stat.GetHit(stat);
         StopCoroutine(OnDamageEvent());
         StartCoroutine(OnDamageEvent());
     }
 
-    void OnDeadEvent()
+    public void OnDamage(BaseStat stat)
     {
-        gameObject.DestroyAPS();
-        ChangeColor(Color.white);
+        if (dict_bool[PlayerBools.Dead] || dict_bool[PlayerBools.ActDodge])
+            return;
+
+        dict_bool[PlayerBools.Dead] = _stat.GetHit(stat);
+        OnDamage();
+    }
+
+    public void OnDamage(float damage)
+    {
+        if (dict_bool[PlayerBools.Dead] || dict_bool[PlayerBools.ActDodge])
+            return;
+
+        dict_bool[PlayerBools.Dead] = _stat.GetHit(damage);
+        OnDamage();
+    }
+
+    public void OnDeadEvent()
+    {
+        GameManagerEX._inst.PlayerDeadAction(this);
+    }
+
+    public void OnResurrectEvent()
+    {
+        InventoryManager._inst.ResetInventory();
+        _locktarget = null;
+        State = PlayerState.Idle;
+        _stat.Init();
+        dict_bool[PlayerBools.Dead] = false;
+        transform.position = _offSetPoint;
+        transform.rotation = Quaternion.identity;
+
+        if (RegerectionCoroutine != null)
+            StopCoroutine(RegerectionCoroutine);
+        RegerectionCoroutine = StartCoroutine(RegenerateStat());
+
+
+    }
+
+    public void SetInBossField(GameObject boss = null,bool Inside = false)
+    {
+        isBossField = Inside;
+        _locktarget = boss;
     }
     #endregion [ State Event ]
 
@@ -673,16 +726,18 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator RegenerateStat()
     {
+        float hpRate = _stat.MaxHP * 0.025f;
+        float mpRate = _stat.MaxMP * 0.05f;
         while (dict_bool[PlayerBools.Dead] == false)
         {
             if (_stat.HP < _stat.MaxHP)
             {
-                _stat.HP = Mathf.Min(_stat.HP + 5, _stat.MaxHP);
+                _stat.HP = Mathf.Min(_stat.HP + hpRate, _stat.MaxHP);
             }
 
             if (_stat.MP < _stat.MaxMP)
             {
-                _stat.MP = Mathf.Min(_stat.MP + 15, _stat.MaxMP);                
+                _stat.MP = Mathf.Min(_stat.MP + mpRate, _stat.MaxMP);                
             }
 
             yield return new WaitForSeconds(1);
@@ -806,10 +861,35 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Debug.Log("Fire In");
+            hitcntTime = 1;
+            hitDamage = other.GetComponent<Boss_Flame>().Damage;
         }
+
+        //if (other.CompareTag("Boss"))
+        //{
+            
+        //    hitDamage = other.GetComponent<BossColliderCheck>().Damage;
+        //    if (hitDamage > 0)
+        //    {
+        //        Debug.Log("Touch");
+        //        OnDamage(hitDamage);
+        //    }
+                
+        //}
+        
     }
 
+    void SetNearObj()
+    {
+        if (_nearObj.TryGetComponent<InteractObject>(out InteractObject io))
+        {
+            _nearType = io.InteractType;
+        }
+        else
+        {
+            ClearNearObject();
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -824,11 +904,20 @@ public class PlayerCtrl : MonoBehaviour
             {
                 ClearNearObject();
             }
+
         }
 
         if (other.CompareTag("Fire"))
         {
-            Debug.Log("Fire Stay");
+            hitcntTime += Time.deltaTime;
+            if (hitcntTime > hitTime)
+            {
+                if (hitDamage > 0) 
+                    OnDamage(hitDamage);
+
+                hitcntTime = 0;
+            }
+            
         }
     }
 
@@ -841,7 +930,8 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.CompareTag("Fire"))
         {
-            Debug.Log("Fire Out");
+            hitDamage = 0;
+            hitcntTime = 0;
         }
     }
 

@@ -217,6 +217,7 @@ MonoBehaviour:
   _hpBar: {fileID: 0}
   mType: 1
   _dropTable: {fileID: 11400000, guid: 6b32599acf594e94baaeba247250f316, type: 2}
+  _rSpeed: 8
   _offSet: {x: 0, y: 0, z: 0}
   _defPos: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
