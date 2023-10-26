@@ -19,9 +19,12 @@ public class BossStateAttack : TSingleton<BossStateAttack>, IFSMState<BossCtrl>
             m.ChangeState(BossStateReturnHome._inst);
         else
         {
-            m.TurnTowardPlayer();
+            
             if (m.IsCloseTarget(m.target.position, m._stat.AttackRange))
             {
+                if(m.isAttack == false)
+                    m.TurnTowardPlayer();
+
                 m.cntTime += Time.deltaTime;
                 if (m.cntTime > m._stat.AttackDelay && m.isAttack == false)
                 {

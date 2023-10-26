@@ -802,6 +802,15 @@ public class PlayerCtrl : MonoBehaviour
 
     #region [ OnTrigger ]
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fire"))
+        {
+            Debug.Log("Fire In");
+        }
+    }
+
+
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(Util.ConvertEnum(eTag.Interact)))
@@ -816,6 +825,11 @@ public class PlayerCtrl : MonoBehaviour
                 ClearNearObject();
             }
         }
+
+        if (other.CompareTag("Fire"))
+        {
+            Debug.Log("Fire Stay");
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -823,6 +837,11 @@ public class PlayerCtrl : MonoBehaviour
         if (other.CompareTag(Util.ConvertEnum(eTag.Interact)))
         {
             ClearNearObject();
+        }
+
+        if (other.CompareTag("Fire"))
+        {
+            Debug.Log("Fire Out");
         }
     }
 

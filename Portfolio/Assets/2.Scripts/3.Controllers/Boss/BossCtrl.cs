@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Define;
+using UnityEngine.SocialPlatforms;
 
 public class BossCtrl : FSM<BossCtrl>
 {
@@ -11,17 +12,18 @@ public class BossCtrl : FSM<BossCtrl>
     Animator _ani;
     Rigidbody _rb;
     Collider[] _colliders;
-    BoxCollider _coli;
     Renderer[] _meshs;
     NavMeshAgent _agent;
 
+    [SerializeField] Transform _colliderParent;
+    [SerializeField] Boss_Flame _flameEffect;
+    [SerializeField] float _rSpeed = 10;
     BossState _nowState;
     public eMonster mType = eMonster.Boss;
 
     [HideInInspector] public Vector3 _offSet = Vector3.zero;
     [HideInInspector] public Vector3 _defPos = Vector3.zero;
     [HideInInspector] public Transform target = null;
-    //[HideInInspector] public Vector3 targetPos;
     [HideInInspector] public float lastCallTime;
     [HideInInspector] public float delayTime;
     [HideInInspector] public float cntTime;
@@ -33,7 +35,7 @@ public class BossCtrl : FSM<BossCtrl>
     int[] _patternWeight;
 
     bool isImotal = false;
-    Coroutine FlameCoroutine = null;
+    //Coroutine FlameCoroutine = null;
     Coroutine DamageCoroutine = null;
 
     public NavMeshAgent Agent { get { if(_agent == null) _agent = GetComponent<NavMeshAgent>(); return _agent; } }
@@ -69,8 +71,7 @@ public class BossCtrl : FSM<BossCtrl>
     {
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
-        _colliders = GetComponentsInChildren<Collider>();
-        //_coli = GetComponent<BoxCollider>();
+        _colliders = _colliderParent.GetComponentsInChildren<Collider>();
         _meshs = GetComponentsInChildren<Renderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -79,7 +80,6 @@ public class BossCtrl : FSM<BossCtrl>
 
     public void Init()
     {
-        //targetPos = Vector3.zero;
         _stat.HP = _stat.MaxHP;
         isDead = false;
         isAttack = false;
@@ -132,10 +132,6 @@ public class BossCtrl : FSM<BossCtrl>
                 coli.enabled = isOn;
         }
 
-        //if (_coli == null)
-        //    _coli = GetComponent<BoxCollider>();
-
-        //_coli.enabled = isOn;
     }
 
     void ChangeColor(Color color)
@@ -226,16 +222,18 @@ public class BossCtrl : FSM<BossCtrl>
     {
         Vector3 dir = pos - transform.position;
         _agent.SetDestination(pos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), _rSpeed * Time.deltaTime);
+        transform.Rotate(dir * 20.0f * Time.deltaTime);
     }
 
     public void TurnTowardPlayer()
     {
         if(player != null)
         {
-            Vector3 dir = player.transform.position - transform.position;
+            Vector3 dir = player.transform.position - transform.position;            
             Quaternion quat = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, quat, _rSpeed * Time.deltaTime);
+            transform.Rotate(dir * 20.0f * Time.deltaTime);
         }
     }
 
@@ -287,7 +285,13 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if(target != null && player.State != PlayerState.Die)
         {
-            if (IsCloseTarget(target.position, _stat.AttackRange))
+
+            Vector3 dir = target.position - transform.position;
+            dir = dir.normalized;
+
+            Ray ray = new Ray(transform.position + Vector3.up, dir * _stat.AttackRange);
+
+            if (Physics.Raycast(ray, out RaycastHit rhit, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
                 player.OnDamage(_stat);
             }
@@ -300,7 +304,17 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if (target != null && player.State != PlayerState.Die)
         {
-            if (IsCloseTarget(target.position, _stat.AttackRange + 2))
+            //if (IsCloseTarget(target.position, _stat.AttackRange + 2))
+            //{
+            //    player.OnDamage(_stat);
+            //}
+
+            Vector3 dir = target.position - transform.position;
+            dir = dir.normalized;
+
+            Ray ray = new Ray(transform.position + Vector3.up, dir * _stat.AttackRange);
+
+            if (Physics.Raycast(ray, out RaycastHit rhit, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
                 player.OnDamage(_stat);
             }
@@ -310,31 +324,19 @@ public class BossCtrl : FSM<BossCtrl>
     //화염 발사 공격
     public void OnFlameAttackEvent()
     {
-        if (FlameCoroutine != null)
-            StopCoroutine(FlameCoroutine);
-
-        //코루틴 시작
-        FlameCoroutine = StartCoroutine(FlameEvent());
-    }
-
-    IEnumerator FlameEvent()
-    {
-        yield return null;
+        _flameEffect.OnEffect();
     }
 
     public void OffHandAttackEvent()
     {
         SetCollider(true);
-        OffAttackEvent();
+        Invoke("OffAttackEvent", 0.5f);
     }
 
     public void OffFlameEvent()
     {
-        if (FlameCoroutine != null)
-            StopCoroutine(FlameCoroutine);
-        FlameCoroutine = null;
-
-        OffAttackEvent();
+        _flameEffect.OffEffect();
+        Invoke("OffAttackEvent", 0.5f);
     }
 
     public void OffAttackEvent()
@@ -404,30 +406,10 @@ public class BossCtrl : FSM<BossCtrl>
         _dropTable.ItemDrop(transform);
     }
 
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Weapon") || other.CompareTag("Cry") || other.CompareTag("Slash"))
-    //    {
-    //        float damage = 0;
-    //        if (other.CompareTag("Weapon"))
-    //        {
-    //            damage = other.transform.GetComponent<WeaponCtrl>().Damage;
-    //        }
-    //        else if (other.CompareTag("Cry"))
-    //        {
-    //            damage = other.transform.GetComponent<SkillCryCtrl>().Damage;
-    //        }
-    //        else
-    //        {
-    //            damage = other.transform.GetComponent<SkillSlashCtrl>().Damage;
-    //        }
+    private void OnDrawGizmos()
+    {
+        
+    }
 
-    //        if (damage > 0)
-    //            OnDamage(damage);
-    //        else
-    //            return;
-    //    }
-    //}
-
-
+    
 }

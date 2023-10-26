@@ -18,13 +18,10 @@ public class BossField : MonoBehaviour
         {
             if (bc != null)
             {
-                
                 bc.RecognizePlayer(other.transform);
                 Debug.Log("플레이어 진입");
             }
         }
-
-        
     }
 
     void OnTriggerExit(Collider other)
@@ -33,16 +30,16 @@ public class BossField : MonoBehaviour
         {
             if (bc != null)
             {
-                bc.SetTarget(null);
                 Debug.Log("플레이어 퇴장");
             }
         }
 
-        if (other.CompareTag("Monster"))
+        if (other.CompareTag("Boss"))
         {
             if(bc != null)
             {
                 bc.IsOutField();
+                Debug.Log("보스몹 이탈");
             }
         }
     }

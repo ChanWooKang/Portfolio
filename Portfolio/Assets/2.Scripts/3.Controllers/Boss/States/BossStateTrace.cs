@@ -13,7 +13,7 @@ public class BossStateTrace : TSingleton<BossStateTrace>, IFSMState<BossCtrl>
     }
 
     public void Execute(BossCtrl m)
-    {
+    {        
         if (UI_WorldMap.ActivatedWorldMap)
             return;
 

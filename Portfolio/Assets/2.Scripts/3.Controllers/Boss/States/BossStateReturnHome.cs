@@ -7,9 +7,13 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
 {
     public void Enter(BossCtrl m)
     {
-        m.BaseNavSetting();
+        m.Agent.ResetPath();
+        m.Agent.updatePosition = false;
+        m.Agent.velocity = Vector3.zero;
+        
         m.Agent.speed = m._stat.MoveSpeed;
         m.State = BossState.Return;
+        m.BaseNavSetting();
     }
 
     public void Execute(BossCtrl m)
@@ -32,7 +36,8 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
             }
             else
             {
-                m.ChangeState(BossStateInitial._inst);
+
+                m.ChangeState(BossStateIdle._inst);
             }
 
         }
