@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Define;
 using System;
-
+using UnityEditorInternal;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -239,11 +239,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (isClickMonster == false || _locktarget == null)
         {
-            if(_locktarget == null)
-                isClickMonster = false;
-            else
-                _locktarget = null;
-            return;
+            if (isClickMonster == false && _locktarget != null)
+                return;
+            if (isClickMonster == false && _locktarget == null)
+                return;
         }
             
         if(CheckDistance(range))
@@ -381,7 +380,10 @@ public class PlayerCtrl : MonoBehaviour
                         {
                             isClickMonster = false;
                             if (isBossField == false)
+                            {
                                 _locktarget = null;
+                            }
+                            Debug.Log($"{_locktarget} + {isBossField}");
                         }
                             
                     }
@@ -885,7 +887,7 @@ public class PlayerCtrl : MonoBehaviour
         if (other.CompareTag("Fire"))
         {
             hitcntTime = 1;
-            hitDamage = other.GetComponent<Boss_Flame>().Damage * hitRate;
+            hitDamage = other.GetComponentInParent<Boss_Flame>().Damage * hitRate;
         }
 
     }

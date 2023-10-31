@@ -1,22 +1,9 @@
 {
-    "InvenArrayNumber": [
-        0,
-        1
-    ],
-    "InvenItemName": [
-        "SmallHPPotion",
-        "SmallGreenPotion"
-    ],
-    "InvenItemCount": [
-        1,
-        1
-    ],
-    "EquipArrayNumber": [
-        4
-    ],
-    "EquipItemName": [
-        "SmallShield"
-    ],
+    "InvenArrayNumber": [],
+    "InvenItemName": [],
+    "InvenItemCount": [],
+    "EquipArrayNumber": [],
+    "EquipItemName": [],
     "HotKeyItemName": "",
     "HotKeyItemCount": 0
 }

@@ -21,8 +21,9 @@ public class BossField : MonoBehaviour
             }
             if (PlayerCtrl._inst != null)
             {
-                if (!PlayerCtrl._inst.Bools[Define.PlayerBools.Dead])
+                if (PlayerCtrl._inst.Bools[Define.PlayerBools.Dead] == false)
                 {
+                    Debug.Log("보스 세팅");
                     PlayerCtrl._inst.SetInBossField(bc.gameObject, true);
                 }
             }
@@ -35,8 +36,9 @@ public class BossField : MonoBehaviour
         {
             if (PlayerCtrl._inst != null)
             {
-                if (!PlayerCtrl._inst.Bools[Define.PlayerBools.Dead])
+                if (PlayerCtrl._inst.Bools[Define.PlayerBools.Dead] == false) 
                 {
+                    Debug.Log("보스 해제");
                     PlayerCtrl._inst.SetInBossField();
                 }
             }

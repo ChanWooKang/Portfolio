@@ -11,19 +11,19 @@ public class BossCtrl : FSM<BossCtrl>
     public MonsterStat _stat = new MonsterStat();
     Animator _ani;
     Rigidbody _rb;
-
-    BoxCollider _coli;
-    //Collider[] _colliders;
-    //BossColliderCheck[] _bccs;
-    BossColliderCheck _bcc;
-
-    Renderer[] _meshs;
+    SkinnedMeshRenderer _mesh;
     NavMeshAgent _agent;
-    
-    [SerializeField] Transform _colliderParent;
+
+    [SerializeField] Transform _bodyTransform;
+    BoxCollider _bodyCollider;
+    BossColliderCheck _bodyCheck;
+
+
+    [SerializeField] Transform headTR;
     [SerializeField] Boss_Flame _flameEffect;
+
     [SerializeField] float _rSpeed = 10;
-    BossState _nowState;
+    BossState _nowState = BossState.FlameAttack;
     public eMonster mType = eMonster.Boss;
 
     [HideInInspector] public Vector3 _offSet = Vector3.zero;
@@ -40,7 +40,7 @@ public class BossCtrl : FSM<BossCtrl>
     int[] _patternWeight;
 
     bool isImotal = false;
-    //Coroutine FlameCoroutine = null;
+    
     Coroutine DamageCoroutine = null;
     Coroutine RegenerateCoroutine = null;
     public NavMeshAgent Agent { get { if(_agent == null) _agent = GetComponent<NavMeshAgent>(); return _agent; } }
@@ -74,13 +74,13 @@ public class BossCtrl : FSM<BossCtrl>
 
     void InitComponent()
     {
+        //BodyCollider
+        _bodyCollider = _bodyTransform.GetComponent<BoxCollider>();
+        _bodyCheck = _bodyTransform.GetComponent<BossColliderCheck>();
+
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
-        //_colliders = _colliderParent.GetComponentsInChildren<Collider>();
-        _coli = _colliderParent.GetComponentInChildren<BoxCollider>();
-        //_bccs = _colliderParent.GetComponentsInChildren<BossColliderCheck>();
-        _bcc = _colliderParent.GetComponentInChildren<BossColliderCheck>();
-        _meshs = GetComponentsInChildren<Renderer>();
+        _mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _stat = new MonsterStat();
@@ -134,21 +134,12 @@ public class BossCtrl : FSM<BossCtrl>
     void SetCollider(bool isOn)
     {
         isImotal = !isOn;
-        //if (_colliders.Length > 0)
-        //{
-        //    foreach (Collider coli in _colliders)
-        //        coli.enabled = isOn;
-        //}
-        _coli.enabled = isOn;
+        _bodyCollider.enabled = isOn;
     }
 
     void ChangeColor(Color color)
     {
-        if(_meshs.Length> 0)
-        {
-            foreach (Renderer mesh in _meshs)
-                mesh.material.color = color;
-        }
+        _mesh.material.color = color;
     }
 
     public void ChangeLayer(eLayer layer)
@@ -299,7 +290,7 @@ public class BossCtrl : FSM<BossCtrl>
 
             Ray ray = new Ray(transform.position + Vector3.up, dir * _stat.AttackRange);
 
-            if (Physics.Raycast(ray, out RaycastHit rhit, _stat.AttackRange, (1 << (int)eLayer.Player)))
+            if (Physics.Raycast(ray, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
                 player.OnDamage(_stat);
             }
@@ -312,17 +303,12 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if (target != null && player.State != PlayerState.Die)
         {
-            //foreach(BossColliderCheck bcc in _bccs)
-            // {
-            //     bcc.SetDamage(_stat.Damage);
-            // }
-
             Vector3 dir = target.position - transform.position;
             dir = dir.normalized;
 
             Ray ray = new Ray(transform.position + Vector3.up, dir * _stat.AttackRange);
 
-            if (Physics.Raycast(ray, out RaycastHit rhit, _stat.AttackRange, (1 << (int)eLayer.Player)))
+            if (Physics.Raycast(ray, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
                 player.OnDamage(_stat.Damage);
             }
@@ -332,17 +318,12 @@ public class BossCtrl : FSM<BossCtrl>
     //화염 발사 공격
     public void OnFlameAttackEvent()
     {
-        _flameEffect.OnEffect(_stat.Damage);
+        _flameEffect.OnEffect(headTR,_stat.Damage);
     }
 
     public void OffHandAttackEvent()
     {
-        //foreach (BossColliderCheck bcc in _bccs)
-        //{
-        //    bcc.SetDamage(0);
-        //}
-
-        _bcc.SetDamage(0);
+        _bodyCheck.SetDamage(0);
         isImotal = false;
         Invoke("OffAttackEvent", 0.5f);
     }

@@ -8,10 +8,27 @@ public class Boss_Flame : MonoBehaviour
     [SerializeField] BoxCollider _collider;
 
     public float Damage;
+    Transform parentTransform = null;
+    bool isOn = false;
 
-
-    public void OnEffect(float dmg, float rate = 0.5f)
+    void FixedUpdate()
     {
+        if (isOn)
+        {
+            transform.position = parentTransform.position;
+            transform.rotation = parentTransform.rotation;
+        }
+    }
+
+
+
+
+    public void OnEffect(Transform head,float dmg, float rate = 0.5f)
+    {
+        parentTransform = head;
+        
+        isOn = true;
+
         Damage = dmg * rate;
         if (_flame.isPlaying)
             _flame.Stop(true);
@@ -22,6 +39,9 @@ public class Boss_Flame : MonoBehaviour
 
     public void OffEffect()
     {
+        isOn = false;
+        parentTransform = null;
+
         if (_flame.isPlaying)
             _flame.Stop(true);
         _collider.enabled = false;
