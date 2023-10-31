@@ -14976,7 +14976,7 @@ MonoBehaviour:
   _poolingUnits:
   - name: Boss
     type: 0
-    prefab: {fileID: 4534812828409795854, guid: 91d32e39f0fe99846a0f6c8b6cf5bac3, type: 3}
+    prefab: {fileID: 6558309631112026117, guid: 91d32e39f0fe99846a0f6c8b6cf5bac3, type: 3}
     amount: 1
   - name: Cactus
     type: 0
@@ -53889,8 +53889,16 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 261721763736955102, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
+      propertyPath: hitRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 261721763736955102, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: hitTime
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 261721763736955102, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
+      propertyPath: attackRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 381994085618501311, guid: 7e04c6e86cf28374285eaf2fbf951f14, type: 3}
       propertyPath: m_Layer

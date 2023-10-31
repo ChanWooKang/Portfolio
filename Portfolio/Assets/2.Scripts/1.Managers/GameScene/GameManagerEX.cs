@@ -30,6 +30,7 @@ public class GameManagerEX : MonoBehaviour
         {
             player.OnResurrectEvent();
             player.gameObject.SetActive(true);
+            player.OnStartRegenarte();
         }
     }
 }

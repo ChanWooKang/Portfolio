@@ -11,14 +11,18 @@ public class BossCtrl : FSM<BossCtrl>
     public MonsterStat _stat = new MonsterStat();
     Animator _ani;
     Rigidbody _rb;
-    Collider[] _colliders;
+
+    BoxCollider _coli;
+    //Collider[] _colliders;
+    //BossColliderCheck[] _bccs;
+    BossColliderCheck _bcc;
+
     Renderer[] _meshs;
     NavMeshAgent _agent;
-    BossColliderCheck[] _bccs;
+    
     [SerializeField] Transform _colliderParent;
     [SerializeField] Boss_Flame _flameEffect;
     [SerializeField] float _rSpeed = 10;
-    [SerializeField,Range(0f,1.0f)] float _flameRate = 0.5f;
     BossState _nowState;
     public eMonster mType = eMonster.Boss;
 
@@ -72,8 +76,10 @@ public class BossCtrl : FSM<BossCtrl>
     {
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
-        _colliders = _colliderParent.GetComponentsInChildren<Collider>();
-        _bccs = _colliderParent.GetComponentsInChildren<BossColliderCheck>();
+        //_colliders = _colliderParent.GetComponentsInChildren<Collider>();
+        _coli = _colliderParent.GetComponentInChildren<BoxCollider>();
+        //_bccs = _colliderParent.GetComponentsInChildren<BossColliderCheck>();
+        _bcc = _colliderParent.GetComponentInChildren<BossColliderCheck>();
         _meshs = GetComponentsInChildren<Renderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -128,12 +134,12 @@ public class BossCtrl : FSM<BossCtrl>
     void SetCollider(bool isOn)
     {
         isImotal = !isOn;
-        if (_colliders.Length > 0)
-        {
-            foreach (Collider coli in _colliders)
-                coli.enabled = isOn;
-        }
-
+        //if (_colliders.Length > 0)
+        //{
+        //    foreach (Collider coli in _colliders)
+        //        coli.enabled = isOn;
+        //}
+        _coli.enabled = isOn;
     }
 
     void ChangeColor(Color color)
@@ -331,10 +337,12 @@ public class BossCtrl : FSM<BossCtrl>
 
     public void OffHandAttackEvent()
     {
-        foreach (BossColliderCheck bcc in _bccs)
-        {
-            bcc.SetDamage(0);
-        }
+        //foreach (BossColliderCheck bcc in _bccs)
+        //{
+        //    bcc.SetDamage(0);
+        //}
+
+        _bcc.SetDamage(0);
         isImotal = false;
         Invoke("OffAttackEvent", 0.5f);
     }
@@ -435,11 +443,5 @@ public class BossCtrl : FSM<BossCtrl>
         _dropTable.ItemDrop(transform, _stat.Gold);
         _dropTable.ItemDrop(transform);
     }
-
-    private void OnDrawGizmos()
-    {
-        
-    }
-
     
 }

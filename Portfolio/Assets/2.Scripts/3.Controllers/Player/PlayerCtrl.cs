@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Define;
 using System;
-using UnityEditor.Experimental.GraphView;
+
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -35,7 +35,9 @@ public class PlayerCtrl : MonoBehaviour
     bool isBossField = false;
     float hitcntTime = 0;
     float hitDamage = 0;
+    [SerializeField, Range(0.2f, 0.5f)] float hitRate;
     [SerializeField, Range(0.2f, 0.5f)]float hitTime;
+    [SerializeField, Range(2.0f, 4.0f)] float attackRange;
 
     // ÀÌµ¿ ÁÂÇ¥
     Vector3 _destPos;
@@ -235,28 +237,40 @@ public class PlayerCtrl : MonoBehaviour
 
     void CheckAttackable(float range = 2.0f)
     {
-        if (isClickMonster == false)
-            return;
-
-        if (_locktarget == null)
+        if (isClickMonster == false || _locktarget == null)
         {
-            if (isClickMonster)
+            if(_locktarget == null)
                 isClickMonster = false;
+            else
+                _locktarget = null;
             return;
         }
             
+        if(CheckDistance(range))
+            State = PlayerState.Attack;
+
+
+        return;
+    }
+
+    bool CheckDistance(float range)
+    {
+        if (_locktarget == null)
+            return false;
 
         _destPos = _locktarget.transform.position;
         Vector3 dir = _destPos - transform.position;
         dir = dir.normalized;
 
         Ray ray = new Ray(transform.position + Vector3.up, dir * range);
-        if(Physics.Raycast(ray,out RaycastHit rhit, range,(1<< (int)eLayer.Monster)))
+        if (Physics.Raycast(ray, out RaycastHit rhit, range, (1 << (int)eLayer.Monster)))
         {
-            State = PlayerState.Attack;
+            return true;
         }
-       
-        return;
+        else
+        {
+            return false;
+        }
     }
 
     public void ClearNearObject()
@@ -320,6 +334,11 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     if (evt == MouseEvent.PointerUp)
                         dict_bool[PlayerBools.ContinueAttack] = false;
+                    else
+                    {
+                        if(CheckDistance(attackRange) == false)
+                            dict_bool[PlayerBools.ContinueAttack] = false;
+                    }
                 }
                 break;
             case PlayerState.Skill:
@@ -419,7 +438,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void UpdateMove()
     {
-        CheckAttackable();
+        CheckAttackable(attackRange);
         Vector3 dir = _destPos - transform.position;
         dir.y = 0;
         if (dir.sqrMagnitude < 0.01f)
@@ -579,6 +598,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void OnDeadEvent()
     {
+        AttackNavSetting();
         GameManagerEX._inst.PlayerDeadAction(this);
     }
 
@@ -586,17 +606,20 @@ public class PlayerCtrl : MonoBehaviour
     {
         InventoryManager._inst.ResetInventory();
         _locktarget = null;
-        State = PlayerState.Idle;
         _stat.Init();
         dict_bool[PlayerBools.Dead] = false;
         transform.position = _offSetPoint;
         transform.rotation = Quaternion.identity;
+    }
+
+    public void OnStartRegenarte()
+    {   
+        State = PlayerState.Idle;
+        BaseNavSetting();
 
         if (RegerectionCoroutine != null)
             StopCoroutine(RegerectionCoroutine);
         RegerectionCoroutine = StartCoroutine(RegenerateStat());
-
-
     }
 
     public void SetInBossField(GameObject boss = null,bool Inside = false)
@@ -862,34 +885,11 @@ public class PlayerCtrl : MonoBehaviour
         if (other.CompareTag("Fire"))
         {
             hitcntTime = 1;
-            hitDamage = other.GetComponent<Boss_Flame>().Damage;
+            hitDamage = other.GetComponent<Boss_Flame>().Damage * hitRate;
         }
 
-        //if (other.CompareTag("Boss"))
-        //{
-            
-        //    hitDamage = other.GetComponent<BossColliderCheck>().Damage;
-        //    if (hitDamage > 0)
-        //    {
-        //        Debug.Log("Touch");
-        //        OnDamage(hitDamage);
-        //    }
-                
-        //}
-        
     }
 
-    void SetNearObj()
-    {
-        if (_nearObj.TryGetComponent<InteractObject>(out InteractObject io))
-        {
-            _nearType = io.InteractType;
-        }
-        else
-        {
-            ClearNearObject();
-        }
-    }
 
     void OnTriggerStay(Collider other)
     {
