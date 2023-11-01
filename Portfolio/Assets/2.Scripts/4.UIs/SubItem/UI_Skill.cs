@@ -63,6 +63,9 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
         if (Cool_Img.fillAmount > 0)
             return;
 
+        if (_skill.type == eSkill.Spin && PlayerCtrl._inst.State == PlayerState.Attack)
+            return;
+
         switch (_skill.type) 
         {
             case eSkill.Dodge:

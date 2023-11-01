@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 7125eebf1200f4b4ba2f105c37668d1d
+guid: 7f3dfce9b2e229f459af8508239ee399
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: LevelUp_Battle_SwordAndShield
+    second: Victory
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: LevelUp_Battle_SwordAndShield
+      name: Victory
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.93478256
+      - time: 0.9643492
         functionName: End
         data: 
         objectReferenceParameter: {instanceID: 0}

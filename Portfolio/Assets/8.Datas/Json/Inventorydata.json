@@ -2,8 +2,14 @@
     "InvenArrayNumber": [],
     "InvenItemName": [],
     "InvenItemCount": [],
-    "EquipArrayNumber": [],
-    "EquipItemName": [],
+    "EquipArrayNumber": [
+        5,
+        4
+    ],
+    "EquipItemName": [
+        "BigSword",
+        "BigShield"
+    ],
     "HotKeyItemName": "",
     "HotKeyItemCount": 0
 }
