@@ -185,7 +185,6 @@ public class PlayerCtrl : MonoBehaviour
     void InitData()
     {
         _offSetPoint = transform.position;
-        _stat.LoadPlayer();
         _clickMask = (1 << (int)eLayer.Ground) | (1 << (int)eLayer.Monster);
         _blockMask = (1 << (int)eLayer.Block) | (1 << (int)eLayer.TransBlock);
 
@@ -200,8 +199,21 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < (int)PlayerBools.Max_Cnt; i++)
             dict_bool.Add((PlayerBools)i, false);
 
+        StatSetting();
         MinimapCamera._inst.InstiatieMarker(true, transform);
         RegerectionCoroutine = StartCoroutine(RegenerateStat());
+    }
+
+    void StatSetting()
+    {
+        if (Managers.IsNew)
+        {
+            _stat.Init();
+        }
+        else
+        {
+            _stat.LoadPlayer();
+        }
     }
 
     public void BaseNavSetting()
@@ -369,7 +381,7 @@ public class PlayerCtrl : MonoBehaviour
                             isClickMonster = true;
                             if (rhit.collider.CompareTag("Boss"))
                             {
-                                _locktarget = rhit.transform.GetComponentInParent<BossCtrl>().gameObject;
+                                _locktarget = rhit.transform.parent.gameObject;
                             }
                             else
                             {
@@ -382,8 +394,7 @@ public class PlayerCtrl : MonoBehaviour
                             if (isBossField == false)
                             {
                                 _locktarget = null;
-                            }
-                            Debug.Log($"{_locktarget} + {isBossField}");
+                            }                           
                         }
                             
                     }
@@ -568,10 +579,7 @@ public class PlayerCtrl : MonoBehaviour
         if (dict_bool[PlayerBools.ContinueAttack])
             State = PlayerState.Attack;
         else
-        {
             State = PlayerState.Idle;
-        }
-            
     }
 
     public void OnDamage()
@@ -601,14 +609,13 @@ public class PlayerCtrl : MonoBehaviour
     public void OnDeadEvent()
     {
         AttackNavSetting();
-        GameManagerEX._inst.PlayerDeadAction(this);
+        GameManagerEX._inst.GameOver(this);
+        
     }
 
     public void OnResurrectEvent()
     {
-        InventoryManager._inst.ResetInventory();
         _locktarget = null;
-        _stat.Init();
         dict_bool[PlayerBools.Dead] = false;
         transform.position = _offSetPoint;
         transform.rotation = Quaternion.identity;
@@ -632,6 +639,11 @@ public class PlayerCtrl : MonoBehaviour
     #endregion [ State Event ]
 
     #region [ Stat Event ]
+
+    public void ResetStat()
+    {
+        _stat.Init();
+    }
 
     public void EarnMoney(int gold)
     {
@@ -891,8 +903,6 @@ public class PlayerCtrl : MonoBehaviour
         }
 
     }
-
-
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(Util.ConvertEnum(eTag.Interact)))

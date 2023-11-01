@@ -58,7 +58,7 @@
         },
         {
           "index": 5,
-          "hp": 10000.0,
+          "hp": 1000.0,
           "damage": 150.0,
           "defense": 30.0,
           "movespeed": 10.0,

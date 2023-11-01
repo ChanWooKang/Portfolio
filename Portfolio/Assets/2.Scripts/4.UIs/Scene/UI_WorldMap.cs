@@ -24,23 +24,12 @@ public class UI_WorldMap : UI_Base
         Init();
     }
 
-    void Update()
+    public void TryOpenWorldMap()
     {
-        TryOpenWorldMap();
-    }
-
-    void TryOpenWorldMap()
-    {
-        if (UI_Inventory.ActivatedInventory)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (ActivatedWorldMap == false)
-                OpenUI();
-            else
-                CloseUI();
-        }
+        if (ActivatedWorldMap == false)
+            OpenUI();
+        else
+            CloseUI();
     }
 
     public override void Init()

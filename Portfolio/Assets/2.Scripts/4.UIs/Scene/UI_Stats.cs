@@ -59,7 +59,7 @@ public class UI_Stats : UI_Base
 
     public override void Init()
     {
-        _format = "{0:#,###}";
+        _format = "{0:N0}";
         Bind<Text>(typeof(Texts));
         Level = GetText((int)Texts.Level);
         NowExp = GetText((int)Texts.NowEXP);

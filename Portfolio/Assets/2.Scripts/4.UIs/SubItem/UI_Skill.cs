@@ -39,9 +39,6 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
         if (player.Bools[PlayerBools.Dead])
             return;
 
-        if (_skill.type == eSkill.Spin && player.State == PlayerState.Attack)
-            return;
-
         if (Input.GetKeyDown(_skill.key))
         {
             OnSkill();

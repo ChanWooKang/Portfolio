@@ -9,21 +9,19 @@ public class GameScene : BaseScene
     {
         base.Init();
         CurrScene = eScene.GameScene;
-
         Managers._data.LoadGameData();
     }
 
     public override void Clear()
     {
         base.Clear();
-
-        //인벤토리 세이브
-        Managers._data.SaveGameData();
-        
+       
     }
 
     void OnApplicationQuit()
     {
+        Managers._data.SaveGameData();
         Clear();
     }
+
 }

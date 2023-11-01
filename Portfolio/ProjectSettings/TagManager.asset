@@ -13,6 +13,7 @@ TagManager:
   - Slash
   - Block
   - Boss
+  - Fire
   layers:
   - Default
   - TransparentFX

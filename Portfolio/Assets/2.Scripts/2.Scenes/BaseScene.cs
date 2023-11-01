@@ -28,4 +28,15 @@ public class BaseScene : MonoBehaviour
         PoolingManager._pool.Clear();
         PrevScene = CurrScene; 
     }
+
+    public virtual void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    
 }

@@ -138,22 +138,12 @@ public class SpawnManager : MonoBehaviour
         return go;
     }
 
-    public void MonsterDespawn(GameObject go , bool isBoss = false)
+    public void MonsterDespawn(GameObject go)
     {
-        if(!isBoss)
-        {
-            eMonster type = GetMonsterType(go);
-            if (type == eMonster.Unknown || type == eMonster.Max_Cnt)
-                return;
-            OnSpawnEvent?.Invoke(type, -1);
-        }
-        else
-        {
-            OnSpawnEvent?.Invoke(eMonster.Boss, -1);
-
-            //霸烙概聪历 积己 饶 贸府 傈价
-
-        }
+        eMonster type = GetMonsterType(go);
+        if (type == eMonster.Unknown || type == eMonster.Max_Cnt)
+            return;
+        OnSpawnEvent?.Invoke(type, -1);
         go.DestroyAPS();
     }
 }

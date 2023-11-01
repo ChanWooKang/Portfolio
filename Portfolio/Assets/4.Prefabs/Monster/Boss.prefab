@@ -2298,14 +2298,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8245872885131961065}
   - component: {fileID: 5972323744443680315}
-  - component: {fileID: 872385304106809615}
   m_Layer: 10
   m_Name: BodyColider
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8245872885131961065
 Transform:
   m_ObjectHideFlags: 0
@@ -2318,7 +2317,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2889527830512603837}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5972323744443680315
 BoxCollider:
@@ -2329,23 +2328,10 @@ BoxCollider:
   m_GameObject: {fileID: 2261663140682010244}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 5, y: 5, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &872385304106809615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2261663140682010244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec29a29f2ce0f24495cf4e0f52aa360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 0
 --- !u!1 &3543915644862682650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,7 +2420,7 @@ BoxCollider:
   m_GameObject: {fileID: 4468761754641139762}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3, y: 5, z: 16}
   m_Center: {x: 0, y: 0, z: 8}
@@ -8759,7 +8745,7 @@ Transform:
   - {fileID: 5679586858739363922}
   - {fileID: 5679586858739363886}
   m_Father: {fileID: 2889527830512603837}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5679586858739526774
 GameObject:
@@ -16000,6 +15986,8 @@ GameObject:
   - component: {fileID: 6276835695321151083}
   - component: {fileID: 7237742882768351619}
   - component: {fileID: 8534364278504439571}
+  - component: {fileID: 6022642882247209423}
+  - component: {fileID: 3460888083538376623}
   m_Layer: 10
   m_Name: Boss
   m_TagString: Monster
@@ -16018,8 +16006,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5679586858739363924}
   - {fileID: 8245872885131961065}
+  - {fileID: 5679586858739363924}
   - {fileID: 3243622614813639848}
   - {fileID: 1569239930}
   m_Father: {fileID: 0}
@@ -16097,7 +16085,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropTable: {fileID: 11400000, guid: df2c6fb6febad0a4d8f4b3575fe233c8, type: 2}
-  _bodyTransform: {fileID: 8245872885131961065}
   headTR: {fileID: 5679586858739363904}
   _flameEffect: {fileID: 4694208518173891926}
   _rSpeed: 8
@@ -16111,6 +16098,33 @@ MonoBehaviour:
   isDead: 0
   isAttack: 0
   _patternWeight: 2c01000018010000c8000000
+--- !u!65 &6022642882247209423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765269846391314980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 12}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3460888083538376623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765269846391314980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec29a29f2ce0f24495cf4e0f52aa360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bc: {fileID: 8534364278504439571}
+  Damage: 0
 --- !u!1001 &1771046245
 PrefabInstance:
   m_ObjectHideFlags: 0

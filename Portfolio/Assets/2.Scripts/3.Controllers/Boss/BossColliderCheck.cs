@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossColliderCheck : MonoBehaviour
 {
+    [SerializeField]
     BossCtrl bc;
     float cntTime;
     float damage = 0;
@@ -17,11 +18,6 @@ public class BossColliderCheck : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (bc == null)
-        {
-            bc = GetComponentInParent<BossCtrl>();
-        }
-
         if (other.CompareTag("Weapon") || other.CompareTag("Cry") || other.CompareTag("Slash"))
         {
             if (other.CompareTag("Weapon"))
@@ -31,7 +27,6 @@ public class BossColliderCheck : MonoBehaviour
             }
             else if (other.CompareTag("Cry"))
             {
-                
                 damage = other.transform.GetComponent<SkillCryCtrl>().Damage;
             }
             else

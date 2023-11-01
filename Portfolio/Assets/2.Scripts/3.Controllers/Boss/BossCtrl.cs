@@ -14,9 +14,9 @@ public class BossCtrl : FSM<BossCtrl>
     SkinnedMeshRenderer _mesh;
     NavMeshAgent _agent;
 
-    [SerializeField] Transform _bodyTransform;
+    //[SerializeField] Transform _bodyTransform;
     BoxCollider _bodyCollider;
-    BossColliderCheck _bodyCheck;
+    //BossColliderCheck _bodyCheck;
 
 
     [SerializeField] Transform headTR;
@@ -75,9 +75,11 @@ public class BossCtrl : FSM<BossCtrl>
     void InitComponent()
     {
         //BodyCollider
-        _bodyCollider = _bodyTransform.GetComponent<BoxCollider>();
-        _bodyCheck = _bodyTransform.GetComponent<BossColliderCheck>();
+        //_bodyCollider = _bodyTransform.GetComponent<BoxCollider>();
+        //_bodyCheck = _bodyTransform.GetComponent<BossColliderCheck>();
 
+
+        _bodyCollider = GetComponent<BoxCollider>();
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _mesh = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -137,7 +139,7 @@ public class BossCtrl : FSM<BossCtrl>
         _bodyCollider.enabled = isOn;
     }
 
-    void ChangeColor(Color color)
+    public void ChangeColor(Color color)
     {
         _mesh.material.color = color;
     }
@@ -323,7 +325,6 @@ public class BossCtrl : FSM<BossCtrl>
 
     public void OffHandAttackEvent()
     {
-        _bodyCheck.SetDamage(0);
         isImotal = false;
         Invoke("OffAttackEvent", 0.5f);
     }
@@ -379,6 +380,7 @@ public class BossCtrl : FSM<BossCtrl>
 
         if (isDead)
         {
+            _flameEffect.OffEffect();
             SetCollider(false);
             _agent.SetDestination(transform.position);
             _stat.DeadFunc(player._stat);
@@ -387,8 +389,10 @@ public class BossCtrl : FSM<BossCtrl>
             yield break;
         }
         ChangeColor(Color.red);
+        isImotal = true;
         yield return new WaitForSeconds(0.3f);
         ChangeColor(Color.white);
+        isImotal = false;
     }
 
     public void OnRegenerate()
@@ -418,11 +422,8 @@ public class BossCtrl : FSM<BossCtrl>
 
     public void OnDeadEvent()
     {
-        SpawnManager._inst.MonsterDespawn(gameObject,true);
-        ChangeColor(Color.white);
-        ChangeState(BossStateDisable._inst);
-        _dropTable.ItemDrop(transform, _stat.Gold);
-        _dropTable.ItemDrop(transform);
+        AttackNavSetting();
+        GameManagerEX._inst.GameClear(this);
     }
     
 }

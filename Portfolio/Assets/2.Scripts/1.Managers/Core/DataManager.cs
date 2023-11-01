@@ -10,6 +10,13 @@ public class DataManager
     public Dictionary<eMonster, DataByMonster> Dict_Monster { get; private set; } = new Dictionary<eMonster, DataByMonster>();
     public PlayerData playerData = new PlayerData();
     public Inventorydata invenData = new Inventorydata();
+    public KillData killData = new KillData();
+
+    const string DBL = "DataByLevel";
+    const string DBM = "DataByMonster";
+    const string PLAYER = "PlayerData";
+    const string INVEN = "InventoryData";
+    const string KILL = "KillData";
 
     public void Init()
     {
@@ -31,26 +38,41 @@ public class DataManager
 
     }
 
+    public void ResetData()
+    {
+        playerData = new PlayerData();
+        invenData = new Inventorydata();
+        killData = new KillData();
+        Managers._file.SaveJsonFile(playerData, PLAYER);
+        Managers._file.SaveJsonFile(invenData, INVEN);
+        Managers._file.SaveJsonFile(killData, KILL);
+    }
+
     void LoadData()
     {
-
-        Dict_Stat = LoadJson<StatData, int, DataByLevel>("DataByLevel").Make();
-        Dict_Monster = LoadJson<MonsterData, eMonster, DataByMonster>("DataByMonster").Make();
+        Dict_Stat = LoadJson<StatData, int, DataByLevel>(DBL).Make();
+        Dict_Monster = LoadJson<MonsterData, eMonster, DataByMonster>(DBM).Make();
     }
 
     public void LoadGameData()
     {
-        string player = Managers._file.LoadJsonFile("PlayerData");
+        string player = Managers._file.LoadJsonFile(PLAYER);
         if (string.IsNullOrEmpty(player) == false)
             playerData = JsonUtility.FromJson<PlayerData>(player);
         else
             playerData = new PlayerData();
 
-        string inven = Managers._file.LoadJsonFile("Inventorydata");
+        string inven = Managers._file.LoadJsonFile(INVEN);
         if (string.IsNullOrEmpty(inven) == false)
             invenData = JsonUtility.FromJson<Inventorydata>(inven);
         else
             invenData = new Inventorydata();
+
+        string kill = Managers._file.LoadJsonFile(KILL);
+        if (string.IsNullOrEmpty(kill) == false)
+            killData = JsonUtility.FromJson<KillData>(kill);
+        else
+            killData = new KillData();
     }
 
     public void SaveGameData()
@@ -59,8 +81,10 @@ public class DataManager
         //플레이어 컨트롤 -> 플레이어 스텟 - > 세이브 플레이어 데이터 추출
         playerData = PlayerCtrl._inst._stat.SavePlayer();
         invenData = InventoryManager._inst.InventorySave();
-        Managers._file.SaveJsonFile(playerData, "PlayerData");
-        Managers._file.SaveJsonFile(invenData, "Inventorydata");
+        killData = GameManagerEX._inst.CountSave();
+        Managers._file.SaveJsonFile(playerData, PLAYER);
+        Managers._file.SaveJsonFile(invenData, INVEN);
+        Managers._file.SaveJsonFile(killData, KILL);
     }
 
 }

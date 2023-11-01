@@ -18,9 +18,9 @@ public class Boss_Flame : MonoBehaviour
             transform.position = parentTransform.position;
             transform.rotation = parentTransform.rotation;
         }
+
+
     }
-
-
 
 
     public void OnEffect(Transform head,float dmg, float rate = 0.5f)

@@ -7,7 +7,7 @@ public class BossStateDisable : TSingleton<BossStateDisable>, IFSMState<BossCtrl
 {
     public void Enter(BossCtrl m)
     {
-        
+       
     }
 
     public void Execute(BossCtrl m)

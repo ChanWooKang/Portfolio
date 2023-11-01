@@ -306,7 +306,10 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         ChangeColor(Color.white);
         ChangeState(MonsterStateDisable._inst);
         _dropTable.ItemDrop(transform, _stat.Gold);
-        _dropTable.ItemDrop(transform);        
+        _dropTable.ItemDrop(transform);
+
+        //GameManager
+        GameManagerEX._inst.KillCount(mType);
     }
 
     public void OnResurrectEvent()

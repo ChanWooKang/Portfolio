@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
     public static SceneManagerEx _scene { get { return _inst.Scene; } }
     public static UIManager _ui { get { return _inst.UI; } }
 
+    public static bool IsNew { get; set; } = true;
     static void Init()
     {
         if(_uniqueInstance == null)

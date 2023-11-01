@@ -60,6 +60,14 @@ namespace DataContents
     }
 
     [System.Serializable]
+    public class KillData
+    {
+        public List<int> MonsterType = new List<int>();
+        public List<int> KillCount = new List<int>();
+        public float InGameTime;
+    }
+
+    [System.Serializable]
     public class StatData : ILoader<int, DataByLevel>
     {
         public List<DataByLevel> stats = new List<DataByLevel>();

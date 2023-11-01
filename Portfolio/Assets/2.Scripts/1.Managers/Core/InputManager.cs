@@ -46,6 +46,7 @@ public class InputManager
                 RPressTime = 0;
             }
         }
+
     }
 
     public void Clear()

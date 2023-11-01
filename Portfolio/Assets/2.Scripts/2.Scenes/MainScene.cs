@@ -16,13 +16,20 @@ public class MainScene : BaseScene
         base.Clear();
     }
 
-
-    //Test
-    void Update()
+    public void NewGame()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneLoad(eScene.GameScene);
-        }
+        Managers.IsNew = true;
+        SceneLoad(eScene.GameScene);
+    }
+
+    public void ContinueGame()
+    {
+        Managers.IsNew = false;
+        SceneLoad(eScene.GameScene);
+    }
+
+    public override void Quit()
+    {
+        base.Quit();
     }
 }

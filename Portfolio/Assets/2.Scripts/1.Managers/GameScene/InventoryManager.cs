@@ -43,16 +43,6 @@ public class InventoryManager : MonoBehaviour
         OnChangeEvent += ChangeEquipment;
     }
 
-    // Test용
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Delete))
-        {
-            //인벤 초기화
-            ResetInventory();
-        }
-    }
-
     public void ResetInventory()
     {
         equip.ClearEquip();
@@ -68,7 +58,11 @@ public class InventoryManager : MonoBehaviour
         equip.Init();
         inven.Init();
         hotkey.Init();
+
         InventoryLoad();
+
+        if (Managers.IsNew)
+            ResetInventory();
     }
 
     void ChangeEquipment(eEquipment type, SOItem item, bool isWear= true)
@@ -87,7 +81,6 @@ public class InventoryManager : MonoBehaviour
         StartCoroutine(ChangeCoroutine(type, item, isWear));
 
     }
-
 
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)
     {

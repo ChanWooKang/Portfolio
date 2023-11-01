@@ -95,7 +95,7 @@ public class PlayerStat : BaseStat
         _level = 1;
         _hp = _maxhp = 200;
         _mp = _maxmp = 200;
-        _damage = 20;
+        _damage = 520;
         _defense = 5;
         _exp = 0;
         _gold = 0;

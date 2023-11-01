@@ -20,11 +20,6 @@ public class UI_Inventory : UI_Base
     UI_Slot[] slots;
     UI_Stats stats;
 
-    void Update()
-    {
-        TryOpenInventory();
-    }
-
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
@@ -67,18 +62,12 @@ public class UI_Inventory : UI_Base
         }
     }
 
-    void TryOpenInventory()
+    public void TryOpenInventory()
     {
-        if (UI_WorldMap.ActivatedWorldMap)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (ActivatedInventory == false)
-                OpenInventory();
-            else
-                CloseInventory();
-        }
+        if (ActivatedInventory == false)
+            OpenInventory();
+        else
+            CloseInventory();
     }
 
     void OpenInventory()
