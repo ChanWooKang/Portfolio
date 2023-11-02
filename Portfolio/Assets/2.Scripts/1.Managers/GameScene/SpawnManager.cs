@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
 
         if(tr == null)
         {
-            Debug.Log($"해당 스폰 위치 존재 X : {type}");
+            //Debug.Log($"해당 스폰 위치 존재 X : {type}");
             return null;
         }
 
@@ -69,7 +69,6 @@ public class SpawnManager : MonoBehaviour
         {
             if (go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
             {
-                Debug.Log("삭제");
                 Destroy(go);
                 return null;
             }
@@ -79,7 +78,6 @@ public class SpawnManager : MonoBehaviour
         {
             if (go.TryGetComponent<BossCtrl>(out BossCtrl bc) == false)
             {
-                Debug.Log("삭제");
                 Destroy(go);
                 return null;
             }
@@ -106,7 +104,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
+            //Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
         }
     }
 
@@ -125,7 +123,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
+            //Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
         }
     }
 

@@ -14,7 +14,7 @@ public class ResourceManager
         GameObject prefab = Load<GameObject>($"Prefabs/{path}");
         if (prefab == null)
         {
-            Debug.Log($"ResourceManager : Failed to Load Prefab : {path}");
+            //Debug.Log($"ResourceManager : Failed to Load Prefab : {path}");
         }
         GameObject go = Object.Instantiate(prefab, parent);
         int index = go.name.IndexOf("(Clone)");

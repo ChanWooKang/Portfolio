@@ -65,7 +65,7 @@ public class CursorCtrl : MonoBehaviour
         
         if (dict.TryGetValue(type, out Texture2D cursor) == false)
         {
-            Debug.Log($"CursorCtrl : Failed To Load Cursor TYPE({type})");
+            //Debug.Log($"CursorCtrl : Failed To Load Cursor TYPE({type})");
             return null;
         }
         else

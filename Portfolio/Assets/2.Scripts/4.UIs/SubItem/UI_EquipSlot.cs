@@ -69,7 +69,7 @@ public class UI_EquipSlot : UI_Base, IPointerClickHandler, IBeginDragHandler, ID
                     }
                     else
                     {
-                        Debug.Log("해제 불가 /인벤토리가 꽉찼습니다....");
+                        //Debug.Log("해제 불가 /인벤토리가 꽉찼습니다....");
                     }
                 }
             }

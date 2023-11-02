@@ -171,7 +171,7 @@ public class UI_HotKey : UI_Base, IPointerClickHandler,IDropHandler, IPointerEnt
                     }
                     else
                     {
-                        Debug.Log("해제 불가 /인벤토리가 꽉찼습니다....");
+                        //Debug.Log("해제 불가 /인벤토리가 꽉찼습니다....");
                     }
                 }
             }

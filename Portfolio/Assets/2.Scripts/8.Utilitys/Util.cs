@@ -54,7 +54,7 @@ public static class Util
         Transform tr = FindChild<Transform>(go, name, recursive);
         if (tr == null)
         {
-            Debug.Log("Failed FindChild");
+            //Debug.Log("Failed FindChild");
             return null;
         }
             

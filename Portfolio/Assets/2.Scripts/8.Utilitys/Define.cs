@@ -94,6 +94,7 @@ namespace Define
     {
         Unknown = 0,
         Item,
+        Shop
     }
 
     public enum eStat

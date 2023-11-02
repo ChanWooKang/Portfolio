@@ -26,7 +26,7 @@ public class UI_Equipment : UI_Base
         {
             if (Equip_Slots.ContainsKey(slot.slotType))
             {
-                Debug.Log($"존재하는 장비 슬롯 선택을 다시하세요 {slot.gameObject.name}");
+                //Debug.Log($"존재하는 장비 슬롯 선택을 다시하세요 {slot.gameObject.name}");
                 return;
             }
             Equip_Slots.Add(slot.slotType, slot);

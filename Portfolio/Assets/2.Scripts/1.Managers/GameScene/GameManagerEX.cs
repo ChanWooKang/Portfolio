@@ -207,8 +207,7 @@ public class GameManagerEX : MonoBehaviour
         totalKill = 0;
         _killDict = new Dictionary<eMonster, int>();
         Managers._data.ResetData();
-        ResetCountTime();
-        Debug.Log("Reset ¿Ï·á");
+        ResetCountTime();        
     }
 
     public void ResetCountTime()

@@ -25,8 +25,8 @@ public abstract class UI_Base : MonoBehaviour
             else
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);
 
-            if (objects[i] == null)
-                Debug.Log($"Failed To Bind : ({names[i]})");
+            //if (objects[i] == null)
+                //Debug.Log($"Failed To Bind : ({names[i]})");
         }
     }
 
@@ -35,7 +35,7 @@ public abstract class UI_Base : MonoBehaviour
         UnityEngine.Object[] objects = null;
         if (_objects.TryGetValue(typeof(T), out objects) == false)
         {
-            Debug.Log("Failed to Get");
+            //Debug.Log("Failed to Get");
             return null;
         }
 

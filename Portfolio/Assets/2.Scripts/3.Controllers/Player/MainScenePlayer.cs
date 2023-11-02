@@ -14,7 +14,7 @@ public class MainScenePlayer : MonoBehaviour
 
     Animator _ani;
     Animations _state = Animations.IDLE;
-    float[] rate = { 0.6f, 0.8f, 1.0f };
+    [SerializeField] float[] rate = { 0.6f, 0.8f, 1.0f };
     float cntTime;
     void Start()
     {
@@ -64,21 +64,13 @@ public class MainScenePlayer : MonoBehaviour
     void PickAnim()
     {
         float value = Random.Range(0f, 1.0f);
-        Debug.Log(value);
-        if(value < rate[0])
-        {
+        if(value < rate[0])        
             _state = Animations.IDLE;
-        }
         else if( value < rate[1])
-        {
             _state = Animations.Victory;
-        }
         else
-        {
             _state = Animations.Level;
-        }
-
-        Debug.Log(_state);
+        
         ChangeAnim();
     }
 

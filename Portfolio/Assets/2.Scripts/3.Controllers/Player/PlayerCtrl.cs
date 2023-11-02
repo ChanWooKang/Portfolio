@@ -380,7 +380,6 @@ public class PlayerCtrl : MonoBehaviour
                     if (hit)
                     {
                         _destPos = rhit.point;
-                        Debug.Log(_destPos);
                         if (State != PlayerState.Move)
                             State = PlayerState.Move;
                         dict_bool[PlayerBools.ContinueAttack] = true;
@@ -540,6 +539,14 @@ public class PlayerCtrl : MonoBehaviour
                                 psc.RootingSound();
                                 ClearNearObject();
                             }
+                        }
+                    }
+                    break;
+                case eInteract.Shop:
+                    {
+                        if(_nearObj.TryGetComponent<Shop>(out Shop shop))
+                        {
+                            shop.TryOpenShop();
                         }
                     }
                     break;

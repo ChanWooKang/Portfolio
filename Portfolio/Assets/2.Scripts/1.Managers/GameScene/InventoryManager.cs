@@ -175,7 +175,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Error");
+                    //Debug.Log("Error");
                 }
             }
         }
