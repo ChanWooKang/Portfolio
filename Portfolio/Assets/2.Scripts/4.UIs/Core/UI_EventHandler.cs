@@ -10,6 +10,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        SoundManager._inst.Play(Define.eSoundList.UI_Touch);
         OnClickHandler?.Invoke(eventData);
     }
 }

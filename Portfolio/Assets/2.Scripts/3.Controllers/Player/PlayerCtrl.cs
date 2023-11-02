@@ -118,6 +118,7 @@ public class PlayerCtrl : MonoBehaviour
     public NavMeshAgent Agent { get { return _agent; } }
     #endregion [ Property ]
 
+    
     void Awake()
     {
         InitComponent();
