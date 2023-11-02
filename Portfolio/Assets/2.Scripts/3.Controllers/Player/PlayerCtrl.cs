@@ -615,7 +615,7 @@ public class PlayerCtrl : MonoBehaviour
     public void OnDeadEvent()
     {
         AttackNavSetting();
-        GameManagerEX._inst.GameOver(this);
+        GameManagerEX._inst.GameOver();
         
     }
 

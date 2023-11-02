@@ -32,7 +32,7 @@ public class GameManagerEX : MonoBehaviour
         if (Managers.IsNew)
             ResetData();
 
-        
+        player = PlayerCtrl._inst;
         //Sounds
         SoundManager._inst.Play(eSoundList.BGM_GameScene, eSound.BGM);
     }
@@ -163,9 +163,8 @@ public class GameManagerEX : MonoBehaviour
 
     
 
-    public void GameOver(PlayerCtrl pc)
+    public void GameOver()
     {
-        player = pc;
         player.gameObject.SetActive(false);
         player.ChangeColor(Color.white);
         isGameEnd = true;
@@ -177,9 +176,6 @@ public class GameManagerEX : MonoBehaviour
     public void GameClear(BossCtrl bc)
     {
         KillCount(eMonster.Boss);
-        bc.gameObject.DestroyAPS();
-        bc.ChangeState(BossStateDisable._inst);
-        bc.ChangeColor(Color.white);
         isGameEnd = true;
         UIOpen(false);
     }
@@ -189,13 +185,17 @@ public class GameManagerEX : MonoBehaviour
     {
         if (player != null)
         {
-            player.ResetStat();
-            player.OnResurrectEvent();
-            player.gameObject.SetActive(true);
-            player.OnStartRegenarte();
-            ResetCountTime();
-            ResetData();
+            //player.ResetStat();
+            //player.OnResurrectEvent();
+            //player.gameObject.SetActive(true);
+            //player.OnStartRegenarte();
+            //ResetCountTime();
+            
         }
+
+        ResetData();
+        Managers.IsNew = true;
+        Managers._scene.CurrentScene.SceneLoad(eScene.GameScene);
 
     }
 
