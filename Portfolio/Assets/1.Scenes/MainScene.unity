@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 705507994}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.4506581, g: 0.668982, b: 0.6559596, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -10062,18 +10062,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 353895321}
-          m_TargetAssemblyTypeName: MainScene, Assembly-CSharp
-          m_MethodName: NewGame
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 3
     callback:
       m_PersistentCalls:
@@ -12734,8 +12722,9 @@ GameObject:
   - component: {fileID: 345401365}
   - component: {fileID: 345401364}
   - component: {fileID: 345401363}
+  - component: {fileID: 345401366}
   m_Layer: 0
-  m_Name: MainCanvas
+  m_Name: UI_MainScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12825,6 +12814,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &345401366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345401361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14401a3b80d94f14e958e53a405af587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &346426670
 GameObject:
   m_ObjectHideFlags: 0
@@ -27933,18 +27934,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 353895321}
-          m_TargetAssemblyTypeName: MainScene, Assembly-CSharp
-          m_MethodName: ContinueGame
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 3
     callback:
       m_PersistentCalls:
@@ -38995,18 +38984,6 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 21300000, guid: ed169c7ef182f0e44a5d758e6a61410d, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 353895321}
-          m_TargetAssemblyTypeName: MainScene, Assembly-CSharp
-          m_MethodName: Quit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -77433,7 +77410,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f2f10015f81e04fbb8acac79f941ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audios: []
+  _audios:
+  - Key: BGM_GameScene
+    clip: {fileID: 8300000, guid: 610e8d1ba6c503040950a7e96659c759, type: 3}
+  - Key: BGM_MainScene
+    clip: {fileID: 8300000, guid: 7836ce4cac7c6b34ba2ee837eddef348, type: 3}
+  - Key: Boss_Flame
+    clip: {fileID: 8300000, guid: 5aadc4dc07dd8c0448550fc57a19a72c, type: 3}
+  - Key: Boss_Hand
+    clip: {fileID: 8300000, guid: 5543cefa2f8fc9e40bb3b5af6eac40ad, type: 3}
+  - Key: Player_Cry
+    clip: {fileID: 8300000, guid: c7865fd595be8a046a018f3e24771dd6, type: 3}
+  - Key: Player_Dodge
+    clip: {fileID: 8300000, guid: 3a6f1c7fea4801f4c9f9252e0d74a860, type: 3}
+  - Key: Player_Hit
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  - Key: Player_Move
+    clip: {fileID: 8300000, guid: 03d634d399bd2cb458f97ad6ad89c87c, type: 3}
+  - Key: Player_Pickup
+    clip: {fileID: 8300000, guid: d0841eebed9944dd3b27de3ee7e6eb88, type: 3}
+  - Key: Player_Spin
+    clip: {fileID: 8300000, guid: 8787a22db31fdb041b2ed1b4cb3617e4, type: 3}
+  - Key: UI_Open
+    clip: {fileID: 8300000, guid: d73b73743ea434d9b98c5c0b04b51e3a, type: 3}
+  - Key: UI_Touch
+    clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  - Key: Player_LevelUp
+    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  BGMValue: 0.2
+  SFXValue: 1
 --- !u!4 &2089853443
 Transform:
   m_ObjectHideFlags: 0

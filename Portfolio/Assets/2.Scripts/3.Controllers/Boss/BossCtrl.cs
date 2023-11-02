@@ -16,7 +16,7 @@ public class BossCtrl : FSM<BossCtrl>
 
     //[SerializeField] Transform _bodyTransform;
     BoxCollider _bodyCollider;
-    //BossColliderCheck _bodyCheck;
+    AudioSource _source;
 
 
     [SerializeField] Transform headTR;
@@ -34,7 +34,10 @@ public class BossCtrl : FSM<BossCtrl>
     [HideInInspector] public float cntTime;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isAttack;
-    
+
+    float hitDamage;
+
+    public float HandDamage { get; set; }
 
     [SerializeField]
     int[] _patternWeight;
@@ -74,18 +77,15 @@ public class BossCtrl : FSM<BossCtrl>
 
     void InitComponent()
     {
-        //BodyCollider
-        //_bodyCollider = _bodyTransform.GetComponent<BoxCollider>();
-        //_bodyCheck = _bodyTransform.GetComponent<BossColliderCheck>();
-
-
         _bodyCollider = GetComponent<BoxCollider>();
+        _source = gameObject.GetOrAddComponent<AudioSource>();
         _ani = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _stat = new MonsterStat();
+        
     }
 
     public void Init()
@@ -284,6 +284,7 @@ public class BossCtrl : FSM<BossCtrl>
     // 기본 공격
     public void OnAttackEvent()
     {
+
         if(target != null && player.State != PlayerState.Die)
         {
 
@@ -294,6 +295,8 @@ public class BossCtrl : FSM<BossCtrl>
 
             if (Physics.Raycast(ray, _stat.AttackRange, (1 << (int)eLayer.Player)))
             {
+                //Sound 삽입
+
                 player.OnDamage(_stat);
             }
         }
@@ -303,40 +306,48 @@ public class BossCtrl : FSM<BossCtrl>
     //이동 공격
     public void OnHandAttackEvent()
     {
+        
+            
+
+        SetClip(eSoundList.Boss_Hand);
         if (target != null && player.State != PlayerState.Die)
         {
-            Vector3 dir = target.position - transform.position;
-            dir = dir.normalized;
-
-            Ray ray = new Ray(transform.position + Vector3.up, dir * _stat.AttackRange);
-
-            if (Physics.Raycast(ray, _stat.AttackRange, (1 << (int)eLayer.Player)))
-            {
-                player.OnDamage(_stat.Damage);
-            }
+            HandDamage = _stat.Damage;
+            _bodyCollider.center = Vector3.forward * 8;
         }
+    }
+
+    void ClearHandDamage()
+    {
+        HandDamage = 0;
     }
 
     //화염 발사 공격
     public void OnFlameAttackEvent()
     {
+        SetClip(eSoundList.Boss_Flame, true);
         _flameEffect.OnEffect(headTR,_stat.Damage);
     }
 
     public void OffHandAttackEvent()
     {
+        _bodyCollider.center = Vector3.zero;
         isImotal = false;
-        Invoke("OffAttackEvent", 0.5f);
+        HandDamage = 0;
+
+        Invoke("OffAttackEvent", 0.25f);
     }
 
     public void OffFlameEvent()
     {
+        StopAudio();
         _flameEffect.OffEffect();
-        Invoke("OffAttackEvent", 0.5f);
+        Invoke("OffAttackEvent", 0.25f);
     }
 
     public void OffAttackEvent()
     {
+        
         _agent.avoidancePriority = 50;
         cntTime = 0;
         isAttack = false;
@@ -380,6 +391,9 @@ public class BossCtrl : FSM<BossCtrl>
 
         if (isDead)
         {
+            //사운드 삽입
+
+
             _flameEffect.OffEffect();
             SetCollider(false);
             _agent.SetDestination(transform.position);
@@ -425,5 +439,72 @@ public class BossCtrl : FSM<BossCtrl>
         AttackNavSetting();
         GameManagerEX._inst.GameClear(this);
     }
-    
+
+
+    void SetClip(eSoundList sList, bool isLoop = false)
+    {
+        AudioClip clip = SoundManager._inst.GetOrAddAudioClip(sList);
+
+        if (clip != null)
+        {
+            if (isLoop)
+            {
+                _source.clip = clip;
+                _source.loop = true;
+                _source.Play();
+            }
+            else
+            {
+                _source.loop = false;
+                _source.PlayOneShot(clip);
+            }
+        }
+
+    }
+
+    void StopAudio()
+    {
+        if (_source.isPlaying)
+            _source.Stop();
+        _source.clip = null;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon") || other.CompareTag("Cry") || other.CompareTag("Slash"))
+        {
+            if (other.CompareTag("Weapon"))
+            {
+                cntTime = 0;
+                hitDamage = other.transform.GetComponent<WeaponCtrl>().Damage;
+            }
+            else if (other.CompareTag("Cry"))
+            {
+                hitDamage = other.transform.GetComponent<SkillCryCtrl>().Damage;
+            }
+            else
+            {
+                hitDamage = other.transform.GetComponent<SkillSlashCtrl>().Damage;
+            }
+
+            if (hitDamage > 0)
+                OnDamage(hitDamage);
+            else
+                return;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            cntTime += Time.deltaTime;
+            if (cntTime > 0.5f)
+            {
+                if (hitDamage > 0)
+                    OnDamage(hitDamage);
+                cntTime = 0;
+            }
+        }
+    }
 }

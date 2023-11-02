@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Define;
 public class MainScenePlayer : MonoBehaviour
 {
     enum Animations
@@ -22,6 +22,9 @@ public class MainScenePlayer : MonoBehaviour
         StartCoroutine(PlayAnim());
         Managers._input.KeyAction -= OnKeyBoard;
         Managers._input.KeyAction += OnKeyBoard;
+
+        // Sound
+        SoundManager._inst.Play(eSoundList.BGM_MainScene, eSound.BGM);
     }
 
     void OnKeyBoard()

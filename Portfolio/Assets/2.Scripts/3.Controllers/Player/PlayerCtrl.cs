@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     NavMeshAgent _agent;
     Renderer[] _meshs;
 
+    PlayerSoundCtrl psc;
     WeaponCtrl _weapon;
     SkillCryCtrl _cry;
     SkillHealCtrl _heal;
@@ -63,6 +64,7 @@ public class PlayerCtrl : MonoBehaviour
 
     #region [ Property ]
 
+    public eSkill SkillState { get { return _sType; } }
     public PlayerState State
     {
         get { return _state; }
@@ -71,6 +73,8 @@ public class PlayerCtrl : MonoBehaviour
             _state = value;
             if (_anim == null)
                 _anim = GetComponent<Animator>();
+
+            psc.UpdateSound();
             switch (_state)
             {
                 case PlayerState.Die:
@@ -170,6 +174,8 @@ public class PlayerCtrl : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _meshs = transform.GetChild(0).GetComponentsInChildren<Renderer>();
         _stat = new PlayerStat();
+
+        psc = GetComponent<PlayerSoundCtrl>();
 
         //스킬 관련 처리
         // 휠윈드 기능
@@ -373,20 +379,14 @@ public class PlayerCtrl : MonoBehaviour
                     if (hit)
                     {
                         _destPos = rhit.point;
+                        Debug.Log(_destPos);
                         if (State != PlayerState.Move)
                             State = PlayerState.Move;
                         dict_bool[PlayerBools.ContinueAttack] = true;
                         if (rhit.collider.gameObject.layer == (int)eLayer.Monster)
                         {
                             isClickMonster = true;
-                            if (rhit.collider.CompareTag("Boss"))
-                            {
-                                _locktarget = rhit.transform.parent.gameObject;
-                            }
-                            else
-                            {
-                                _locktarget = rhit.collider.gameObject;
-                            }
+                            _locktarget = rhit.transform.gameObject;
                         }
                         else
                         {
@@ -536,6 +536,7 @@ public class PlayerCtrl : MonoBehaviour
                         {
                             if(item.Root())
                             {
+                                psc.RootingSound();
                                 ClearNearObject();
                             }
                         }
@@ -548,6 +549,11 @@ public class PlayerCtrl : MonoBehaviour
     #endregion [ KeyBoard Event ]
 
     #region [ State Event ]
+
+    public void LevelUp()
+    {
+        psc.LevelUpSound();
+    }
 
     public void OnAttackEvent()
     {
@@ -902,6 +908,18 @@ public class PlayerCtrl : MonoBehaviour
             hitDamage = other.GetComponentInParent<Boss_Flame>().Damage * hitRate;
         }
 
+        if (other.CompareTag("Boss"))
+        {
+            if(other.TryGetComponent<BossCtrl>(out BossCtrl bc))
+            {
+                if(bc.HandDamage>0)
+                {
+                    OnDamage(bc.HandDamage);
+                    bc.HandDamage = 0;   
+                }
+            }
+        }
+
     }
     void OnTriggerStay(Collider other)
     {
@@ -929,7 +947,18 @@ public class PlayerCtrl : MonoBehaviour
 
                 hitcntTime = 0;
             }
-            
+        }
+
+        if (other.CompareTag("Boss"))
+        {
+            if (other.TryGetComponent<BossCtrl>(out BossCtrl bc))
+            {
+                if (bc.HandDamage > 0)
+                {
+                    OnDamage(bc.HandDamage);
+                    bc.HandDamage = 0;
+                }
+            }
         }
     }
 
@@ -945,6 +974,8 @@ public class PlayerCtrl : MonoBehaviour
             hitDamage = 0;
             hitcntTime = 0;
         }
+
+       
     }
 
     #endregion [ OnTrigger ]

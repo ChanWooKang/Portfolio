@@ -49,7 +49,6 @@ public class PlayerStat : BaseStat
             {
                 _level = level;
                 SetStat(_level);
-                
             }
         }
     }
@@ -108,6 +107,11 @@ public class PlayerStat : BaseStat
 
     public void SetStat(int level)
     {
+        if(PlayerCtrl._inst != null)
+        {
+            PlayerCtrl._inst.LevelUp();
+        }
+
         DataByLevel stat = Managers._data.Dict_Stat[level];
        _maxhp = stat.hp;
        _maxmp = stat.mp;

@@ -47,6 +47,7 @@ public class UI_Alert : UI_Base
 
     public void OpenAlert()
     {
+
         SetTimeScale(0);
         BackGround.SetActive(true);
     }

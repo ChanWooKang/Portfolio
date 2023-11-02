@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Define;
 
-public class BaseScene : MonoBehaviour
+public abstract class BaseScene : MonoBehaviour
 {
     public eScene PrevScene { get; protected set; } = eScene.Unknown;
     public eScene CurrScene { get; protected set; } = eScene.Unknown;
@@ -28,6 +28,9 @@ public class BaseScene : MonoBehaviour
         PoolingManager._pool.Clear();
         PrevScene = CurrScene; 
     }
+
+    public abstract void NewGame();
+    public abstract void ContinueGame();
 
     public virtual void Quit()
     {

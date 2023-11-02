@@ -28,13 +28,20 @@ public class GameManagerEX : MonoBehaviour
     void Start()
     {
         DictionarySetting();
-        StartCoroutine(CountingTime());
+
+        if (Managers.IsNew)
+            ResetData();
+
+        
+        //Sounds
+        SoundManager._inst.Play(eSoundList.BGM_GameScene, eSound.BGM);
     }
 
     void Update()
     {
         if(isGameEnd == false)
         {
+            InGameTime += Time.deltaTime;
             InventoryEvent(Input.GetKeyDown(KeyCode.I));
             WorldMapEvent(Input.GetKeyDown(KeyCode.M));
             ESCEvent(Input.GetKeyDown(KeyCode.Escape));
@@ -64,6 +71,11 @@ public class GameManagerEX : MonoBehaviour
         
     }
 
+    public void OpenUISoundEvent()
+    {
+        SoundManager._inst.Play(eSoundList.UI_Open);
+    }
+
     #region [ Key Event ]
     void InventoryEvent(bool btnDown)
     {        
@@ -72,10 +84,11 @@ public class GameManagerEX : MonoBehaviour
 
         if (UI_WorldMap.ActivatedWorldMap)
             return;
-
+        
         if (inven == null)
             inven = FindObjectOfType<UI_Inventory>();
 
+        OpenUISoundEvent();
         inven.TryOpenInventory();
     }
 
@@ -90,6 +103,7 @@ public class GameManagerEX : MonoBehaviour
         if(world == null)
             world = FindObjectOfType<UI_WorldMap>();
 
+        OpenUISoundEvent();
         world.TryOpenWorldMap();
     }
 
@@ -121,6 +135,7 @@ public class GameManagerEX : MonoBehaviour
             if (alt == null)
                 alt = FindObjectOfType<UI_Alert>();
 
+            OpenUISoundEvent();
             alt.TryOpen();
         }
 
@@ -146,14 +161,7 @@ public class GameManagerEX : MonoBehaviour
         totalKill = sum;
     }
 
-    IEnumerator CountingTime()
-    {
-        while (isGameEnd == false)
-        {
-            InGameTime += Time.deltaTime;
-            yield return null;
-        }
-    }
+    
 
     public void GameOver(PlayerCtrl pc)
     {
@@ -208,8 +216,6 @@ public class GameManagerEX : MonoBehaviour
         InGameTime = 0;
         isGameEnd = false;
         _killDict = new Dictionary<eMonster, int>();
-        StopCoroutine(CountingTime());
-        StartCoroutine(CountingTime());
     }
 
     public void KillCount(eMonster type, int cnt = 1)

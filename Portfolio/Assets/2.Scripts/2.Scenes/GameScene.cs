@@ -18,10 +18,21 @@ public class GameScene : BaseScene
        
     }
 
+
+
     void OnApplicationQuit()
     {
         Managers._data.SaveGameData();
         Clear();
     }
 
+    public override void NewGame()
+    {
+        
+    }
+
+    public override void ContinueGame()
+    {
+        
+    }
 }

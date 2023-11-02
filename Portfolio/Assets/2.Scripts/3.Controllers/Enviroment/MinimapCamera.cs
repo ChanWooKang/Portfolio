@@ -38,7 +38,7 @@ public class MinimapCamera : MonoBehaviour
     {
         _uniqueInstance = this;
         thisCam = GetComponent<Camera>();
-        ChangeMiniMap();
+        
     }
 
     void Update()
@@ -94,11 +94,11 @@ public class MinimapCamera : MonoBehaviour
 
             if (IsWorldMap)
             {
-                go.transform.localScale = Vector3.one * 4;
+                go.transform.localScale = Vector3.one * 5;
             }
             else
             {
-                go.transform.localScale = Vector3.one * 2;
+                go.transform.localScale = Vector3.one * 3;
             }
             AddMarkSetting(go, true);
         }
@@ -113,11 +113,11 @@ public class MinimapCamera : MonoBehaviour
 
             if (IsWorldMap)
             {
-                go.transform.localScale = Vector3.one * 3;
+                go.transform.localScale = Vector3.one * 4;
             }
             else
             {
-                go.transform.localScale = Vector3.one * 1;
+                go.transform.localScale = Vector3.one * 2;
             }
             AddMarkSetting(go, false);
         }

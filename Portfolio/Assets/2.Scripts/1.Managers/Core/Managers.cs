@@ -46,6 +46,7 @@ public class Managers : MonoBehaviour
     {
         _input.Clear();
         _scene.Clear();
+        SoundManager._inst.Clear();
     }
 
     void Start()

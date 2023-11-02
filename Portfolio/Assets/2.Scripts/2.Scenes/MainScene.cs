@@ -16,13 +16,13 @@ public class MainScene : BaseScene
         base.Clear();
     }
 
-    public void NewGame()
+    public override void NewGame()
     {
         Managers.IsNew = true;
         SceneLoad(eScene.GameScene);
     }
 
-    public void ContinueGame()
+    public override void ContinueGame()
     {
         Managers.IsNew = false;
         SceneLoad(eScene.GameScene);

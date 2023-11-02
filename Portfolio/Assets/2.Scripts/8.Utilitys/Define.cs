@@ -26,6 +26,23 @@ namespace Define
         Max_Cnt
     }
 
+    public enum eSoundList
+    {
+        BGM_GameScene,
+        BGM_MainScene,
+        Boss_Flame,
+        Boss_Hand,
+        Player_Cry,
+        Player_Dodge,
+        Player_Hit,
+        Player_Move,
+        Player_Pickup,
+        Player_Spin,
+        UI_Open,
+        UI_Touch,
+        Player_LevelUp,
+    }
+
     public enum eLayer
     {
         UI      = 5,

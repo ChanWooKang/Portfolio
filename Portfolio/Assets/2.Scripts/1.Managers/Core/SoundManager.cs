@@ -6,6 +6,7 @@ using Define;
 public class SoundManager : MonoBehaviour
 {
     AudioSource[] audioSources = new AudioSource[(int)eSound.Max_Cnt];
+    List<AudioSource> list_Sources = new List<AudioSource>();
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     [SerializeField]List<Audios> _audios;
@@ -13,15 +14,18 @@ public class SoundManager : MonoBehaviour
     [System.Serializable]
     class Audios
     {
-        public string name;
+        public string Key;
         public AudioClip clip;
     }
 
     static SoundManager _uniqueInstance;
     public static SoundManager _inst { get {return _uniqueInstance; } }
 
-    public Dictionary<string, AudioClip> Clips { get { return _audioClips; } }
-
+    [SerializeField,Range(0,1)]
+    public float BGMValue;
+    [SerializeField, Range(0, 1)]
+    public float SFXValue;
+    
     void Awake()
     {
         _uniqueInstance = this;
@@ -33,12 +37,24 @@ public class SoundManager : MonoBehaviour
         Init();
     }
 
-    
+    void Update()
+    {
+        
+    }
 
     public void Init()
     {
 
         string[] soundName = System.Enum.GetNames(typeof(eSound));
+        //for(int i = 0; i < soundName.Length -1; i++)
+        //{
+        //    GameObject go = new GameObject { name = soundName[i] };
+        //    AudioSource source = go.AddComponent<AudioSource>();
+        //    go.transform.parent = transform;
+        //    list_Sources.Add(source);
+        //}
+
+
         for (int i = 0; i < soundName.Length - 1; i++)
         {
             GameObject go = new GameObject { name = soundName[i] };
@@ -67,13 +83,14 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Play(string path, eSound type = eSound.SFX, float pitch = 1.0f)
+    public void Play(eSoundList Key, eSound type = eSound.SFX, bool isLoop = false)
     {
-        AudioClip audioClip = GetOrAddAudioClip(path, type);
-        Play(audioClip, type, pitch);
+        AudioClip audioClip = GetOrAddAudioClip(Key.ToString(), type);
+       
+        Play(audioClip, type, isLoop);
     }
 
-    public void Play(AudioClip audioClip, eSound type = eSound.SFX, float pitch = 1.0f)
+    public void Play(AudioClip audioClip, eSound type = eSound.SFX, bool isLoop = false)
     {
         if (audioClip == null)
             return;
@@ -85,8 +102,8 @@ public class SoundManager : MonoBehaviour
             if (audioSource.isPlaying)
                 audioSource.Stop();
 
-            audioSource.pitch = pitch;
             audioSource.clip = audioClip;
+            audioSource.volume = BGMValue;
             audioSource.Play();
 
 
@@ -94,38 +111,77 @@ public class SoundManager : MonoBehaviour
         else
         {
             AudioSource audioSource = audioSources[(int)eSound.SFX];
-            audioSource.pitch = pitch;
-            audioSource.PlayOneShot(audioClip);
+            audioSource.volume = SFXValue;
+            if (isLoop)
+            {
+                audioSource.clip = audioClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.loop = false;
+                audioSource.PlayOneShot(audioClip);
+            }
+            
         }
+
     }
 
-    AudioClip GetOrAddAudioClip(string path, eSound type = eSound.SFX)
+    public void StopAudio(eSound type = eSound.SFX)
     {
-        if (path.Contains("Sounds/") == false)
-            path = $"Sounds/{path}";
+        AudioSource audioSource = audioSources[(int)eSound.SFX];
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+    }
 
+    public AudioClip GetOrAddAudioClip(eSoundList Key, eSound type = eSound.SFX)
+    {
+        return GetOrAddAudioClip(Key.ToString(), type);
+    }
+
+    public AudioClip GetOrAddAudioClip(string Key, eSound type = eSound.SFX)
+    {
         AudioClip audioClip = null;
 
         if (type == eSound.BGM)
         {
-            audioClip = Managers._resource.Load<AudioClip>(path);
+            audioClip = SearchSound(Key);
         }
         else
         {
 
-            if (_audioClips.TryGetValue(path, out audioClip) == false)
+            if (_audioClips.TryGetValue(Key, out audioClip) == false)
             {
-                audioClip = Managers._resource.Load<AudioClip>(path);
-                _audioClips.Add(path, audioClip);
+                audioClip = SearchSound(Key);
+                _audioClips.Add(Key, audioClip);
             }
 
         }
 
         if (audioClip == null)
         {
-            Debug.Log($"AudioClip Missing {path}");
+            Debug.Log($"AudioClip Missing {Key}");
         }
 
         return audioClip;
+    }
+
+
+    AudioClip SearchSound(string Key)
+    {
+        AudioClip temp = null;
+        if(_audios != null)
+        {
+            for(int i = 0; i < _audios.Count; i++)
+            {
+                if(_audios[i].Key == Key)
+                {
+                    temp = _audios[i].clip;
+                    break;
+                }
+            }
+        }
+        return temp;
     }
 }
