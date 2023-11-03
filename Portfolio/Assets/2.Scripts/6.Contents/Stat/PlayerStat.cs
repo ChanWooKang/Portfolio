@@ -252,4 +252,15 @@ public class PlayerStat : BaseStat
             return false;
         }
     }
+
+    public bool TryUseMoney(int value)
+    {
+        if (_gold >= value)
+        {
+            _gold -= value;
+            return true;
+        }
+        else
+            return false;
+    }
 }

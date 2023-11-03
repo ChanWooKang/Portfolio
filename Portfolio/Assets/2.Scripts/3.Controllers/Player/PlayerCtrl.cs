@@ -322,7 +322,7 @@ public class PlayerCtrl : MonoBehaviour
         if (dict_bool[PlayerBools.Dead])
             return;
 
-        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory)
+        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory || UI_Shop.ActivatedShop)
             return;
 
         if (dict_bool[PlayerBools.ActDodge])
@@ -546,7 +546,9 @@ public class PlayerCtrl : MonoBehaviour
                     {
                         if(_nearObj.TryGetComponent<Shop>(out Shop shop))
                         {
-                            shop.TryOpenShop();
+                            shop.OpenShop();
+                            _destPos = transform.position;
+                            _agent.velocity = Vector3.zero;
                         }
                     }
                     break;
@@ -662,6 +664,11 @@ public class PlayerCtrl : MonoBehaviour
     public void EarnMoney(int gold)
     {
         _stat.Gold += gold;
+    }
+
+    public bool TryUseMoney(int gold)
+    {
+        return _stat.TryUseMoney(gold);
     }
 
     public void AddPlusStat(eStat type, float value)
@@ -975,6 +982,11 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.CompareTag(Util.ConvertEnum(eTag.Interact)))
         {
+            if (other.TryGetComponent<Shop>(out Shop shop))
+            {
+                shop.CloseShop();
+            }
+
             ClearNearObject();
         }
 

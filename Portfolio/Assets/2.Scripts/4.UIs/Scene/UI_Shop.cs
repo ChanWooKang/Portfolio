@@ -9,45 +9,42 @@ public class UI_Shop : UI_Base
 {
     public static bool ActivatedShop = false;
     List<SOItem> list_Sells = new List<SOItem>();
-    [SerializeField] int slotCnt = 5;
+    [SerializeField]
+    GameObject ShopPage;
+    UI_SellSlot[] Slots;
+
+    void Start()
+    {
+        Init();
+    }
 
     public override void Init()
     {
 
-        UpdateItem();
+        Slots = GetComponentsInChildren<UI_SellSlot>();
+        for (int i = 0; i < Slots.Length; i++)
+            Slots[i].Init();
         CloseUI();
     }
 
-
-    public void TryOpenUI()
-    {
-        if (ActivatedShop)
-        {
-            CloseUI();
-        }
-        else
-        {
-            OpenUI();
-        }
-    }
-
-    void OpenUI()
+    public void OpenUI()
     {
         ActivatedShop = true;
+        UpdateItem();
+        ShopPage.SetActive(true);
     }
 
-    void CloseUI()
+    public void CloseUI()
     {
         ActivatedShop = false;
+        ShopPage.SetActive(false);
     }
 
     public void UpdateItem()
     {
         list_Sells.Clear();
-        for(int i = 0; i <slotCnt; i++)
-        {
-
-        }
+        for (int i = 0; i < Slots.Length; i++)
+                Slots[i].AddItem(PickItem());
     }
 
     SOItem PickItem()

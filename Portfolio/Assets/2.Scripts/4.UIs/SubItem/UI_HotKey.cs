@@ -166,7 +166,7 @@ public class UI_HotKey : UI_Base, IPointerClickHandler,IDropHandler, IPointerEnt
                 {
                     if (InventoryManager._inst.CheckSlotFull(item) == false)
                     {
-                        InventoryManager._inst.AddHotKeyToInven(item, itemCount);
+                        InventoryManager._inst.AddToInven(item, itemCount);
                         ClearSlot();
                     }
                     else

@@ -9,12 +9,13 @@ public class GameManagerEX : MonoBehaviour
     static GameManagerEX _uniqueInstance;
     public static GameManagerEX _inst { get { return _uniqueInstance; } }
     public float GameTime { get { return InGameTime; } }
-    public int TotalKill { get {  SetTotalKill(); return totalKill; }}
+    public int TotalKill { get { SetTotalKill(); return totalKill; } }
     PlayerCtrl player;
     UI_Inventory inven;
     UI_WorldMap world;
     UI_Alert alt;
     UI_GameEnd end;
+    UI_Shop shop;
 
     int totalKill;
     float InGameTime;
@@ -39,7 +40,7 @@ public class GameManagerEX : MonoBehaviour
 
     void Update()
     {
-        if(isGameEnd == false)
+        if (isGameEnd == false)
         {
             InGameTime += Time.deltaTime;
             InventoryEvent(Input.GetKeyDown(KeyCode.I));
@@ -68,7 +69,7 @@ public class GameManagerEX : MonoBehaviour
         {
             CountLoad();
         }
-        
+
     }
 
     public void OpenUISoundEvent()
@@ -78,13 +79,13 @@ public class GameManagerEX : MonoBehaviour
 
     #region [ Key Event ]
     void InventoryEvent(bool btnDown)
-    {        
+    {
         if (btnDown == false)
             return;
 
-        if (UI_WorldMap.ActivatedWorldMap)
+        if (UI_WorldMap.ActivatedWorldMap || UI_Shop.ActivatedShop)
             return;
-        
+
         if (inven == null)
             inven = FindObjectOfType<UI_Inventory>();
 
@@ -97,10 +98,10 @@ public class GameManagerEX : MonoBehaviour
         if (btnDown == false)
             return;
 
-        if (UI_Inventory.ActivatedInventory)
+        if (UI_Inventory.ActivatedInventory || UI_Shop.ActivatedShop)
             return;
 
-        if(world == null)
+        if (world == null)
             world = FindObjectOfType<UI_WorldMap>();
 
         OpenUISoundEvent();
@@ -118,6 +119,9 @@ public class GameManagerEX : MonoBehaviour
         if (world == null)
             world = FindObjectOfType<UI_WorldMap>();
 
+        if (shop == null)
+            shop = FindObjectOfType<UI_Shop>();
+
         if (UI_WorldMap.ActivatedWorldMap)
         {
             world.CloseUI();
@@ -130,7 +134,13 @@ public class GameManagerEX : MonoBehaviour
             return;
         }
 
-        if(!UI_WorldMap.ActivatedWorldMap && !UI_Inventory.ActivatedInventory)
+        if (UI_Shop.ActivatedShop)
+        {
+            shop.CloseUI();
+            return;
+        }
+
+        if (!UI_WorldMap.ActivatedWorldMap && !UI_Inventory.ActivatedInventory && !UI_Shop.ActivatedShop)
         {
             if (alt == null)
                 alt = FindObjectOfType<UI_Alert>();
@@ -154,14 +164,14 @@ public class GameManagerEX : MonoBehaviour
     public void SetTotalKill()
     {
         int sum = 0;
-        foreach(var data in _killDict)
+        foreach (var data in _killDict)
         {
             sum += data.Value;
         }
         totalKill = sum;
     }
 
-    
+
 
     public void GameOver()
     {
@@ -170,9 +180,10 @@ public class GameManagerEX : MonoBehaviour
         player.ChangeColor(Color.white);
         isGameEnd = true;
         UIOpen(true);
+        
     }
 
-    
+
 
     public void GameClear(BossCtrl bc)
     {
@@ -192,7 +203,7 @@ public class GameManagerEX : MonoBehaviour
             //player.gameObject.SetActive(true);
             //player.OnStartRegenarte();
             //ResetCountTime();
-            
+
         }
 
         ResetData();
@@ -209,7 +220,7 @@ public class GameManagerEX : MonoBehaviour
         totalKill = 0;
         _killDict = new Dictionary<eMonster, int>();
         Managers._data.ResetData();
-        ResetCountTime();        
+        ResetCountTime();
     }
 
     public void ResetCountTime()
@@ -239,19 +250,19 @@ public class GameManagerEX : MonoBehaviour
         {
             saveData.MonsterType.Add((int)data.Key);
             saveData.KillCount.Add(data.Value);
-        }           
+        }
         saveData.InGameTime = InGameTime;
         return saveData;
     }
 
     public void CountLoad()
     {
-        if(Managers._data.killData != null)
+        if (Managers._data.killData != null)
         {
             KillData saveData = Managers._data.killData;
 
-            int i = 0; 
-            for(; i < saveData.MonsterType.Count; i++)
+            int i = 0;
+            for (; i < saveData.MonsterType.Count; i++)
             {
                 KillCount((eMonster)saveData.MonsterType[i], saveData.KillCount[i]);
             }
@@ -262,7 +273,7 @@ public class GameManagerEX : MonoBehaviour
             DictionarySetting();
             InGameTime = 0;
         }
-            
+
     }
     #endregion [ Save & Load ]
 }

@@ -5,17 +5,21 @@ using Define;
 
 public class Shop : MonoBehaviour
 {
-    UI_Shop _shopUI;
-    
+    [SerializeField] UI_Shop _shopUI;
 
-    public void TryOpenShop()
+    public void OpenShop()
     {
         if (UI_Shop.ActivatedShop)
             return;
 
-        if(_shopUI == null)
-            _shopUI = FindObjectOfType<UI_Shop>();
+        _shopUI.OpenUI();
+    }
 
-        _shopUI.TryOpenUI();
+    public void CloseShop()
+    {
+        if (UI_Shop.ActivatedShop == false)
+            return;
+
+        _shopUI.CloseUI();
     }
 }

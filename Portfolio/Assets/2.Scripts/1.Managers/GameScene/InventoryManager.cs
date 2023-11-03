@@ -65,18 +65,18 @@ public class InventoryManager : MonoBehaviour
             ResetInventory();
     }
 
-    void ChangeEquipment(eEquipment type, SOItem item, bool isWear= true)
+    void ChangeEquipment(eEquipment type, SOItem item, bool isWear = true)
     {
         if (item == null || PlayerCtrl._inst.Bools[PlayerBools.Dead])
         {
             return;
         }
-            
+
         if (ActiveChangeEquip)
         {
             return;
         }
-            
+
         StopCoroutine(ChangeCoroutine(type, item, isWear));
         StartCoroutine(ChangeCoroutine(type, item, isWear));
 
@@ -85,13 +85,13 @@ public class InventoryManager : MonoBehaviour
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)
     {
         ActiveChangeEquip = true;
-        if(isWear == false)
+        if (isWear == false)
         {
             //장비 해제 하기
-            if(dict_Equip.ContainsKey(type) && dict_Equip[type] == item)
+            if (dict_Equip.ContainsKey(type) && dict_Equip[type] == item)
             {
                 List<STAT> list = dict_Equip[type].sList;
-                for(int i = 0; i < list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     PlayerCtrl._inst._stat.AddPlusStat(list[i].statType, -list[i].sValue);
                 }
@@ -105,7 +105,7 @@ public class InventoryManager : MonoBehaviour
             // 장비 해제 할거 있으면 해제 하고 장비 장착
             SOItem tempItem = null;
             List<STAT> tempStat = new List<STAT>();
-            if(item != null && dict_Equip.ContainsKey(type))
+            if (item != null && dict_Equip.ContainsKey(type))
             {
                 //장착 되어 있으면 장착 해제 후 임시 데이터 저장
                 if (dict_Equip[type] != null)
@@ -122,7 +122,7 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
                 //장착 할 아이템 추가 스텟 적용
-                if(item.sList != null)
+                if (item.sList != null)
                 {
                     tempStat = item.sList;
                     for (int i = 0; i < tempStat.Count; i++)
@@ -135,7 +135,7 @@ public class InventoryManager : MonoBehaviour
                     AddInvenItem(tempItem);
                 AddEquipItem(type, item);
                 dict_Equip[type] = item;
-                
+
             }
 
         }
@@ -148,7 +148,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public bool CheckSlotFull(SOItem _item, int cnt = 1)
-    {        
+    {
         if (inven.CheckSlotFull(_item, cnt))
         {
             return true;
@@ -166,11 +166,11 @@ public class InventoryManager : MonoBehaviour
             if (hotkey.item == _item)
             {
                 int value = hotkey.AccquireItem(cnt);
-                if(value > 0)
+                if (value > 0)
                 {
                     cnt = value;
                 }
-                else if ( value == 0)
+                else if (value == 0)
                 {
                     return;
                 }
@@ -180,15 +180,15 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        
+
         inven.AcquireItem(_item, cnt);
     }
 
-    public void AddHotKeyToInven(SOItem _item, int cnt = 1)
+    public void AddToInven(SOItem _item, int cnt = 1)
     {
         inven.AcquireItem(_item, cnt);
     }
-    
+
     public void AddEquipItem(eEquipment type, SOItem item)
     {
         equip.AcquireItem(type, item);
@@ -196,10 +196,10 @@ public class InventoryManager : MonoBehaviour
 
     public void OnUsePotion(SOItem _item)
     {
-        if(_item.sList != null)
+        if (_item.sList != null)
         {
             PlayerCtrl._inst.PotionEvent(_item.pType);
-            for(int i = 0; i < _item.sList.Count; i++)
+            for (int i = 0; i < _item.sList.Count; i++)
             {
                 PlayerCtrl._inst.UsePotion(_item.sList[i].statType, _item.sList[i].sValue);
             }
@@ -212,25 +212,25 @@ public class InventoryManager : MonoBehaviour
     {
         Inventorydata saveData = new Inventorydata();
         UI_Slot[] invenSlots = inven.GetInvenSlots();
-        for(int i = 0; i < invenSlots.Length; i++)
+        for (int i = 0; i < invenSlots.Length; i++)
         {
-            if(invenSlots[i].item != null)
+            if (invenSlots[i].item != null)
             {
                 saveData.InvenArrayNumber.Add(i);
                 saveData.InvenItemName.Add(invenSlots[i].item.Name);
                 saveData.InvenItemCount.Add(invenSlots[i].itemCount);
             }
         }
-        foreach(var data in dict_Equip)
+        foreach (var data in dict_Equip)
         {
-            if(data.Value != null)
+            if (data.Value != null)
             {
                 saveData.EquipArrayNumber.Add((int)data.Key);
                 saveData.EquipItemName.Add(data.Value.Name);
             }
         }
 
-        if(hotkey.item != null)
+        if (hotkey.item != null)
         {
             saveData.HotKeyItemName = hotkey.item.Name;
             saveData.HotKeyItemCount = hotkey.itemCount;
@@ -245,7 +245,7 @@ public class InventoryManager : MonoBehaviour
         inven.ResetAllSlots();
         hotkey.ClearSlot();
 
-        if(Managers._data.invenData != null)
+        if (Managers._data.invenData != null)
         {
             Inventorydata SaveData = Managers._data.invenData;
             int i = 0;
