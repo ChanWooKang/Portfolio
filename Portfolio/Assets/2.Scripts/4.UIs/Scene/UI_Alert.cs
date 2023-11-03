@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Define;
 
 public class UI_Alert : UI_Base
 {
     enum GameObjects
     {
-        BackGround,
+        QuitBackGround,
+        ShopAlert,
         Main,
         Quit,
-        Close
+        Close,
+        ShopDesc,
+        ShopClose,
     }
 
-    GameObject BackGround;
-
+    GameObject QuitAlert;
+    GameObject ShopAlert;
+    Text ShopDesc;
     void Start()
     {
         Init();
@@ -24,38 +29,76 @@ public class UI_Alert : UI_Base
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
-        BackGround = GetObject((int)GameObjects.BackGround);
-
+        QuitAlert = GetObject((int)GameObjects.QuitBackGround);
+        ShopAlert = GetObject((int)GameObjects.ShopAlert);
+        ShopDesc = GetObject((int)GameObjects.ShopDesc).GetComponent<Text>();
         GameObject go = GetObject((int)GameObjects.Main);
         BindEvent(go, (PointerEventData data) => { if (data.button == PointerEventData.InputButton.Left) GoToMainScene(); },UIEvent.Click);
         GameObject go2 = GetObject((int)GameObjects.Quit);
         BindEvent(go2, (PointerEventData data) => { if (data.button == PointerEventData.InputButton.Left) Quit(); }, UIEvent.Click);
         GameObject go3 = GetObject((int)GameObjects.Close);
         BindEvent(go3, (PointerEventData data) => { if (data.button == PointerEventData.InputButton.Left) CloseAlert(); }, UIEvent.Click);
+        GameObject go4 = GetObject((int)GameObjects.ShopClose);
+        BindEvent(go4, (PointerEventData data) => { if (data.button == PointerEventData.InputButton.Left) CloseAlert(); }, UIEvent.Click);
 
         CloseAlert();
     }
 
-    public void TryOpen()
-    {
-        if (BackGround.activeSelf)
-            CloseAlert();
-        else
-            OpenAlert();
-    }
+    //public void TryOpen(bool isQuit = true)
+    //{
+    //    if (isQuit)
+    //    {
+    //        if (QuitAlert.activeSelf)
+    //            CloseAlert();
+    //        else
+    //            OpenAlert();
+    //    }
+    //    else
+    //    {
+    //        if (ShopAlert.activeSelf)
+    //            CloseAlert(false);
+    //        else
+    //            OpenAlert(false);
+    //    }
+        
+    //}
 
 
-    public void OpenAlert()
+    public void OpenAlert(bool isQuit = true)
     {
 
         SetTimeScale(0);
-        BackGround.SetActive(true);
+        if (isQuit)
+        {
+            QuitAlert.SetActive(true);
+            ShopAlert.SetActive(false);
+        }
+        else
+        {
+            QuitAlert.SetActive(false);
+            ShopAlert.SetActive(true);
+        }
     }
 
-    public void CloseAlert()
+    public void CloseAlert(bool isQuit = true)
     {
         SetTimeScale(1);
-        BackGround.SetActive(false);
+        if (isQuit)
+        {
+            QuitAlert.SetActive(false);
+            ShopAlert.SetActive(false);
+        }
+        else
+        {
+            QuitAlert.SetActive(false);
+            ShopAlert.SetActive(false);
+        }
+    }
+
+    public void SettingShopAlert(string desc)
+    {
+        ShopDesc.text = desc;
+        OpenAlert(false);
     }
 
     public void GoToMainScene()

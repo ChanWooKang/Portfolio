@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Define;
+using UnityEngine.EventSystems;
 
-public class UI_SellSlot : UI_Base
+public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
 {
     enum GameObjects
     {
@@ -20,6 +21,8 @@ public class UI_SellSlot : UI_Base
     public bool SoldOut { get; set; }
     const string _priceFormat = "{0:#,###}";
     const string _soldOut = "구매 완료";
+    const string _failedByMoney = "금화가 부족합니다.";
+    const string _failedByInventory = "인벤토리가 꽉 찼습니다.";
 
     public override void Init()
     {
@@ -41,9 +44,7 @@ public class UI_SellSlot : UI_Base
 
     public void ClearItem()
     {
-        item = null;
-        Item_Image.sprite = null;
-        Item_Name.text = string.Empty;
+        item = null;        
         SoldOut = true;
         Item_Price.text = _soldOut;
     }
@@ -64,22 +65,43 @@ public class UI_SellSlot : UI_Base
 
                     if (PlayerCtrl._inst.TryUseMoney(item.price))
                     {
-                        
+                        SoundManager._inst.Play(eSoundList.Shop_BuySell);
                         InventoryManager._inst.AddToInven(item);
                         ClearItem();
                     }
                     else
                     {
-                        
+                        GameManagerEX._inst.ShopAlert(_failedByMoney);
                     }
                 }
 
             }
             else
             {
-                
+                GameManagerEX._inst.ShopAlert(_failedByInventory);
             }
 
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            if (item.iType == eItem.Equipment)
+            {
+                UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, true);
+            }
+            else
+            {
+                UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, false, 1);
+            }
+        }
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UI_ItemInfo._inst.OffInforMation();
     }
 }

@@ -50,8 +50,6 @@ public class UI_WorldMap : UI_Base
 
     public void OpenUI()
     {
-       
-
         _cam.ChangeWorldMap();
         Base.SetActive(true);
         ActivatedWorldMap = true;

@@ -1,11 +1,14 @@
 {
     "InvenArrayNumber": [
-        0
+        0,
+        1
     ],
     "InvenItemName": [
-        "BigSword"
+        "SmallShield",
+        "SmallHPPotion"
     ],
     "InvenItemCount": [
+        1,
         1
     ],
     "EquipArrayNumber": [],

@@ -146,12 +146,20 @@ public class GameManagerEX : MonoBehaviour
                 alt = FindObjectOfType<UI_Alert>();
 
             OpenUISoundEvent();
-            alt.TryOpen();
+            alt.OpenAlert();
         }
-
     }
 
     #endregion
+
+    public void ShopAlert(string desc)
+    {
+        if (alt == null)
+            alt = FindObjectOfType<UI_Alert>();
+
+        alt.SettingShopAlert(desc);
+    }
+
 
     void UIOpen(bool isOver)
     {

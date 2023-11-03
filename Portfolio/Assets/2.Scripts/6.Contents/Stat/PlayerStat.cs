@@ -97,7 +97,7 @@ public class PlayerStat : BaseStat
         _damage = 20;
         _defense = 5;
         _exp = 0;
-        _gold = 10000000;
+        _gold = 5000;
         _moveSpeed = 10;
         _plushp = 0;
         _plusmp = 0;
