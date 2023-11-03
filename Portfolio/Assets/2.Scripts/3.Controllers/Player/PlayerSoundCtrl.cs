@@ -46,11 +46,6 @@ public class PlayerSoundCtrl : MonoBehaviour
                 break;
         }
     }
-
-    //public void CrySound()
-    //{
-    //    SoundManager._inst.Play(eSoundList.Player_Cry);
-    //}
   
     public void GetHitSound()
     {
@@ -69,7 +64,7 @@ public class PlayerSoundCtrl : MonoBehaviour
 
     public void UsePotionSound()
     {
-        SetClip(eSoundList.Player_Heal);
+        SoundManager._inst.Play(eSoundList.Player_Heal);
     }
 
     void StopAudio()

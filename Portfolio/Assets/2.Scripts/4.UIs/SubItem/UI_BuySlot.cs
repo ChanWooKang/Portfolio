@@ -15,6 +15,7 @@ public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
     }
 
     public SOItem item;
+    UI_Shop shop;
     Image Item_Image;
     Text Item_Name;
     Text Item_Price;
@@ -30,6 +31,7 @@ public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
         Item_Image = GetObject((int)GameObjects.ItemIcon).GetComponent<Image>();
         Item_Name = GetObject((int)GameObjects.ItemName).GetComponent<Text>();
         Item_Price = GetObject((int)GameObjects.ItemPrice).GetComponent<Text>();
+        shop = FindObjectOfType<UI_Shop>();
         ClearItem();
     }
 
@@ -52,9 +54,7 @@ public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
     public void TryBuyItem()
     {
         if (item == null || SoldOut)
-        {
             return;
-        }
 
         if (InventoryManager.ActiveChangeEquip == false)
         {
@@ -67,6 +67,7 @@ public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
                     {
                         SoundManager._inst.Play(eSoundList.Shop_BuySell);
                         InventoryManager._inst.AddToInven(item);
+                        shop.UpdateInventoryItemByOpen();
                         ClearItem();
                     }
                     else
@@ -86,18 +87,20 @@ public class UI_BuySlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (item != null)
+        if(eventData.pointerEnter == Item_Image.gameObject)
         {
-            if (item.iType == eItem.Equipment)
+            if (item != null)
             {
-                UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, true);
-            }
-            else
-            {
-                UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, false, 1);
+                if (item.iType == eItem.Equipment)
+                {
+                    UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, true);
+                }
+                else
+                {
+                    UI_ItemInfo._inst.SetInforMation(item, Item_Image.transform.position, false, 1);
+                }
             }
         }
-
     }
 
     public void OnPointerExit(PointerEventData eventData)

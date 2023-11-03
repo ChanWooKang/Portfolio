@@ -27,6 +27,17 @@ public class InventoryManager : MonoBehaviour
 
     #region [ Property ]
 
+    public UI_Slot[] Inven_Slots 
+    { 
+        get 
+        {
+            if(inven == null)
+                inven = FindObjectOfType<UI_Inventory>();
+
+            return inven.GetInvenSlots();
+        } 
+    }
+
     public static InventoryManager _inst { get { return _uniqueInstance; } }
 
     #endregion [ Property ]
