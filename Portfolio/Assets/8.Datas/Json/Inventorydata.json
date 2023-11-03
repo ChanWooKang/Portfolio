@@ -1,7 +1,13 @@
 {
-    "InvenArrayNumber": [],
-    "InvenItemName": [],
-    "InvenItemCount": [],
+    "InvenArrayNumber": [
+        0
+    ],
+    "InvenItemName": [
+        "BigSword"
+    ],
+    "InvenItemCount": [
+        1
+    ],
     "EquipArrayNumber": [],
     "EquipItemName": [],
     "HotKeyItemName": "",

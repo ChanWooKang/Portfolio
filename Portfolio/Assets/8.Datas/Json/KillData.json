@@ -1,9 +1,5 @@
 {
-    "MonsterType": [
-        2
-    ],
-    "KillCount": [
-        1
-    ],
-    "InGameTime": 21.577743530273439
+    "MonsterType": [],
+    "KillCount": [],
+    "InGameTime": 10.194589614868164
 }
