@@ -671,6 +671,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void UsePotion(eStat type, float value)
     {
+        psc.UsePotionSound();
         _stat.UsePotion(type, value);
     }
 
@@ -682,7 +683,6 @@ public class PlayerCtrl : MonoBehaviour
     #endregion [ Stat Event ]
 
     #region [ Skill Event ]
-
     public void SkillEvent(eSkill type, SOSkill skill)
     {
         switch (type)
@@ -797,6 +797,7 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator OnDamageEvent()
     {
+        psc.GetHitSound();
         FloatText.Create("FloatText", false, transform.position, (int)_stat.AttackedDamage);
         if (dict_bool[PlayerBools.Dead])
         {

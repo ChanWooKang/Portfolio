@@ -37,19 +37,24 @@ public class PlayerSoundCtrl : MonoBehaviour
                         SetClip(eSoundList.Player_Cry);
                         break;
                     case eSkill.Heal:
-                        
+                        SetClip(eSoundList.Player_Heal);
                         break;
-                    
                     case eSkill.Slash:
+                        SoundManager._inst.Play(eSoundList.Player_Slash);
                         break;
                 }
                 break;
         }
     }
 
+    //public void CrySound()
+    //{
+    //    SoundManager._inst.Play(eSoundList.Player_Cry);
+    //}
+  
     public void GetHitSound()
     {
-        
+        SetClip(eSoundList.GetHit);
     }
 
     public void RootingSound()
@@ -60,6 +65,11 @@ public class PlayerSoundCtrl : MonoBehaviour
     public void LevelUpSound()
     {
         SetClip(eSoundList.Player_LevelUp);
+    }
+
+    public void UsePotionSound()
+    {
+        SetClip(eSoundList.Player_Heal);
     }
 
     void StopAudio()

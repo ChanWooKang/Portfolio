@@ -9692,7 +9692,7 @@ GameObject:
   - component: {fileID: 6355920159471335648}
   - component: {fileID: 8300366774257241126}
   - component: {fileID: 125412815166599957}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79416,7 +79416,7 @@ GameObject:
   - component: {fileID: 5819702608205865785}
   - component: {fileID: 7599925990601904301}
   - component: {fileID: 3610438366041252529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BuffEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

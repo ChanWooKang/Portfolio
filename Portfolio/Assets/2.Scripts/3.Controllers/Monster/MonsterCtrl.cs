@@ -285,6 +285,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     IEnumerator OnDamageEvent()
     {
+        SoundManager._inst.Play(eSoundList.GetHit);
         FloatText.Create("FloatText", true, transform.position, (int)_stat.AttackedDamage);
         if (isDead)
         {

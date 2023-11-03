@@ -1,8 +1,8 @@
 {
     "level": 1,
     "nowhp": 200.0,
-    "nowmp": 200.0,
-    "nowexp": 0.0,
+    "nowmp": 80.0,
+    "nowexp": 50.0,
     "gold": 0,
     "plushp": 0.0,
     "plusmp": 0.0,

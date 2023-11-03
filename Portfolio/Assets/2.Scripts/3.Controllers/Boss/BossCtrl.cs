@@ -243,6 +243,7 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if(State == BossState.Sleep || State == BossState.Idle)
         {
+            SetClip(eSoundList.Boss_Growl);
             State = BossState.Scream;
             SetTarget(tr);
         }
@@ -271,6 +272,7 @@ public class BossCtrl : FSM<BossCtrl>
         {
             case BossPattern.Basic:
                 State = BossState.Attack;
+                SetClip(eSoundList.Boss_Bite);
                 break;
             case BossPattern.Hand:
                 State = BossState.HandAttack;
@@ -306,20 +308,12 @@ public class BossCtrl : FSM<BossCtrl>
     //이동 공격
     public void OnHandAttackEvent()
     {
-        
-            
-
         SetClip(eSoundList.Boss_Hand);
         if (target != null && player.State != PlayerState.Die)
         {
             HandDamage = _stat.Damage;
             _bodyCollider.center = Vector3.forward * 8;
         }
-    }
-
-    void ClearHandDamage()
-    {
-        HandDamage = 0;
     }
 
     //화염 발사 공격
@@ -387,6 +381,7 @@ public class BossCtrl : FSM<BossCtrl>
 
     IEnumerator OnDamageEvent()
     {
+        SetClip(eSoundList.GetHit);
         FloatText.Create("FloatText", true, transform.position + Vector3.up, (int)_stat.AttackedDamage);
 
         if (isDead)

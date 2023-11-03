@@ -76821,28 +76821,46 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 610e8d1ba6c503040950a7e96659c759, type: 3}
   - Key: BGM_MainScene
     clip: {fileID: 8300000, guid: 7836ce4cac7c6b34ba2ee837eddef348, type: 3}
-  - Key: Boss_Flame
-    clip: {fileID: 8300000, guid: 5aadc4dc07dd8c0448550fc57a19a72c, type: 3}
-  - Key: Boss_Hand
-    clip: {fileID: 8300000, guid: 5543cefa2f8fc9e40bb3b5af6eac40ad, type: 3}
+  - Key: Player_Move
+    clip: {fileID: 8300000, guid: 03d634d399bd2cb458f97ad6ad89c87c, type: 3}
+  - Key: Player_Hit
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  - Key: Player_Pickup
+    clip: {fileID: 8300000, guid: d0841eebed9944dd3b27de3ee7e6eb88, type: 3}
+  - Key: Player_LevelUp
+    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - Key: Player_Slash
+    clip: {fileID: 8300000, guid: cbc323d51038fb945be36259d4b0fedc, type: 3}
+  - Key: Player_Heal
+    clip: {fileID: 8300000, guid: a2ae90e42daaf4723a539c25867d37fd, type: 3}
+  - Key: Player_Spin
+    clip: {fileID: 8300000, guid: 82d91a95664277d4f8fbc456eacdf982, type: 3}
   - Key: Player_Cry
     clip: {fileID: 8300000, guid: c7865fd595be8a046a018f3e24771dd6, type: 3}
   - Key: Player_Dodge
     clip: {fileID: 8300000, guid: 3a6f1c7fea4801f4c9f9252e0d74a860, type: 3}
-  - Key: Player_Hit
-    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-  - Key: Player_Move
-    clip: {fileID: 8300000, guid: 03d634d399bd2cb458f97ad6ad89c87c, type: 3}
-  - Key: Player_Pickup
-    clip: {fileID: 8300000, guid: d0841eebed9944dd3b27de3ee7e6eb88, type: 3}
-  - Key: Player_Spin
-    clip: {fileID: 8300000, guid: 8787a22db31fdb041b2ed1b4cb3617e4, type: 3}
+  - Key: Boss_Growl
+    clip: {fileID: 8300000, guid: 31572d31fe9bc4d4d909f5a91c767e4a, type: 3}
+  - Key: Boss_Bite
+    clip: {fileID: 8300000, guid: 94667da63594c704abb2621f4432a3a4, type: 3}
+  - Key: Boss_Hand
+    clip: {fileID: 8300000, guid: 5543cefa2f8fc9e40bb3b5af6eac40ad, type: 3}
+  - Key: Boss_Flame
+    clip: {fileID: 8300000, guid: 5aadc4dc07dd8c0448550fc57a19a72c, type: 3}
   - Key: UI_Open
     clip: {fileID: 8300000, guid: d73b73743ea434d9b98c5c0b04b51e3a, type: 3}
   - Key: UI_Touch
     clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  - Key: Player_LevelUp
-    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - Key: Shop_BuySell
+    clip: {fileID: 8300000, guid: 560b59f7bba57425da9d11fb4794b676, type: 3}
+  - Key: GetHit
+    clip: {fileID: 8300000, guid: ae65ddc2daf7c684699b8f247f422079, type: 3}
+  - Key: Inven_ChangeEquip
+    clip: {fileID: 8300000, guid: 126a7914023294e2faf8108acc1e9a71, type: 3}
+  - Key: GameClear
+    clip: {fileID: 8300000, guid: 14e15f75ff87846e18aa9ba0845c8a96, type: 3}
+  - Key: GameOver
+    clip: {fileID: 8300000, guid: 2f07c3b7706a64f489133201c2342886, type: 3}
   BGMValue: 0.2
   SFXValue: 1
 --- !u!4 &2089853443
@@ -82136,3 +82154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3690266010701649a1b10c88145878e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rate:
+  - 0.6
+  - 0.8
+  - 1

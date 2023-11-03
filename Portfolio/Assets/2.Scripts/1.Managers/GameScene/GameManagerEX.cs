@@ -165,6 +165,7 @@ public class GameManagerEX : MonoBehaviour
 
     public void GameOver()
     {
+        SoundManager._inst.Play(eSoundList.GameOver);
         player.gameObject.SetActive(false);
         player.ChangeColor(Color.white);
         isGameEnd = true;
@@ -175,6 +176,7 @@ public class GameManagerEX : MonoBehaviour
 
     public void GameClear(BossCtrl bc)
     {
+        SoundManager._inst.Play(eSoundList.GameClear);
         KillCount(eMonster.Boss);
         isGameEnd = true;
         UIOpen(false);

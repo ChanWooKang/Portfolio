@@ -41,6 +41,15 @@ namespace Define
         UI_Open,
         UI_Touch,
         Player_LevelUp,
+        Shop_BuySell,
+        GetHit,
+        Inven_ChangeEquip,
+        Boss_Growl,
+        GameClear,
+        GameOver,
+        Player_Slash,
+        Player_Heal,
+        Boss_Bite
     }
 
     public enum eLayer

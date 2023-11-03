@@ -140,6 +140,7 @@ public class InventoryManager : MonoBehaviour
 
         }
 
+        SoundManager._inst.Play(eSoundList.Inven_ChangeEquip);
         //UI변경 해야 하는 UI스크립트 체크 후 처리
         Managers._ui.OnSetUIEvent?.Invoke();
         yield return new WaitForSeconds(1.0f);
