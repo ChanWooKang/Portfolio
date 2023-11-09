@@ -83,6 +83,7 @@ public class SpawnManager : MonoBehaviour
             }
             bc._defPos = tr.position;
             bc.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            
             bf.SettingBoss(bc);
         }
 

@@ -165,6 +165,7 @@ namespace Define
         Boss,
         Max_Cnt
     }
+
     public enum TranslateMonsterName
     {
         Unknown = 0,

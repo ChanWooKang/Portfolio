@@ -97,23 +97,13 @@ public class UI_Shop : UI_Base
 
     public void UpdateInventoryItemByOpen()
     {
-        UI_Slot[] InvenData = InventoryManager._inst.Inven_Slots;
-        int index = 0;
-        for (int i = 0;  i <SellSlots.Length; i++)
-        {
-            if(SellSlots[i].matchSlot != null)
-            {
-                index++;
-            }
-        }
-        
-        for(int i = index; i < InvenData.Length; i++)
+        UI_Slot[] InvenData = InventoryManager._inst.Inven_Slots;              
+        for(int i = 0; i < InvenData.Length; i++)
         {
             if(InvenData[i].item != null)
             {
-                SellSlots[index].AddItem(InvenData[i], InvenData[i].itemCount);
-                SellSlots[index].gameObject.SetActive(true);
-                index++;
+                SellSlots[i].AddItem(InvenData[i], InvenData[i].itemCount);
+                SellSlots[i].gameObject.SetActive(true);
             }
         }
     }
