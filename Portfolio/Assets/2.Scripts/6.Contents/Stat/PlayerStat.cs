@@ -235,10 +235,10 @@ public class PlayerStat : BaseStat
         }
     }
 
-    public override bool GetHit(BaseStat attacker)
-    {
-        return base.GetHit(attacker);
-    }
+    //public override bool GetHit(BaseStat attacker)
+    //{
+    //    return base.GetHit(attacker);
+    //}
 
     public bool UseMP(float value)
     {

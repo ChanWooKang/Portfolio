@@ -30,5 +30,4 @@ public class TSingleton<T> : MonoBehaviour where T : MonoBehaviour
             return _uniqueInstance;
         }
     }
-
 }
