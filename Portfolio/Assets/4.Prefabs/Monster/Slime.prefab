@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 3535725806208298711}
   - component: {fileID: 3535725806208298710}
   - component: {fileID: 1460562811}
+  - component: {fileID: 4861368682445092186}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Monster
@@ -555,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60504b1bc8a632d419836386ace432e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stat: {fileID: 0}
   _hpBar: {fileID: 0}
   mType: 3
   _dropTable: {fileID: 11400000, guid: 5bcc5fcfc8e36c34191fb4306a82e945, type: 2}
@@ -569,3 +571,16 @@ MonoBehaviour:
   isDead: 0
   isAttack: 0
   isReturnHome: 0
+--- !u!114 &4861368682445092186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3535725806208298709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e411c49677a82a4e9b4259f1381dcbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weightProbs: c800000082000000

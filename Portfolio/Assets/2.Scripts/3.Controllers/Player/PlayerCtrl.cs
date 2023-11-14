@@ -174,8 +174,8 @@ public class PlayerCtrl : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _meshs = transform.GetChild(0).GetComponentsInChildren<Renderer>();
-        _stat = new PlayerStat();
 
+        _stat = GetComponent<PlayerStat>();
         psc = GetComponent<PlayerSoundCtrl>();
 
         //스킬 관련 처리

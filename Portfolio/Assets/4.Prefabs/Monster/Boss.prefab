@@ -13699,6 +13699,7 @@ GameObject:
   - component: {fileID: 7237742882768351619}
   - component: {fileID: 8534364278504439571}
   - component: {fileID: 6022642882247209423}
+  - component: {fileID: 4348023064450784619}
   m_Layer: 10
   m_Name: Boss
   m_TagString: Boss
@@ -13795,6 +13796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropTable: {fileID: 11400000, guid: df2c6fb6febad0a4d8f4b3575fe233c8, type: 2}
+  _stat: {fileID: 0}
   headTR: {fileID: 5679586858739363904}
   _flameEffect: {fileID: 4694208518173891926}
   _rSpeed: 8
@@ -13821,3 +13823,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 5, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4348023064450784619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765269846391314980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4b4b8db450f194c976732df9c61c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weightProbs: 

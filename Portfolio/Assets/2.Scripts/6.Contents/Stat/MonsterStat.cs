@@ -4,9 +4,8 @@ using UnityEngine;
 using Define;
 using DataContents;
 
-public class MonsterStat : BaseStat
-{
-    protected eMonster _type;
+public class MonsterStat : BaseStat , IMonsterAttack
+{    
     protected float _traceRange;
     protected float _traceSpeed;
     protected float _attackRange;
@@ -14,10 +13,9 @@ public class MonsterStat : BaseStat
     protected int _minGold;
     protected int _maxGold;
     protected float _exp;
+    [SerializeField] int[] _weightProbs;
 
     #region [ Property ]
-
-    public eMonster Type { get { return _type; } }
     public float TraceRange { get { return _traceRange; } }
     public float TraceSpeed { get { return _traceSpeed; } }
     public float AttackRange { get { return _attackRange; } }
@@ -29,7 +27,6 @@ public class MonsterStat : BaseStat
 
     void Init()
     {
-        _type = eMonster.Unknown;
         _level = 0;
         _hp = 0;
         _maxhp = 0;
@@ -49,7 +46,6 @@ public class MonsterStat : BaseStat
     {
         if(Managers._data.Dict_Monster.TryGetValue(type,out DataByMonster data))
         {
-            _type = data.index;
             _level = 0;
             _hp = data.hp;
             _maxhp = data.hp;
@@ -68,21 +64,32 @@ public class MonsterStat : BaseStat
         {
             Init();
         }
-    }
-
-    public override bool GetHit(BaseStat attacker)
-    {
-        return base.GetHit(attacker);
-    }
-
-    public override bool GetHit(float damage)
-    {
-        return base.GetHit(damage);
-    }
+    }    
 
     public void DeadFunc(PlayerStat stat)
     {
         if (stat != null)
             stat.EXP += _exp;
+    }
+
+    public virtual void Attack(Animator anim) { }                
+    public int PickPattern()
+    {
+        int sum = 0;
+        int i = 0;
+        for (; i < _weightProbs.Length; i++)
+            sum += _weightProbs[i];
+        int randValue = Random.Range(0, sum + 1);
+        for (i = 0; i < _weightProbs.Length; i++)
+        {
+            if (_weightProbs[i] > randValue)
+            {
+                return i;
+            }
+            else
+                randValue -= _weightProbs[i];
+        }
+
+        return 1;
     }
 }

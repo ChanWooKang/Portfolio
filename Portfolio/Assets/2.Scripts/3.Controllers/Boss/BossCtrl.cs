@@ -8,7 +8,7 @@ using UnityEngine.SocialPlatforms;
 public class BossCtrl : FSM<BossCtrl>
 {
     public SODropTable _dropTable;
-    public MonsterStat _stat = new MonsterStat();
+    public MonsterStat _stat;
     Animator _ani;
     Rigidbody _rb;
     SkinnedMeshRenderer _mesh;
@@ -84,7 +84,7 @@ public class BossCtrl : FSM<BossCtrl>
         _mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
-        _stat = new MonsterStat();
+        _stat = GetComponent<MonsterStat>();
         
     }
 

@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 2862990797729395241}
   - component: {fileID: 2862990797729395254}
   - component: {fileID: 890934388}
+  - component: {fileID: 3136751455682819338}
   m_Layer: 10
   m_Name: Cactus
   m_TagString: Monster
@@ -214,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60504b1bc8a632d419836386ace432e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stat: {fileID: 0}
   _hpBar: {fileID: 0}
   mType: 1
   _dropTable: {fileID: 11400000, guid: 6b32599acf594e94baaeba247250f316, type: 2}
@@ -228,6 +230,19 @@ MonoBehaviour:
   isDead: 0
   isAttack: 0
   isReturnHome: 0
+--- !u!114 &3136751455682819338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2862990797729395252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c924ba8c61ffe45bbb45603f97d17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weightProbs: 9600000064000000
 --- !u!1 &3035842855095625468
 GameObject:
   m_ObjectHideFlags: 0

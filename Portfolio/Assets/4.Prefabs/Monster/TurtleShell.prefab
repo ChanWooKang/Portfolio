@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 976233130831722392}
   - component: {fileID: 976233130831722393}
   - component: {fileID: 252175352}
+  - component: {fileID: 6622307946946676303}
   m_Layer: 10
   m_Name: TurtleShell
   m_TagString: Monster
@@ -121,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60504b1bc8a632d419836386ace432e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stat: {fileID: 0}
   _hpBar: {fileID: 0}
   mType: 4
   _dropTable: {fileID: 11400000, guid: 3be0609a598a90144b9cefdc2fe81509, type: 2}
@@ -135,6 +137,19 @@ MonoBehaviour:
   isDead: 0
   isAttack: 0
   isReturnHome: 0
+--- !u!114 &6622307946946676303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976233130831722394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262873e8ac32c4f48937578af597d5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weightProbs: 9600000064000000
 --- !u!1 &7888986920494566401
 GameObject:
   m_ObjectHideFlags: 0

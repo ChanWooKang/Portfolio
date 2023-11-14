@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseStat
+public class BaseStat: MonoBehaviour
 {
     protected int _level;
     protected float _hp;

@@ -1,7 +1,13 @@
 {
-    "InvenArrayNumber": [],
-    "InvenItemName": [],
-    "InvenItemCount": [],
+    "InvenArrayNumber": [
+        0
+    ],
+    "InvenItemName": [
+        "SmallHPPotion"
+    ],
+    "InvenItemCount": [
+        2
+    ],
     "EquipArrayNumber": [],
     "EquipItemName": [],
     "HotKeyItemName": "",

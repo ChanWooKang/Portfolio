@@ -243,7 +243,10 @@ namespace Define
     #endregion [ Enums ]
 
     #region [ Interface ]
-
+    public interface IMonsterAttack
+    {
+        void Attack(Animator anim);
+    }
     public interface ILoader<Key, Value>
     {
         Dictionary<Key, Value> Make();

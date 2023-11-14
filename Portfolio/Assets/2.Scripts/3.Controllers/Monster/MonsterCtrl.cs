@@ -80,13 +80,13 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     void InitComponent()
     {
+        _stat = GetComponent<MonsterStat>();
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _colider = GetComponent<CapsuleCollider>();
         _meshs = GetComponentsInChildren<Renderer>();
         _agent = GetComponent<NavMeshAgent>();
-        _agent.updateRotation = false;
-        _stat = new MonsterStat();
+        _agent.updateRotation = false;        
     }
 
     public void InitData()
@@ -159,24 +159,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
                 _anim.CrossFade("Trace", 0.1f);
                 break;
             case MonsterState.Attack:
-                switch (mType)
-                {
-                    default:
-                        {
-                            switch (nowCombo)
-                            {
-                                case eCombo.Hit1:
-                                    _anim.CrossFade("Hit1", 0.1f, -1, 0);
-                                    nowCombo = eCombo.Hit2;
-                                    break;
-                                case eCombo.Hit2:
-                                    _anim.CrossFade("Hit2", 0.1f, -1, 0);
-                                    nowCombo = eCombo.Hit1;
-                                    break;
-                            }
-                        }
-                        break;
-                }
+                _stat.Attack(_anim);
                 break;
         }
     }
