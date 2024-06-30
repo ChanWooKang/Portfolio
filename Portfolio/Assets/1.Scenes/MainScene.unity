@@ -76861,8 +76861,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 14e15f75ff87846e18aa9ba0845c8a96, type: 3}
   - Key: GameOver
     clip: {fileID: 8300000, guid: 2f07c3b7706a64f489133201c2342886, type: 3}
-  BGMValue: 0.2
-  SFXValue: 1
+  BGMValue: 0.5
+  SFXValue: 0.5
 --- !u!4 &2089853443
 Transform:
   m_ObjectHideFlags: 0

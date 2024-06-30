@@ -36,7 +36,7 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
 
     void OnKeyBoardEvent()
     {
-        if (player.Bools[PlayerBools.Dead])
+        if (player.Bools[PlayerBools.Dead] || GameManagerEX._inst.StopMove)
             return;
 
         if (Input.GetKeyDown(_skill.key))

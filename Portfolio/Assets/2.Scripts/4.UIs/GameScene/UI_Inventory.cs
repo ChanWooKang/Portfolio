@@ -72,6 +72,7 @@ public class UI_Inventory : UI_Base
 
     void OpenInventory()
     {
+        GameManagerEX._inst.StopMove = true;
         ActivatedInventory = true;
         Inventory_Base.SetActive(true);
         Managers._ui.OnSetUIEvent?.Invoke();
@@ -80,8 +81,8 @@ public class UI_Inventory : UI_Base
     public void CloseInventory()
     {
         UI_ItemInfo._inst.OffInforMation();
-
         ActivatedInventory = false;
+        GameManagerEX._inst.StopMove = false;
         Inventory_Base.SetActive(false);
     }
 

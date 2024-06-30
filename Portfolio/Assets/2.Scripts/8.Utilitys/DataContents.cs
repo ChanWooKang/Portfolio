@@ -60,6 +60,14 @@ namespace DataContents
     }
 
     [System.Serializable]
+    public class QuestSaveData
+    {
+        public List<int> NPCDatas = new List<int>();
+        public List<int> QuestIndex = new List<int>();        
+        public List<int> nowCount = new List<int>();
+    }    
+
+    [System.Serializable]
     public class KillData
     {
         public List<int> MonsterType = new List<int>();

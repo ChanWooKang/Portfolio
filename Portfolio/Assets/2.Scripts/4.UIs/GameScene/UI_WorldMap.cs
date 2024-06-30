@@ -46,6 +46,7 @@ public class UI_WorldMap : UI_Base
         _cam.ChangeMiniMap();
         Base.SetActive(false);
         ActivatedWorldMap = false;
+        GameManagerEX._inst.StopMove = false;
     }
 
     public void OpenUI()
@@ -53,5 +54,6 @@ public class UI_WorldMap : UI_Base
         _cam.ChangeWorldMap();
         Base.SetActive(true);
         ActivatedWorldMap = true;
+        GameManagerEX._inst.StopMove = true;
     }
 }

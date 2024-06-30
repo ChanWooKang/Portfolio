@@ -52,6 +52,7 @@ public class UI_Shop : UI_Base
     public void OpenUI()
     {
         ActivatedShop = true;
+        GameManagerEX._inst.StopMove = true;
         UpdateBuyItem();
         UpdateInventoryItemByOpen();
         if (MoneyCoroutine != null)
@@ -66,6 +67,7 @@ public class UI_Shop : UI_Base
     public void CloseUI()
     {
         ActivatedShop = false;
+        GameManagerEX._inst.StopMove = false;
         ShopPage.SetActive(false);
         UpdateInventoryItemByClose();
         if (MoneyCoroutine != null)

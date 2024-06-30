@@ -103,7 +103,8 @@ namespace Define
     {
         Unknown = 0,
         Item,
-        Shop
+        Shop,
+        NPC
     }
 
     public enum eStat
@@ -121,7 +122,8 @@ namespace Define
         Move,
         Attack,
         Skill,
-        Die
+        Die,
+        Return
     }
 
     public enum PlayerBools
@@ -307,5 +309,6 @@ namespace Define
         public int weight;
     }
 
+    
     #endregion [ Class ]
 }

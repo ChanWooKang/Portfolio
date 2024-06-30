@@ -67,7 +67,7 @@ public class PlayerSoundCtrl : MonoBehaviour
         SoundManager._inst.Play(eSoundList.Player_Heal);
     }
 
-    void StopAudio()
+    public void StopAudio()
     {
         if (source == null)
             source = GetComponent<AudioSource>();

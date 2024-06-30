@@ -24,7 +24,7 @@ public class InputManager
 
         if(RightMouseAction != null)
         {
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(0))
             {
                 if(isRPress == false)
                 {

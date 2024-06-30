@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using Define;
 using System;
-using UnityEditorInternal;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -17,9 +16,9 @@ public class PlayerCtrl : MonoBehaviour
     Animator _anim;
     Rigidbody _rb;
     NavMeshAgent _agent;
-    Renderer[] _meshs;
+    Renderer[] _meshs;    
 
-    PlayerSoundCtrl psc;
+    public PlayerSoundCtrl psc;
     WeaponCtrl _weapon;
     SkillCryCtrl _cry;
     SkillHealCtrl _heal;
@@ -30,7 +29,7 @@ public class PlayerCtrl : MonoBehaviour
     int _blockMask;
 
     [SerializeField]
-    Vector3 _offSetPoint;
+    Transform RespawnPos;
 
     bool isClickMonster = false;
     bool isBossField = false;
@@ -108,6 +107,9 @@ public class PlayerCtrl : MonoBehaviour
                         }
                     }
                     break;
+                case PlayerState.Return:
+                    _anim.CrossFade("Return", 0.1f, -1, 0);
+                    break;
             }
         }
     }
@@ -134,7 +136,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         switch (_state)
         {
             case PlayerState.Move:
@@ -174,7 +176,6 @@ public class PlayerCtrl : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _meshs = transform.GetChild(0).GetComponentsInChildren<Renderer>();
-
         _stat = GetComponent<PlayerStat>();
         psc = GetComponent<PlayerSoundCtrl>();
 
@@ -190,8 +191,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     void InitData()
-    {
-        _offSetPoint = transform.position;
+    {        
         _clickMask = (1 << (int)eLayer.Ground) | (1 << (int)eLayer.Monster);
         _blockMask = (1 << (int)eLayer.Block) | (1 << (int)eLayer.TransBlock);
 
@@ -312,6 +312,15 @@ public class PlayerCtrl : MonoBehaviour
         return false;
     }
 
+    public void ReturnHome()
+    {
+        _agent.enabled = false;
+        transform.position = RespawnPos.position;
+        _agent.enabled = true;
+        State = PlayerState.Idle;
+        
+    }    
+
     
     #endregion [ Sub Function ]
 
@@ -319,21 +328,27 @@ public class PlayerCtrl : MonoBehaviour
 
     void OnKeyBoardEvent()
     {
-        if (dict_bool[PlayerBools.Dead])
+        if (dict_bool[PlayerBools.Dead] || State == PlayerState.Return)
             return;
 
-        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory || UI_Shop.ActivatedShop)
+        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory || UI_Shop.ActivatedShop || UI_Quest.ActivatedQuestWindow)
             return;
 
         if (dict_bool[PlayerBools.ActDodge])
             return;
 
         OnInteractEvent(Input.GetKeyDown(KeyCode.F));
-    }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            State = PlayerState.Idle;
+            State = PlayerState.Return;           
+        }
+    }    
 
     void OnMouseEvent(MouseEvent evt)
     {
-        if (dict_bool[PlayerBools.Dead])
+        if (dict_bool[PlayerBools.Dead] || GameManagerEX._inst.StopMove)
             return;
 
         if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory)
@@ -346,6 +361,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             case PlayerState.Idle:
             case PlayerState.Move:
+            case PlayerState.Return:
                 OnMouseEvent_IDLEMOVE(evt);
                 break;
             case PlayerState.Attack:
@@ -379,6 +395,9 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     if (hit)
                     {
+                        if (_agent.updatePosition == false)
+                            _agent.updatePosition = true;
+
                         _destPos = rhit.point;
                         if (State != PlayerState.Move)
                             State = PlayerState.Move;
@@ -461,10 +480,10 @@ public class PlayerCtrl : MonoBehaviour
             float dist = Mathf.Clamp(_stat.MoveSpeed * Time.deltaTime, 0, dir.sqrMagnitude);
             _agent.Move(dir.normalized * dist);
 
-            if(Physics.Raycast(transform.position + Vector3.up * 0.5f, dir, 1.0f, _blockMask))
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, dir, 1.0f, _blockMask))
             {
                 //벽앞에 있더라도 마우스를 계속 누르고 있을경우 뛰는 애니메이션 재생
-                if (Input.GetMouseButton(1))
+                if (Input.GetMouseButton(0))
                     return;
             }
 
@@ -544,16 +563,24 @@ public class PlayerCtrl : MonoBehaviour
                     break;
                 case eInteract.Shop:
                     {
-                        if(_nearObj.TryGetComponent<Shop>(out Shop shop))
-                        {
-                            shop.OpenShop();
-                            _destPos = transform.position;
-                            _agent.velocity = Vector3.zero;
-                        }
+                        GameManagerEX._inst.ShowText(_nearObj, _nearType);
                     }
                     break;
+                case eInteract.NPC:
+                    {
+                        GameManagerEX._inst.ShowText(_nearObj, _nearType);
+                    }
+                    break;
+                    
             }
         }
+    }    
+
+    public void Stop()
+    {
+        _destPos = transform.position;
+        _agent.velocity = Vector3.zero;
+        State = PlayerState.Idle;
     }
 
     #endregion [ KeyBoard Event ]
@@ -633,14 +660,14 @@ public class PlayerCtrl : MonoBehaviour
     {
         _locktarget = null;
         dict_bool[PlayerBools.Dead] = false;
-        transform.position = _offSetPoint;
+        transform.position = RespawnPos.position;
         transform.rotation = Quaternion.identity;
     }
 
     public void OnStartRegenarte()
     {   
         State = PlayerState.Idle;
-        BaseNavSetting();
+       
 
         if (RegerectionCoroutine != null)
             StopCoroutine(RegerectionCoroutine);

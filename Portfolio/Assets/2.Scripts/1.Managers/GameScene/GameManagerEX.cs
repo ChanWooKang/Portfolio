@@ -16,11 +16,24 @@ public class GameManagerEX : MonoBehaviour
     UI_Alert alt;
     UI_GameEnd end;
     UI_Shop shop;
+    public UI_Talk talk;
+    public UI_Quest questUI;
+
+    public QuestManager questManager;
+    public QuestProvider contactProvider;
 
     int totalKill;
     float InGameTime;
     public bool isGameEnd = false;
     Dictionary<eMonster, int> _killDict = new Dictionary<eMonster, int>();
+
+    public TalkManager talkManager;    
+    public int talkIndex;
+    public bool StopMove = false;
+    public GameObject ScanObject;
+    public eInteract ScanType;
+    public bool endTalk = false;
+
     void Awake()
     {
         _uniqueInstance = this;
@@ -31,7 +44,15 @@ public class GameManagerEX : MonoBehaviour
         DictionarySetting();
 
         if (Managers.IsNew)
+        {
             ResetData();
+            questManager.Init();
+        }
+        else
+        {
+            questManager.LoadQuestData();
+        }
+            
 
         player = PlayerCtrl._inst;
         //Sounds
@@ -82,7 +103,7 @@ public class GameManagerEX : MonoBehaviour
     {
         if (btnDown == false)
             return;
-
+      
         if (UI_WorldMap.ActivatedWorldMap || UI_Shop.ActivatedShop)
             return;
 
@@ -96,7 +117,7 @@ public class GameManagerEX : MonoBehaviour
     void WorldMapEvent(bool btnDown)
     {
         if (btnDown == false)
-            return;
+            return;        
 
         if (UI_Inventory.ActivatedInventory || UI_Shop.ActivatedShop)
             return;
@@ -122,6 +143,8 @@ public class GameManagerEX : MonoBehaviour
         if (shop == null)
             shop = FindObjectOfType<UI_Shop>();
 
+        SoundManager._inst.StopAudio();
+
         if (UI_WorldMap.ActivatedWorldMap)
         {
             world.CloseUI();
@@ -145,6 +168,8 @@ public class GameManagerEX : MonoBehaviour
             if (alt == null)
                 alt = FindObjectOfType<UI_Alert>();
 
+            if(player.State != PlayerState.Idle)
+                player.Stop();
             OpenUISoundEvent();
             alt.OpenAlert();
         }
@@ -240,6 +265,13 @@ public class GameManagerEX : MonoBehaviour
 
     public void KillCount(eMonster type, int cnt = 1)
     {
+        //Test
+        if (questManager.isProgress)
+        {
+            questManager.AddCount(type, cnt);
+            
+        }
+
         if (_killDict.ContainsKey(type))
         {
             _killDict[type] += cnt;
@@ -247,6 +279,132 @@ public class GameManagerEX : MonoBehaviour
         else
         {
             _killDict.Add(type, cnt);
+        }
+    }
+
+    #region [ Talk ]
+    public void ShowText(GameObject scanObj, eInteract type)
+    {
+        ScanObject = scanObj;
+        ScanType = type;
+        
+        ObjectData objData = scanObj.GetComponent<ObjectData>();
+        if (player.State != PlayerState.Idle) 
+            player.Stop();        
+        if (OnTalk(objData.id, objData.krName) == false)
+        {
+            ScanObject = null;
+            ScanType = eInteract.Unknown;
+
+            // 진행할거 , 퀘스트 Or 상점 열기
+            switch (type)
+            {
+                case eInteract.Shop:
+                    if (scanObj.TryGetComponent<Shop>(out Shop shop))
+                    {
+                        talk.SetOnOff(false);
+                        shop.OpenShop();                        
+                    }
+                    break;
+                case eInteract.NPC:
+                    if (scanObj.TryGetComponent<QuestProvider>(out QuestProvider quest))
+                    {
+                        if (endTalk)
+                        {
+                            talk.SetOnOff(false);
+                            StopMove = false;
+                            endTalk = false;
+                            return;
+                        }
+
+                        if (questManager.isProgress)
+                        {
+                            if (questManager.ProgerssQuest.isSucess)
+                            {                                
+                                OnTalk(objData.id + 2, objData.krName);
+                                AddReward(questManager.ProgerssQuest.reward);
+                                questManager.isProgress = false;
+                                questManager.DisableUI();
+
+                                QuestData data = questManager.ProgerssQuest;
+                                contactProvider.SetNowQuest(data.questID, false, true);
+                                endTalk = true;
+                            }
+                            else
+                            {
+                                OnTalk(objData.id + 1, objData.krName);
+                                endTalk = true;
+                            }
+                        }
+                        else
+                        {
+                            
+                            if (quest.OpenQuest())
+                            {
+                                OnTalk(objData.id + 3, objData.krName);
+                                endTalk = true;
+                            }
+                            else
+                            {
+                                talk.SetOnOff(false);
+                            }
+                        }                        
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            talk.SetOnOff(true);
+        }
+    }
+
+    bool OnTalk(int id , string speaker = null)
+    {
+        string talkData = talkManager.GetTalk(id, talkIndex);
+        if (string.IsNullOrEmpty(talkData))
+        {            
+            StopMove = false;
+            talkIndex = 0;
+            return false;
+        }
+        talk.SetText(speaker, talkData);
+
+        StopMove = true;
+        talkIndex++;
+        return true;
+    }
+    #endregion [ Talk ]
+
+    public void ShowQuest(QuestProvider provider,QuestData data)
+    {
+        contactProvider = provider;
+        questUI.OpenUI(data);
+    }
+
+    public void AcceptQuest(QuestData data)
+    {
+        if (questManager.isProgress)
+        {
+            //진행중인 퀘스트가 있습니다 알림
+        }
+        else
+        {
+            contactProvider.SetNowQuest(data.questID, true, false);
+            questManager.AcceptQuest(data);
+        }        
+    }
+
+    public void RejectQuest()
+    {
+        contactProvider = null;
+    }
+
+    public void AddReward(List<RewardItem> items)
+    {
+        for(int i = 0; i < items.Count; i++)
+        {
+            InventoryManager._inst.AddInvenItem(items[i].item, items[i].rewardCount);
         }
     }
 

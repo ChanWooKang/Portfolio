@@ -11,12 +11,14 @@ public class DataManager
     public PlayerData playerData = new PlayerData();
     public Inventorydata invenData = new Inventorydata();
     public KillData killData = new KillData();
+    public QuestSaveData questData = new QuestSaveData();
 
     const string DBL = "DataByLevel";
     const string DBM = "DataByMonster";
     const string PLAYER = "PlayerData";
     const string INVEN = "InventoryData";
     const string KILL = "KillData";
+    const string Quest = "QuestData";
 
     public void Init()
     {
@@ -35,7 +37,6 @@ public class DataManager
             Managers._file.SaveJsonFile(datas, path);
             return datas;
         }
-
     }
 
     public void ResetData()
@@ -43,9 +44,11 @@ public class DataManager
         playerData = new PlayerData();
         invenData = new Inventorydata();
         killData = new KillData();
+        questData = new QuestSaveData();
         Managers._file.SaveJsonFile(playerData, PLAYER);
         Managers._file.SaveJsonFile(invenData, INVEN);
         Managers._file.SaveJsonFile(killData, KILL);
+        Managers._file.SaveJsonFile(questData, Quest);
     }
 
     void LoadData()
@@ -73,6 +76,12 @@ public class DataManager
             killData = JsonUtility.FromJson<KillData>(kill);
         else
             killData = new KillData();
+
+        string quest = Managers._file.LoadJsonFile(Quest);
+        if (string.IsNullOrEmpty(quest) == false)
+            questData = JsonUtility.FromJson<QuestSaveData>(quest);
+        else
+            questData = new QuestSaveData();
     }
 
     public void SaveGameData()
@@ -82,9 +91,11 @@ public class DataManager
         playerData = PlayerCtrl._inst._stat.SavePlayer();
         invenData = InventoryManager._inst.InventorySave();
         killData = GameManagerEX._inst.CountSave();
+        questData = GameManagerEX._inst.questManager.SaveQuestData();
         Managers._file.SaveJsonFile(playerData, PLAYER);
         Managers._file.SaveJsonFile(invenData, INVEN);
         Managers._file.SaveJsonFile(killData, KILL);
+        Managers._file.SaveJsonFile(questData, Quest);
     }
 
 }
