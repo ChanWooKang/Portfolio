@@ -91,6 +91,7 @@ public class BossCtrl : FSM<BossCtrl>
     public void Init()
     {
         _stat.HP = _stat.MaxHP;
+        delayTime = 2.0f;
         isDead = false;
         isAttack = false;
         SetCollider(true);
@@ -387,8 +388,6 @@ public class BossCtrl : FSM<BossCtrl>
         if (isDead)
         {
             //»ç¿îµå »ðÀÔ
-
-
             _flameEffect.OffEffect();
             SetCollider(false);
             _agent.SetDestination(transform.position);
@@ -430,11 +429,27 @@ public class BossCtrl : FSM<BossCtrl>
     }
 
     public void OnDeadEvent()
-    {
-        AttackNavSetting();
-        GameManagerEX._inst.GameClear(this);
+    {        
+        ChangeColor(Color.white);
+        ChangeState(BossStateDisable._inst);
+        _dropTable.ItemDrop(transform, _stat.Gold);
+        _dropTable.ItemDrop(transform);
+
+        //GameManager
+        GameManagerEX._inst.KillCount(mType);
     }
 
+    public void PlayerOut()
+    {
+        SpawnManager._inst.MonsterDespawn(gameObject);
+    }
+
+    public void OnRessurect()
+    {
+        SetCollider(true);
+        ChangeLayer(eLayer.Monster);
+        ChangeState(BossStateInitial._inst);
+    }
 
     void SetClip(eSoundList sList, bool isLoop = false)
     {

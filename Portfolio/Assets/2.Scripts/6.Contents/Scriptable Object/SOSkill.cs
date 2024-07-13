@@ -22,4 +22,6 @@ public class SOSkill : ScriptableObject
     public string description;
     [Multiline]
     public string effect;
+
+    public int RequiredLevel;
 }

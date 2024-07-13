@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: SmallShield
   iType: 2
   eType: 4
+  pType: 0
   maxStack: 1
   sList:
   - statType: 0
@@ -29,3 +30,4 @@ MonoBehaviour:
   krName: "\uC870\uADF8\uB9CC\uD55C \uBC29\uD328"
   description: "\uCB10\uADF8\uB9C8\uD55C \uBC29\uD328"
   price: 3000
+  AvailablePurchase: 1

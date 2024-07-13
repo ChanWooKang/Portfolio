@@ -33,6 +33,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     MonsterState _nowState = MonsterState.Idle;
     eCombo _nowCombo = eCombo.Hit1;
 
+   
 
     public NavMeshAgent Agent
     {
@@ -237,18 +238,28 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         isAttack = true;
     }
 
-    public void OnAttackEvent()
+    public void SpeacialAttack(Vector3 targetPos)
+    {
+        _stat.SpeacialAttack(target.position);
+    }
+
+    public void OnAttackEvent(int pattern)
     {
         if (target != null && player.State != PlayerState.Die)
         {
+            if(pattern == 2)
+            {
+                SpeacialAttack(target.position);
+                return;
+            }
+
             if (IsCloseTarget(target.position, _stat.AttackRange))
             {                
-
                 player.OnDamage(_stat);
             }
         }
-
     }
+
     public void OffAttackEvent()
     {
         _agent.avoidancePriority = 50;
@@ -294,7 +305,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
         //GameManager
         GameManagerEX._inst.KillCount(mType);
-    }
+    }    
 
     public void OnResurrectEvent()
     {

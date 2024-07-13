@@ -13,21 +13,7 @@ MonoBehaviour:
   m_Name: DT_Boss
   m_EditorClassIdentifier: 
   list_Items:
-  - item: {fileID: 0}
-    weight: 300
-  - item: {fileID: 11400000, guid: bedb73a2d0c413a4b8702ffd74c83bf0, type: 2}
-    weight: 120
-  - item: {fileID: 11400000, guid: d9e7d903d1f150840ba66816f53945b7, type: 2}
-    weight: 90
-  - item: {fileID: 11400000, guid: 9c4566b9ba2e82b429c5c3684a9e30f9, type: 2}
-    weight: 40
-  - item: {fileID: 11400000, guid: 6b6a09ea1e146f74ab8a9f6766059cd5, type: 2}
-    weight: 30
-  - item: {fileID: 11400000, guid: 54ea0ff160ff28b49a3b6d0ebe9870ba, type: 2}
-    weight: 25
-  - item: {fileID: 11400000, guid: 1c00051014f78f343b56e5eab2c1bb76, type: 2}
-    weight: 20
-  - item: {fileID: 11400000, guid: 269daa27764b4a84c8415fb3e8b9287e, type: 2}
-    weight: 10
-  pickCnt_Weights: c8000000500000000a000000
+  - item: {fileID: 11400000, guid: d01b6973ef1ebe642bea0ed86207f930, type: 2}
+    weight: 100
+  pickCnt_Weights: 0000000064000000
   GoldItem: {fileID: 11400000, guid: bda98e6c556c2d542988d1d5f30b9c33, type: 2}

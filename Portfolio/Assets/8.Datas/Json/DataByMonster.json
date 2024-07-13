@@ -37,7 +37,7 @@
             "tracespeed": 10.0,
             "tracerange": 8.0,
             "attackrange": 2.0,
-            "attackdelay": 1.5,
+            "attackdelay": 0.8,
             "mingold": 100,
             "maxgold": 200,
             "exp": 75.0
@@ -65,7 +65,21 @@
           "tracespeed": 10.0,
           "tracerange": 20.0,
           "attackrange": 15,
-          "attackdelay": 1.5,
+          "attackdelay": 0.8,
+          "mingold": 8000,
+          "maxgold": 9000,
+          "exp": 500.0
+        },
+        {
+          "index": 6,
+          "hp": 1000.0,
+          "damage": 150.0,
+          "defense": 30.0,
+          "movespeed": 10.0,
+          "tracespeed": 10.0,
+          "tracerange": 20.0,
+          "attackrange": 15,
+          "attackdelay": 0.8,
           "mingold": 8000,
           "maxgold": 9000,
           "exp": 500.0

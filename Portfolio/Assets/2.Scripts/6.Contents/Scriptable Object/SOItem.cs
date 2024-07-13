@@ -18,4 +18,5 @@ public class SOItem : ScriptableObject
     [Multiline]
     public string description;
     public int price;
+    public bool AvailablePurchase;
 }

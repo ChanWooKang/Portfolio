@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: BigShield
   iType: 2
   eType: 4
+  pType: 0
   maxStack: 1
   sList:
   - statType: 0
@@ -29,3 +30,4 @@ MonoBehaviour:
   krName: "\uB2E8\uB2E8\uD55C \uBC29\uD328"
   description: "\uD2BC\uD2BC\uD55C \uBC29\uD328"
   price: 8000
+  AvailablePurchase: 1

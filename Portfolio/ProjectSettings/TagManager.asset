@@ -14,6 +14,7 @@ TagManager:
   - Block
   - Boss
   - Fire
+  - FireBall
   layers:
   - Default
   - TransparentFX

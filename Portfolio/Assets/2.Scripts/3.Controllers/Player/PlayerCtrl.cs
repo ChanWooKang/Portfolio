@@ -16,13 +16,15 @@ public class PlayerCtrl : MonoBehaviour
     Animator _anim;
     Rigidbody _rb;
     NavMeshAgent _agent;
-    Renderer[] _meshs;    
+    Renderer[] _meshs;
 
-    public PlayerSoundCtrl psc;
-    WeaponCtrl _weapon;
-    SkillCryCtrl _cry;
-    SkillHealCtrl _heal;
-    PotionEffect _potion;
+    public PlayerEquipCtrl pec;
+    public PlayerSoundCtrl psc;    
+    public SkillCryCtrl _cry;
+    public SkillHealCtrl _heal;
+    public PotionEffect _potion;
+    public ParticleSystem levelUpEffect;
+    public PortalEventCtrl _portal;
 
     //레이어 마스크 
     int _clickMask;
@@ -128,11 +130,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
-        InitData();
         Managers._input.KeyAction -= OnKeyBoardEvent;
         Managers._input.KeyAction += OnKeyBoardEvent;
         Managers._input.RightMouseAction -= OnMouseEvent;
         Managers._input.RightMouseAction += OnMouseEvent;
+
     }
 
     void Update()
@@ -176,22 +178,7 @@ public class PlayerCtrl : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _meshs = transform.GetChild(0).GetComponentsInChildren<Renderer>();
-        _stat = GetComponent<PlayerStat>();
-        psc = GetComponent<PlayerSoundCtrl>();
 
-        //스킬 관련 처리
-        // 휠윈드 기능
-        _weapon = FindObjectOfType<WeaponCtrl>();
-        // 함성 기능
-        _cry = FindObjectOfType<SkillCryCtrl>();
-        // 힐링 기능
-        _heal = FindObjectOfType<SkillHealCtrl>();
-        // 포션 섭취시 
-        _potion = FindObjectOfType<PotionEffect>();
-    }
-
-    void InitData()
-    {        
         _clickMask = (1 << (int)eLayer.Ground) | (1 << (int)eLayer.Monster);
         _blockMask = (1 << (int)eLayer.Block) | (1 << (int)eLayer.TransBlock);
 
@@ -205,7 +192,10 @@ public class PlayerCtrl : MonoBehaviour
         dict_bool = new Dictionary<PlayerBools, bool>();
         for (int i = 0; i < (int)PlayerBools.Max_Cnt; i++)
             dict_bool.Add((PlayerBools)i, false);
+    }
 
+    public void InitData()
+    {        
         StatSetting();
         MinimapCamera._inst.InstiatieMarker(true, transform);
         RegerectionCoroutine = StartCoroutine(RegenerateStat());
@@ -312,8 +302,14 @@ public class PlayerCtrl : MonoBehaviour
         return false;
     }
 
+    public void PlayPortalEvent()
+    {
+        _portal.PlayPortal();
+    }
+
     public void ReturnHome()
     {
+        _portal.StopPortal();
         _agent.enabled = false;
         transform.position = RespawnPos.position;
         _agent.enabled = true;
@@ -337,12 +333,21 @@ public class PlayerCtrl : MonoBehaviour
         if (dict_bool[PlayerBools.ActDodge])
             return;
 
+        if (_portal.isActivePortal)
+            _portal.StopPortal();
+
         OnInteractEvent(Input.GetKeyDown(KeyCode.F));
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            State = PlayerState.Idle;
+            Stop();
             State = PlayerState.Return;           
+        }
+
+        //For Test
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            _stat.EXP += 3001;
         }
     }    
 
@@ -356,6 +361,9 @@ public class PlayerCtrl : MonoBehaviour
 
         if (dict_bool[PlayerBools.ActDodge])
             return;
+
+        if (_portal.isActivePortal)
+            _portal.StopPortal();
 
         switch (_state)
         {
@@ -590,6 +598,9 @@ public class PlayerCtrl : MonoBehaviour
     public void LevelUp()
     {
         psc.LevelUpSound();
+        //레벨업시 체크 
+        levelUpEffect.Play(true);
+        GameManagerEX._inst.information.CheckSkillAble();
     }
 
     public void OnAttackEvent()
@@ -884,7 +895,7 @@ public class PlayerCtrl : MonoBehaviour
         float damage = _stat.Damage * skill.effectValue;
 
         //콜라이더 생성
-        _weapon.WeaponUse(damage, skill.duration);
+        pec.nowWeapon.WeaponUse(damage, skill.duration);
 
         yield return new WaitForSeconds(time);
 
@@ -960,6 +971,14 @@ public class PlayerCtrl : MonoBehaviour
                     OnDamage(bc.HandDamage);
                     bc.HandDamage = 0;   
                 }
+            }
+        }
+
+        if (other.CompareTag("FireBall"))
+        {
+            if(other.TryGetComponent(out FireBall fb))
+            {
+                OnDamage(fb.Damage);                
             }
         }
 

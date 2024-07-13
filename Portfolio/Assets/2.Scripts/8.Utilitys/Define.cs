@@ -17,6 +17,7 @@ namespace Define
         Unknown,
         MainScene   = 0,
         GameScene   = 1,
+        TestScene   = 2,
     }
 
     public enum eSound
@@ -89,6 +90,7 @@ namespace Define
     public enum CameraMode
     {
         Quater,
+        Top,
     }
 
     public enum PoolType
@@ -165,6 +167,7 @@ namespace Define
 
 
         Boss,
+        Boss_2,
         Max_Cnt
     }
 

@@ -11,24 +11,31 @@ public class CameraCtrl : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 dir = (_target.position - transform.position).normalized;
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, dir, Mathf.Infinity, 1 << (int)eLayer.TransBlock);
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            TransparentObject[] obj = hits[i].transform.GetComponentsInChildren<TransparentObject>();
-
-            for (int j = 0; j < obj.Length; j++)
-            {
-                obj[j]?.BecomeTransparent();
-            }
-        }
+       
 
 
         if(_mode == CameraMode.Quater)
         {
+            Vector3 dir = (_target.position - transform.position).normalized;
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, dir, Mathf.Infinity, 1 << (int)eLayer.TransBlock);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                TransparentObject[] obj = hits[i].transform.GetComponentsInChildren<TransparentObject>();
+
+                for (int j = 0; j < obj.Length; j++)
+                {
+                    obj[j]?.BecomeTransparent();
+                }
+            }
+
             transform.position = _target.position + _offSet;
             transform.LookAt(_target);
+        }
+
+        if(_mode == CameraMode.Top)
+        {
+            transform.position = _target.position + _offSet;
         }
     }
 

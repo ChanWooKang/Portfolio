@@ -88,7 +88,10 @@ public class UI_Shop : UI_Base
     {
         int max = InventoryManager._inst.items.Length;
         int value = Random.Range(1, max);
-        return InventoryManager._inst.items[value];
+        if (InventoryManager._inst.items[value].AvailablePurchase)
+            return InventoryManager._inst.items[value];
+        else
+            return PickItem();
     }
 
     

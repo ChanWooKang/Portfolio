@@ -13796,7 +13796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropTable: {fileID: 11400000, guid: df2c6fb6febad0a4d8f4b3575fe233c8, type: 2}
-  _stat: {fileID: 0}
+  _stat: {fileID: 4348023064450784619}
   headTR: {fileID: 5679586858739363904}
   _flameEffect: {fileID: 4694208518173891926}
   _rSpeed: 8

@@ -5,10 +5,15 @@ using UnityEngine;
 public class BossField : MonoBehaviour
 {
     BossCtrl bc = null;
-
+    public bool isInPlayer = false;
     public void SettingBoss(BossCtrl bCtrl)
     {
         bc = bCtrl;
+        if(bc != null)
+        {
+            if (isInPlayer)
+                bc.gameObject.SetActive(false);
+        }        
     }
 
     void OnTriggerEnter(Collider other)
@@ -24,10 +29,13 @@ public class BossField : MonoBehaviour
                 if (PlayerCtrl._inst.Bools[Define.PlayerBools.Dead] == false)
                 {
                     PlayerCtrl._inst.SetInBossField(bc.gameObject, true);
+                    isInPlayer = true;
                 }
             }
         }
     }
+
+    
 
     void OnTriggerExit(Collider other)
     {
@@ -38,6 +46,15 @@ public class BossField : MonoBehaviour
                 if (PlayerCtrl._inst.Bools[Define.PlayerBools.Dead] == false) 
                 {
                     PlayerCtrl._inst.SetInBossField();
+                    isInPlayer = false;
+
+                    if(bc != null)
+                    {
+                        if (bc.isDead == true)
+                        {
+                            bc.PlayerOut();
+                        }                            
+                    }
                 }
             }
         }

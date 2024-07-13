@@ -20,6 +20,7 @@ public class UI_Information : UI_Base
     Text level_text;
 
     PlayerStat ps;
+    public List<UI_Skill> skills;
     void Start()
     {
         Init();
@@ -34,6 +35,14 @@ public class UI_Information : UI_Base
         level_text = GetObject((int)GameObjects.Level).GetComponent<Text>();
 
         StartCoroutine(SetUI());
+    }
+
+    public void CheckSkillAble()
+    {
+        for (int i = 0; i < skills.Count; i++)
+        {
+            skills[i].TryCheckActive();
+        }
     }
 
     void SettingUI()

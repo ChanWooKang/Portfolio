@@ -16,6 +16,7 @@ public class GameManagerEX : MonoBehaviour
     UI_Alert alt;
     UI_GameEnd end;
     UI_Shop shop;
+    public UI_Information information;
     public UI_Talk talk;
     public UI_Quest questUI;
 
@@ -57,6 +58,12 @@ public class GameManagerEX : MonoBehaviour
         player = PlayerCtrl._inst;
         //Sounds
         SoundManager._inst.Play(eSoundList.BGM_GameScene, eSound.BGM);
+        //스킬 체크
+        Debug.Log(player._stat.Level);
+        player.InitData();
+        information.CheckSkillAble();
+        //장비 체크
+        player.pec.SettingEquipment();
     }
 
     void Update()

@@ -32,7 +32,6 @@ public class QuestManager : MonoBehaviour
             
             if(givers[i].nowQuestID == ProgerssQuest.questID)
             {
-                Debug.Log(ProgerssQuest.quest.nowCount);
                 nowCount.Add(ProgerssQuest.quest.nowCount);                
             }                
             else

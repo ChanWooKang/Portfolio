@@ -152,6 +152,8 @@ public class InventoryManager : MonoBehaviour
         }
 
         SoundManager._inst.Play(eSoundList.Inven_ChangeEquip);
+        //플레이어 장비 변경시 오브젝트 변경
+        PlayerCtrl._inst.pec.ChangeEquipment(type, item.Name);
         //UI변경 해야 하는 UI스크립트 체크 후 처리
         Managers._ui.OnSetUIEvent?.Invoke();
         yield return new WaitForSeconds(1.0f);

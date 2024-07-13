@@ -9,13 +9,21 @@ public class Cactus : MonsterStat
     {
         PunchAttack = 0,
         HeadAttack = 1,
-        BombAttack = 2
+        FireBall = 2
     }
-
+    
 
     public override void Attack(Animator anim)
     {
         int index = PickPattern();
         anim.SetTrigger(Util.ConvertEnum((AnimationIndex)index));
     }
+
+    public override void SpeacialAttack(Vector3 targetPos)
+    {
+        GameObject go = PoolingManager._pool.InstantiateAPS("FireBall");
+        FireBall fire = go.GetComponent<FireBall>();
+        fire.ShootEvent(transform, targetPos, Damage);
+    }
+
 }

@@ -84,7 +84,7 @@ public class AutoRespawnManager : MonoBehaviour
         eMonster type = _monsterQ.Dequeue();
         GameObject go = spawn.Spawn(type);
 
-        if(type != eMonster.Boss)
+        if(type != eMonster.Boss && type != eMonster.Boss_2)
         {
             MonsterCtrl mc = go.GetComponent<MonsterCtrl>();
             Vector3 randPos = new Vector3();
@@ -104,31 +104,22 @@ public class AutoRespawnManager : MonoBehaviour
                 mc.OnResurrectEvent();
             else
             {
-                MinimapCamera._inst.InstiatieMarker(false, mc.transform);
+                MinimapCamera._inst.InstiatieMarker(false, mc.transform);                             
             }
             go.transform.position = randPos;
         }
         else
         {
             BossCtrl bc = go.GetComponent<BossCtrl>();
-            Vector3 randPos = new Vector3();
-            if (go.TryGetComponent<NavMeshAgent>(out NavMeshAgent na) == false)
-                na = go.AddComponent<NavMeshAgent>();
-
-            while (true)
-            {
-                Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
-                randDir.y = 0;
-                randPos = go.transform.position + randDir;
-                NavMeshPath path = new NavMeshPath();
-                if (na.CalculatePath(randPos, path))
-                    break;
-            }
+           
             if (bc.isDead == false)
             {
                 MinimapCamera._inst.InstiatieMarker(false, bc.transform, eMonster.Boss);
             }
-            go.transform.position = randPos;
+            else
+            {
+                bc.OnRessurect();
+            }            
         }
         _reserveAmount--;
     }

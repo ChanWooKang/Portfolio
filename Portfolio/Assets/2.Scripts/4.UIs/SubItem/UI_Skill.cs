@@ -11,32 +11,66 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
 {
     enum GameObjects
     {
+        Skill_Img,
         Cool_Img
     }
 
     PlayerCtrl player;
     
     public SOSkill _skill;
+    Image Skill_Img;
     Image Cool_Img;
+    bool isAble = false;
 
+    void Awake()
+    {
+        Bind<GameObject>(typeof(GameObjects));
+        Skill_Img = GetObject((int)GameObjects.Skill_Img).GetComponent<Image>();
+        Cool_Img = GetObject((int)GameObjects.Cool_Img).GetComponent<Image>();
+    }
     void Start()
     {
         Init();
     }
 
     public override void Init()
-    {
-        Bind<GameObject>(typeof(GameObjects));
-        Cool_Img = GetObject((int)GameObjects.Cool_Img).GetComponent<Image>();
+    {        
         Managers._input.KeyAction -= OnKeyBoardEvent;
         Managers._input.KeyAction += OnKeyBoardEvent;
         ClearCool();
-        player = PlayerCtrl._inst;
+        
+    }
+
+    public void TryCheckActive()
+    {
+        if(player == null)
+        {
+            player = PlayerCtrl._inst;
+        }
+
+        if (player._stat.Level >= _skill.RequiredLevel)
+        {
+            if (isAble == false)
+            {
+                isAble = true;
+                Skill_Img.gameObject.SetActive(true);
+                ClearCool();
+            }
+        }
+        else
+        {
+            isAble = false;
+            Skill_Img.gameObject.SetActive(false);
+            Cool_Img.gameObject.SetActive(false);
+        }
     }
 
     void OnKeyBoardEvent()
     {
         if (player.Bools[PlayerBools.Dead] || GameManagerEX._inst.StopMove)
+            return;
+
+        if (!isAble)
             return;
 
         if (Input.GetKeyDown(_skill.key))

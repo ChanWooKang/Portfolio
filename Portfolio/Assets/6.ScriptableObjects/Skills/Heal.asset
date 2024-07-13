@@ -24,3 +24,4 @@ MonoBehaviour:
   krName: "\uCCB4\uB825 \uD68C\uBCF5"
   description: "\uB9C8\uB098\uB97C \uC18C\uBAA8\uD558\uC5EC \uCCB4\uB825\uC744 \uD68C\uBCF5\uD55C\uB2E4."
   effect: "\uCCB4\uB825 \uD68C\uBCF5 + 50%"
+  RequiredLevel: 2

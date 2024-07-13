@@ -11,7 +11,8 @@ public class SpawnManager : MonoBehaviour
     public Action<eMonster, int> OnSpawnEvent;
     public List<SpawnPoint> points;
 
-    [SerializeField] BossField bf;
+    [SerializeField] BossField boss1Field;
+    [SerializeField] BossField boss2Field;
     [SerializeField] SOItem testItem;
     PoolingManager pool;
 
@@ -42,6 +43,11 @@ public class SpawnManager : MonoBehaviour
         {
             type = mc.mType;
         }
+        else
+        {
+            if (go.TryGetComponent(out BossCtrl bc))
+                type = bc.mType;
+        }
         return type;
     }
     
@@ -65,7 +71,7 @@ public class SpawnManager : MonoBehaviour
 
         GameObject go = pool.InstantiateAPS(Util.ConvertEnum(type), tr.position, tr.rotation, Vector3.one);
 
-        if (type != eMonster.Boss)
+        if (type != eMonster.Boss && type != eMonster.Boss_2)
         {
             if (go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
             {
@@ -84,7 +90,15 @@ public class SpawnManager : MonoBehaviour
             bc._defPos = tr.position;
             bc.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             
-            bf.SettingBoss(bc);
+            switch(type)
+            {
+                case eMonster.Boss:
+                    boss1Field.SettingBoss(bc);
+                    break;
+                case eMonster.Boss_2:
+                    boss2Field.SettingBoss(bc);
+                    break;
+            }            
         }
 
         OnSpawnEvent?.Invoke(type, 1);
@@ -142,6 +156,13 @@ public class SpawnManager : MonoBehaviour
         eMonster type = GetMonsterType(go);
         if (type == eMonster.Unknown || type == eMonster.Max_Cnt)
             return;
+        if (type == eMonster.Boss)
+            boss1Field.SettingBoss(null);
+        else if (type == eMonster.Boss_2)
+        {
+            boss2Field.SettingBoss(null);
+        }
+
         OnSpawnEvent?.Invoke(type, -1);
         go.DestroyAPS();
     }

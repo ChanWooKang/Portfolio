@@ -7,7 +7,7 @@ public class BossStateDisable : TSingleton<BossStateDisable>, IFSMState<BossCtrl
 {
     public void Enter(BossCtrl m)
     {
-       
+        m.gameObject.SetActive(false);
     }
 
     public void Execute(BossCtrl m)

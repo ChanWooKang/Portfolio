@@ -19,13 +19,14 @@ public class MainScene : BaseScene
     public override void NewGame()
     {
         Managers.IsNew = true;
-        SceneLoad(eScene.GameScene);
+        Managers._data.ResetData();
+        SceneLoad(eScene.TestScene);
     }
 
     public override void ContinueGame()
     {
         Managers.IsNew = false;
-        SceneLoad(eScene.GameScene);
+        SceneLoad(eScene.TestScene);
     }
 
     public override void Quit()

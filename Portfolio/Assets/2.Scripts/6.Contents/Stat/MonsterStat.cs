@@ -72,7 +72,9 @@ public class MonsterStat : BaseStat , IMonsterAttack
             stat.EXP += _exp;
     }
 
-    public virtual void Attack(Animator anim) { }              
+    public virtual void Attack(Animator anim) { }   
+    
+    public virtual void SpeacialAttack(Vector3 targetPos) { }
     public int PickPattern()
     {
         int sum = 0;
