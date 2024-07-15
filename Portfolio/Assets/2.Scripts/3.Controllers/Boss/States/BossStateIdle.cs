@@ -7,7 +7,8 @@ public class BossStateIdle : TSingleton<BossStateIdle>, IFSMState<BossCtrl>
 {
     public void Enter(BossCtrl m)
     {
-        m.State = BossState.Sleep;
+        m.State = BossState.Sleep;        
+        m.OnRegenerate();
     }
 
     public void Execute(BossCtrl m)

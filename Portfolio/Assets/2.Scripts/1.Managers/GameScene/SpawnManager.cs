@@ -115,7 +115,7 @@ public class SpawnManager : MonoBehaviour
                 _item = go.AddComponent<Item>();
                 _item.itemSO = item;
             }
-            _item.Spawn();
+            _item.Spawn(parent);
         }
         else
         {
@@ -134,7 +134,7 @@ public class SpawnManager : MonoBehaviour
                 _item.itemSO = item;
             }
             _item.Gold = gold;
-            _item.Spawn();
+            _item.Spawn(parent);
         }
         else
         {

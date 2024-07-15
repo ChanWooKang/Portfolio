@@ -181,6 +181,7 @@ namespace Define
 
 
         µå·¡°ï,
+        »ç¸·µå·¡°ï,
         Max_Cnt,
     }
 

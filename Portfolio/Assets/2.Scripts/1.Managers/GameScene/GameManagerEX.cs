@@ -34,6 +34,8 @@ public class GameManagerEX : MonoBehaviour
     public GameObject ScanObject;
     public eInteract ScanType;
     public bool endTalk = false;
+    public GameObject BlockObj;
+    public GameObject ClearObj;
 
     void Awake()
     {
@@ -236,16 +238,6 @@ public class GameManagerEX : MonoBehaviour
 
     public void ReGame()
     {
-        if (player != null)
-        {
-            //player.ResetStat();
-            //player.OnResurrectEvent();
-            //player.gameObject.SetActive(true);
-            //player.OnStartRegenarte();
-            //ResetCountTime();
-
-        }
-
         ResetData();
         Managers.IsNew = true;
         Managers._scene.CurrentScene.SceneLoad(eScene.GameScene);
@@ -287,6 +279,18 @@ public class GameManagerEX : MonoBehaviour
         {
             _killDict.Add(type, cnt);
         }
+    }
+
+    public void BossClear()
+    {
+        BoxCollider box = BlockObj.GetComponent<BoxCollider>();
+        if (box.enabled)
+        {
+            box.enabled = false;
+        }
+
+        if (!ClearObj.activeSelf)
+            ClearObj.SetActive(true);
     }
 
     #region [ Talk ]

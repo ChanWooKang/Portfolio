@@ -31,7 +31,7 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
                 m.ChangeState(MonsterStateTrace._inst);
             else
             {
-                if (m.IsCloseTarget(m.targetPos, 0.5f))
+                if (m.IsCloseTarget(m.targetPos, 1.0f))
                 {
                     m.cntTime += Time.deltaTime;
                     if (m.cntTime > m.delayTime)
@@ -60,7 +60,7 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
         }
         else
         {
-            if (m.IsCloseTarget(m.targetPos, 0.5f))
+            if (m.IsCloseTarget(m.targetPos, 1.0f))
             {
                 m.cntTime += Time.deltaTime;
                 if (m.cntTime > m.delayTime)

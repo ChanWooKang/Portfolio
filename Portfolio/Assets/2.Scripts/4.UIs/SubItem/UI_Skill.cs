@@ -20,7 +20,7 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
     public SOSkill _skill;
     Image Skill_Img;
     Image Cool_Img;
-    bool isAble = false;
+    public bool isAble = false;
 
     void Awake()
     {
@@ -144,8 +144,8 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
-        UI_SkillInfo._inst.SetInformation(_skill, transform.position);
+        if(isAble)
+            UI_SkillInfo._inst.SetInformation(_skill, transform.position);
 
     }
 

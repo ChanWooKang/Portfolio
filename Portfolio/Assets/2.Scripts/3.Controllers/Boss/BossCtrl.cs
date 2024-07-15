@@ -436,6 +436,7 @@ public class BossCtrl : FSM<BossCtrl>
         _dropTable.ItemDrop(transform);
 
         //GameManager
+        GameManagerEX._inst.BossClear();
         GameManagerEX._inst.KillCount(mType);
     }
 

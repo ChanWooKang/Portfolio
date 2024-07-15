@@ -36,6 +36,7 @@ public class Item : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _colider = GetComponent<SphereCollider>();
+        _rb.isKinematic = true;
         isShoot = false;
         isCall = false;
         isStop = false;
@@ -48,10 +49,13 @@ public class Item : MonoBehaviour
         return pos;
     }
 
-    public void Spawn(float power = 5)
+    public void Spawn(Transform parent,float power = 3f)
     {
         Init();
-        Vector3 dir = GetRandomPoint();
+        Vector3 dir = GetRandomPoint();        
+        
+        transform.position = new Vector3(transform.position.x, parent.position.y, transform.position.z);
+        _rb.isKinematic = false;
         _rb.AddForce(dir * power, ForceMode.Impulse);
         isShoot = true;
     }

@@ -64,29 +64,43 @@ public class PlayerEquipCtrl : MonoBehaviour
         }        
     }
 
-    public void ChangeEquipment(eEquipment type, string EquipName)
+    public void ChangeEquipment(eEquipment type, string EquipName = null)
     {
         switch (type)
         {
             case eEquipment.Weapon:
-                for (int i = 0; i < Weapons.Count; i++)
+                if(EquipName == null)
                 {
-                    if (EquipName == Weapons[i].name)
-                    {
-                        SetWeapon(i);
-                        break;
-                    }
+                    SetWeapon(0);
                 }
+                else
+                {
+                    for (int i = 0; i < Weapons.Count; i++)
+                    {
+                        if (EquipName == Weapons[i].name)
+                        {
+                            SetWeapon(i);
+                            break;
+                        }
+                    }
+                }                
                 if (nowWeapon == null)
                     SetWeapon(0);
                 break;
             case eEquipment.Shield:
-                for (int i = 0; i < Shields.Count; i++)
+                if (EquipName == null)
                 {
-                    if (EquipName == Shields[i].name)
+                    SetShield(0);
+                }
+                else
+                {
+                    for (int i = 0; i < Shields.Count; i++)
                     {
-                        SetShield(i);
-                        break;
+                        if (EquipName == Shields[i].name)
+                        {
+                            SetShield(i);
+                            break;
+                        }
                     }
                 }
                 break;

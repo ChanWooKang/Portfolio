@@ -96,6 +96,7 @@ public class InventoryManager : MonoBehaviour
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)
     {
         ActiveChangeEquip = true;
+        string ChangeItemName = null;
         if (isWear == false)
         {
             //장비 해제 하기
@@ -110,6 +111,7 @@ public class InventoryManager : MonoBehaviour
             dict_Equip[type] = null;
             AddInvenItem(item);
             AddEquipItem(type, null);
+            
         }
         else
         {
@@ -146,14 +148,13 @@ public class InventoryManager : MonoBehaviour
                     AddInvenItem(tempItem);
                 AddEquipItem(type, item);
                 dict_Equip[type] = item;
-
-            }
-
+                ChangeItemName = item.Name;
+            }            
         }
 
         SoundManager._inst.Play(eSoundList.Inven_ChangeEquip);
         //플레이어 장비 변경시 오브젝트 변경
-        PlayerCtrl._inst.pec.ChangeEquipment(type, item.Name);
+        PlayerCtrl._inst.pec.ChangeEquipment(type, ChangeItemName);
         //UI변경 해야 하는 UI스크립트 체크 후 처리
         Managers._ui.OnSetUIEvent?.Invoke();
         yield return new WaitForSeconds(1.0f);

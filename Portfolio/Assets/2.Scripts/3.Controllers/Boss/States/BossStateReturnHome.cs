@@ -18,7 +18,7 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
 
     public void Execute(BossCtrl m)
     {
-        if (m.IsCloseTarget(m._offSet, 0.5f))
+        if (m.IsCloseTarget(m._offSet, 1.0f))
         {
             if(m.target != null)
             {
@@ -29,9 +29,8 @@ public class BossStateReturnHome : TSingleton<BossStateReturnHome>, IFSMState<Bo
                 else
                 {
                     if (m.State != BossState.Sleep)
-                    {
-                        m.State = BossState.Sleep;
-                        m.OnRegenerate();
+                    {                        
+                        m.ChangeState(BossStateIdle._inst);
                     }
                         
                 }

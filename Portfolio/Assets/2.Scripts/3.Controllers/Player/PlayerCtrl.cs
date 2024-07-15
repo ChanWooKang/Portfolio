@@ -349,6 +349,11 @@ public class PlayerCtrl : MonoBehaviour
         {
             _stat.EXP += 3001;
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            _stat.EXP += 301;
+        }
     }    
 
     void OnMouseEvent(MouseEvent evt)
@@ -493,6 +498,8 @@ public class PlayerCtrl : MonoBehaviour
                 //벽앞에 있더라도 마우스를 계속 누르고 있을경우 뛰는 애니메이션 재생
                 if (Input.GetMouseButton(0))
                     return;
+                else
+                    Stop();
             }
 
             if (dir != Vector3.zero)
