@@ -4900,7 +4900,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 4
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -4937,7 +4937,7 @@ MonoBehaviour:
   cntTime: 0
   isDead: 0
   isAttack: 0
-  _patternWeight: 2c01000018010000c8000000
+  _patternWeight: 2c01000018010000
 --- !u!65 &209248415158612306
 BoxCollider:
   m_ObjectHideFlags: 0

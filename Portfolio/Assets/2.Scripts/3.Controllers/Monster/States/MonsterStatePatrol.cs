@@ -11,6 +11,7 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
         m.targetPos = m._offSet;
         m.cntTime = 0;
         m.Agent.speed = m._stat.MoveSpeed;
+        m.Agent.avoidancePriority = 47;
         m.State = MonsterState.Patrol;
     }
 

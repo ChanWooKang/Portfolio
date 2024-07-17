@@ -36,6 +36,7 @@ public class BossCtrl : FSM<BossCtrl>
     [HideInInspector] public bool isAttack;
 
     float hitDamage;
+    int dealTimes;
 
     public float HandDamage { get; set; }
 
@@ -92,6 +93,7 @@ public class BossCtrl : FSM<BossCtrl>
     {
         _stat.HP = _stat.MaxHP;
         delayTime = 2.0f;
+        dealTimes = 0;
         isDead = false;
         isAttack = false;
         SetCollider(true);
@@ -211,7 +213,7 @@ public class BossCtrl : FSM<BossCtrl>
                 _ani.CrossFade("Attack", 0.1f, -1, 0);
                 break;
             case BossState.HandAttack:
-                isImotal = true;
+                //isImotal = true;
                 _ani.CrossFade("Hand", 0.1f, -1, 0);
                 break;
             case BossState.FlameAttack:
@@ -264,11 +266,19 @@ public class BossCtrl : FSM<BossCtrl>
 
             return;
         }
-
-        BossPattern nowPattern = PickPattern();
+        BossPattern nowPattern = BossPattern.Basic;
+        if (dealTimes > 2)
+        {
+             nowPattern = PickPattern();
+            
+        }
+        else
+        {
+            nowPattern = (BossPattern)dealTimes;
+            dealTimes++;
+        }                
         _agent.avoidancePriority = 51;
         isAttack = true;
-
         switch (nowPattern)
         {
             case BossPattern.Basic:
@@ -282,6 +292,7 @@ public class BossCtrl : FSM<BossCtrl>
                 State = BossState.FlameAttack;
                 break;
         }
+
     }
 
     // 기본 공격
@@ -366,9 +377,6 @@ public class BossCtrl : FSM<BossCtrl>
     {
         if (isDead)
             return true;
-
-        if (isImotal)
-            return false;
 
         isDead = _stat.GetHit(damage);
         if (DamageCoroutine != null)

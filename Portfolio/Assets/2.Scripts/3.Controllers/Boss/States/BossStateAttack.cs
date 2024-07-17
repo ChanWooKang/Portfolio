@@ -8,8 +8,7 @@ public class BossStateAttack : TSingleton<BossStateAttack>, IFSMState<BossCtrl>
     public void Enter(BossCtrl m)
     {
         m.AttackNavSetting();
-        m.Agent.SetDestination(m.transform.position);
-        m.cntTime = 10;
+        m.Agent.SetDestination(m.transform.position);        
     }
 
     public void Execute(BossCtrl m)

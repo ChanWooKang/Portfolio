@@ -8,6 +8,7 @@ public class MonsterStateTrace : TSingleton<MonsterStateTrace>, IFSMState<Monste
     public void Enter(MonsterCtrl m)
     {
         m.Agent.speed = m._stat.TraceSpeed;
+        m.Agent.avoidancePriority = 50;
         m.State = MonsterState.Trace;
         m.BaseNavSetting();
     }

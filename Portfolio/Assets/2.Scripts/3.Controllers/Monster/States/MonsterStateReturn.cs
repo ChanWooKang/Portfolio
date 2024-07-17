@@ -10,7 +10,7 @@ public class MonsterStateReturn : TSingleton<MonsterStateReturn>, IFSMState<Mons
         m.Agent.ResetPath();
         m.Agent.updatePosition = false;
         m.Agent.velocity = Vector3.zero;
-
+        m.Agent.avoidancePriority = 48;
         m.Agent.speed = m._stat.MoveSpeed;
         m.State = MonsterState.Patrol;
         m.BaseNavSetting();

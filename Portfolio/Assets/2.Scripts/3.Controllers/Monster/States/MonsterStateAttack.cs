@@ -9,6 +9,7 @@ public class MonsterStateAttack : TSingleton<MonsterStateAttack>, IFSMState<Mons
     {
         m.AttackNavSetting();
         m.nowCombo = eCombo.Hit1;
+        m.cntTime = 0;
     }
 
     public void Execute(MonsterCtrl m)

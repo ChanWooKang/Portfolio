@@ -22,7 +22,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     [HideInInspector] public Vector3 _offSet = Vector3.zero;
     [HideInInspector] public Vector3 _defPos = Vector3.zero;
     [HideInInspector] public Transform target = null;
-    [HideInInspector] public Vector3 targetPos;
+    public Vector3 targetPos;
     [HideInInspector] public float lastCallTime;
     [HideInInspector] public float delayTime;
     [HideInInspector] public float cntTime;
@@ -120,7 +120,8 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     public bool IsTooFar(float range = 20.0f)
     {
-        float dist = Vector3.SqrMagnitude(transform.position - _offSet);
+        Vector3 goalPos = new Vector3(_offSet.x, transform.position.y, _offSet.z);
+        float dist = Vector3.SqrMagnitude(goalPos - transform.position);
         if (dist > range * range)
             return true;
         return false;
@@ -186,7 +187,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         Vector3 pos = Random.onUnitSphere;
         pos.y = 0;
-        float r = Random.Range(0, range);
+        float r = Random.Range(1, range);
         pos = _defPos + (pos * r);
 
         NavMeshPath path = new NavMeshPath();
@@ -198,7 +199,8 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     public bool IsCloseTarget(Vector3 pos, float range)
     {
-        float dist = Vector3.SqrMagnitude(transform.position - pos);
+        Vector3 goalPos = new Vector3(pos.x, transform.position.y, pos.z);        
+        float dist = Vector3.SqrMagnitude(goalPos - transform.position);
         if (dist < range * range)
             return true;
         return false;
