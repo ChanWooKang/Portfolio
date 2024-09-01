@@ -193,6 +193,7 @@ namespace Define
         Sense,
         Trace,
         Attack,
+        Initial,
         Disable
     }
 

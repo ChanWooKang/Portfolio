@@ -18,7 +18,10 @@ public class FileManager
 #else
         JsonPath = Application.persistentDataPath + "/Json";
 #endif
-       
+        if (Directory.Exists(JsonPath) == false)
+        {
+            Directory.CreateDirectory(JsonPath);
+        }
     }
 
     public void SaveJsonFile<T>(T data, string name)
@@ -47,11 +50,7 @@ public class FileManager
     }
 
     public string LoadJsonFile(string name)
-    {
-        if (Directory.Exists(JsonPath) == false)
-        {
-            Directory.CreateDirectory(JsonPath);
-        }
+    {        
         string path = Path.Combine(JsonPath, name) + JsonSuffix;
         if (File.Exists(path) == false)
             return null;
@@ -67,7 +66,7 @@ public class FileManager
         }
         catch
         {
-            //Debug.Log($"FileManager : Failed To Load Json ({name})");
+            Debug.Log($"FileManager : Failed To Load Json ({name})");
             fs.Close();
             return null;
         }

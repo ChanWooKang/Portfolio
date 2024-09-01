@@ -132,8 +132,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         Managers._input.KeyAction -= OnKeyBoardEvent;
         Managers._input.KeyAction += OnKeyBoardEvent;
-        Managers._input.RightMouseAction -= OnMouseEvent;
-        Managers._input.RightMouseAction += OnMouseEvent;
+        Managers._input.MouseAction -= OnMouseEvent;
+        Managers._input.MouseAction += OnMouseEvent;
 
     }
 
@@ -246,19 +246,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void CheckAttackable(float range = 2.0f)
     {
-        if (isClickMonster == false || _locktarget == null)
-        {
-            if (isClickMonster == false && _locktarget != null)
-                return;
-            if (isClickMonster == false && _locktarget == null)
-                return;
-        }
+        if (isClickMonster == false)
+            return;        
             
         if(CheckDistance(range))
-            State = PlayerState.Attack;
-
-
-        return;
+            State = PlayerState.Attack;        
     }
 
     bool CheckDistance(float range)
@@ -266,8 +258,8 @@ public class PlayerCtrl : MonoBehaviour
         if (_locktarget == null)
             return false;
 
-        _destPos = _locktarget.transform.position;
-        Vector3 dir = _destPos - transform.position;
+        Vector3 goalPos = _locktarget.transform.position;
+        Vector3 dir = goalPos - transform.position;
         dir = dir.normalized;
 
         Ray ray = new Ray(transform.position + Vector3.up, dir * range);
@@ -353,20 +345,24 @@ public class PlayerCtrl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             _stat.EXP += 301;
+            _stat.AddPlusStat(eStat.HP, 500);
+            _stat.AddPlusStat(eStat.MP, 500);
+            _stat.AddPlusStat(eStat.Damage, 50);
+            _stat.AddPlusStat(eStat.Defense, 10);
         }
     }    
 
     void OnMouseEvent(MouseEvent evt)
     {
-        if (dict_bool[PlayerBools.Dead] || GameManagerEX._inst.StopMove)
+        //플레이어 상태가 회피중이거나 죽었을때 작용 X
+        if (dict_bool[PlayerBools.Dead] || dict_bool[PlayerBools.ActDodge])
             return;
 
-        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory)
-            return;
+        //UI가 열려 있을 경우 플레이어 이동 제어
+        if (UI_WorldMap.ActivatedWorldMap || UI_Inventory.ActivatedInventory || UI_Quest.ActivatedQuestWindow)
+            return;        
 
-        if (dict_bool[PlayerBools.ActDodge])
-            return;
-
+        //포탈이 작동 중인 경우 포탈 취소 작업
         if (_portal.isActivePortal)
             _portal.StopPortal();
 
@@ -377,23 +373,18 @@ public class PlayerCtrl : MonoBehaviour
             case PlayerState.Return:
                 OnMouseEvent_IDLEMOVE(evt);
                 break;
-            case PlayerState.Attack:
+            case PlayerState.Attack:                
+                if (evt == MouseEvent.PointerUp)
+                    dict_bool[PlayerBools.ContinueAttack] = false;
+                else
                 {
-                    if (evt == MouseEvent.PointerUp)
+                    if (CheckDistance(attackRange) == false)
                         dict_bool[PlayerBools.ContinueAttack] = false;
-                    else
-                    {
-                        if(CheckDistance(attackRange) == false)
-                            dict_bool[PlayerBools.ContinueAttack] = false;
-                    }
                 }
                 break;
             case PlayerState.Skill:
-                {
-
-                    if (_sType == eSkill.Spin)
-                        OnMouseEvent_SPINMOVE(evt);
-                }
+                if (_sType == eSkill.Spin)
+                    OnMouseEvent_SPINMOVE(evt);
                 break;
         }
     }
@@ -577,10 +568,6 @@ public class PlayerCtrl : MonoBehaviour
                     }
                     break;
                 case eInteract.Shop:
-                    {
-                        GameManagerEX._inst.ShowText(_nearObj, _nearType);
-                    }
-                    break;
                 case eInteract.NPC:
                     {
                         GameManagerEX._inst.ShowText(_nearObj, _nearType);
@@ -614,7 +601,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if(_locktarget != null)
         {
-            if(_locktarget.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc))
+            if(_locktarget.TryGetComponent(out MonsterCtrl mc))
             {
                 mc.OnDamage(_stat);
                 if (mc.isDead)
@@ -623,7 +610,7 @@ public class PlayerCtrl : MonoBehaviour
                     dict_bool[PlayerBools.ContinueAttack] = false;
                 }
             }
-            else if(_locktarget.TryGetComponent<BossCtrl>(out BossCtrl bc))
+            else if(_locktarget.TryGetComponent(out BossCtrl bc))
             {
                 bc.OnDamage(_stat);
                 if (bc.isDead)
@@ -871,15 +858,14 @@ public class PlayerCtrl : MonoBehaviour
 
         dict_bool[PlayerBools.ActSkill] = true;
 
+        //마우스 위치로 회전
         Quaternion rot = Quaternion.LookRotation(_mouseWorldPoint);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f);
-
 
         _sType = eSkill.Slash;
         State = PlayerState.Skill;
         
-        yield return new WaitForSeconds(0.2f);
-        //Test
+        yield return new WaitForSeconds(0.2f);        
         GameObject go = PoolingManager._pool.InstantiateAPS(skill.skillName);
         SkillSlashCtrl ssc = go.GetComponent<SkillSlashCtrl>();
         ssc.SlashEvent(skill, transform, dir);
@@ -889,6 +875,7 @@ public class PlayerCtrl : MonoBehaviour
         _sType = eSkill.Unknown;
         State = PlayerState.Move;
 
+        //2초후 소멸
         yield return new WaitForSeconds(2.0f);
         go.DestroyAPS();
     }

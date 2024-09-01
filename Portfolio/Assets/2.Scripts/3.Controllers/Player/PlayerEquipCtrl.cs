@@ -4,13 +4,12 @@ using UnityEngine;
 using Define;
 
 public class PlayerEquipCtrl : MonoBehaviour
-{
+{    
+    // 장비들 모아둔 오브젝트 리스트
     public List<GameObject> Weapons;
     public List<GameObject> Shields;
+    // 스킬 사용시 이펙트 효과 및 콜라이더 On/Off 사용할 수 있는 무기 스크립트 연결
     public WeaponCtrl nowWeapon;
-
-    Dictionary<int, GameObject> weaponCollect;
-    Dictionary<int, GameObject> shieldCollect;
 
     //인벤토리 로드 이후 실행
     public void SettingEquipment()
@@ -71,6 +70,7 @@ public class PlayerEquipCtrl : MonoBehaviour
             case eEquipment.Weapon:
                 if(EquipName == null)
                 {
+                    //기본 장비
                     SetWeapon(0);
                 }
                 else
@@ -85,7 +85,10 @@ public class PlayerEquipCtrl : MonoBehaviour
                     }
                 }                
                 if (nowWeapon == null)
+                {
+                    //기본 장비
                     SetWeapon(0);
+                }                
                 break;
             case eEquipment.Shield:
                 if (EquipName == null)

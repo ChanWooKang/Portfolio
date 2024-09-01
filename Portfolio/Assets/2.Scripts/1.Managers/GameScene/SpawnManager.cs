@@ -70,7 +70,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         GameObject go = pool.InstantiateAPS(Util.ConvertEnum(type), tr.position, tr.rotation, Vector3.one);
-
+        //일반 몬스터 생성
         if (type != eMonster.Boss && type != eMonster.Boss_2)
         {
             if (go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
@@ -80,6 +80,7 @@ public class SpawnManager : MonoBehaviour
             }
             mc._defPos = tr.position;
         }
+        //보스 생성
         else
         {
             if (go.TryGetComponent<BossCtrl>(out BossCtrl bc) == false)
@@ -119,7 +120,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
+            Debug.Log($"SpawnManager : Failed to Load Prefab ({item.Name})");
         }
     }
 

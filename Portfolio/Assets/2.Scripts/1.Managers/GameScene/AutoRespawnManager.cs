@@ -84,6 +84,7 @@ public class AutoRespawnManager : MonoBehaviour
         eMonster type = _monsterQ.Dequeue();
         GameObject go = spawn.Spawn(type);
 
+        //老馆 阁胶磐 积己
         if(type != eMonster.Boss && type != eMonster.Boss_2)
         {
             MonsterCtrl mc = go.GetComponent<MonsterCtrl>();
@@ -108,6 +109,7 @@ public class AutoRespawnManager : MonoBehaviour
             }
             go.transform.position = randPos;
         }
+        //焊胶 积己 规过
         else
         {
             BossCtrl bc = go.GetComponent<BossCtrl>();

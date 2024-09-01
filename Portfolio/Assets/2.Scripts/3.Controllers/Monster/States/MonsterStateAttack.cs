@@ -7,8 +7,7 @@ public class MonsterStateAttack : TSingleton<MonsterStateAttack>, IFSMState<Mons
 {
     public void Enter(MonsterCtrl m)
     {
-        m.AttackNavSetting();
-        m.nowCombo = eCombo.Hit1;
+        m.AttackNavSetting();        
         m.cntTime = 0;
     }
 

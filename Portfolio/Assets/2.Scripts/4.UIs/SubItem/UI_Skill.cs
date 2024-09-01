@@ -94,24 +94,27 @@ public class UI_Skill : UI_Base, IPointerEnterHandler, IPointerExitHandler
 
     public void OnSkill()
     {
+        //쿨타임 중에는 작동 X
         if (Cool_Img.fillAmount > 0)
             return;
 
+        //회전공격 도중 혹은 공격 모션 작동 중일 때에는 스킬 작동 X
         if (_skill.type == eSkill.Spin && PlayerCtrl._inst.State == PlayerState.Attack)
             return;
 
         switch (_skill.type) 
         {
             case eSkill.Dodge:
-                {
-                    if (player.Bools[PlayerBools.ActSkill])
-                        return;
-                }
+                //스킬 사용중 회피 X
+                if (player.Bools[PlayerBools.ActSkill])
+                    return;
                 break;
             default:
+                //회피 중 사용 X
                 if (player.Bools[PlayerBools.ActDodge])
                     return;
 
+                //사용 가능한 충분한 마나 확인 후 부족 한경우 사용 X
                 if (player.UseMP(_skill.useMp) == false)
                     return;
                 break;

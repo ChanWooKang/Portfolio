@@ -90,7 +90,6 @@ public class InventoryManager : MonoBehaviour
 
         StopCoroutine(ChangeCoroutine(type, item, isWear));
         StartCoroutine(ChangeCoroutine(type, item, isWear));
-
     }
 
     IEnumerator ChangeCoroutine(eEquipment type, SOItem item, bool isWear = true)

@@ -9,7 +9,7 @@ using Define;
 public class InputManager
 {
     public Action KeyAction = null;
-    public Action<MouseEvent> RightMouseAction = null;
+    public Action<MouseEvent> MouseAction = null;
     bool isRPress = false;
     float RPressTime = 0;
 
@@ -22,16 +22,16 @@ public class InputManager
         if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke();
 
-        if(RightMouseAction != null)
+        if(MouseAction != null)
         {
             if (Input.GetMouseButton(0))
             {
                 if(isRPress == false)
                 {
-                    RightMouseAction.Invoke(MouseEvent.PointerDown);
+                    MouseAction.Invoke(MouseEvent.PointerDown);
                     RPressTime = Time.time;
                 }
-                RightMouseAction.Invoke(MouseEvent.Press);
+                MouseAction.Invoke(MouseEvent.Press);
                 isRPress = true;
             }
             else
@@ -39,8 +39,8 @@ public class InputManager
                 if (isRPress)
                 {
                     if (Time.time > RPressTime + 0.25f)
-                        RightMouseAction.Invoke(MouseEvent.Click);
-                    RightMouseAction.Invoke(MouseEvent.PointerUp);
+                        MouseAction.Invoke(MouseEvent.Click);
+                    MouseAction.Invoke(MouseEvent.PointerUp);
                 }
                 isRPress = false;
                 RPressTime = 0;
@@ -51,7 +51,7 @@ public class InputManager
 
     public void Clear()
     {
-        RightMouseAction = null;
+        MouseAction = null;
         KeyAction = null;
     }
 }

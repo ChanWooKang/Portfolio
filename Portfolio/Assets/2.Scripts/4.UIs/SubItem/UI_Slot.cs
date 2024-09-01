@@ -118,13 +118,13 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
         }
     }
 
+    //우클릭 아이템 사용 혹은 장착/해제
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Right)
         {
             if(item != null)
-            {
-                //Test 
+            {                
                 UI_ItemInfo._inst.OffInforMation();
 
                 switch (item.iType)
@@ -148,7 +148,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
             }
         }
     }
-
+    //드래그 시작
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (item != null)
@@ -163,7 +163,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
 
         }
     }
-
+    //드래그 중 이동
     public void OnDrag(PointerEventData eventData)
     {
         if (item != null)
@@ -171,7 +171,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
             DragSlot._inst.rect.position = eventData.position;
         }
     }
-
+    // 드래그 완료
     public void OnEndDrag(PointerEventData eventData)
     {
         DragSlot._inst.SetAlpha(0);
@@ -179,6 +179,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
         DragSlot._inst.Slot_Inven = null;
         DragSlot._inst.rect.position = Vector2.zero;
     }
+    // 슬롯에 드래그 아이템 들어왔을 경우
     public void OnDrop(PointerEventData eventData)
     {
         if (DragSlot._inst.isFormInven)
@@ -200,7 +201,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
             }
         }
     }
-
+    // 마우스 갖다 대면 아이템 정보 표시
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(item != null)
@@ -216,7 +217,7 @@ public class UI_Slot : UI_Base, IPointerClickHandler, IBeginDragHandler, IDragHa
         }
         
     }
-
+    // 아이템 정보 표시 X
     public void OnPointerExit(PointerEventData eventData)
     {
         UI_ItemInfo._inst.OffInforMation();

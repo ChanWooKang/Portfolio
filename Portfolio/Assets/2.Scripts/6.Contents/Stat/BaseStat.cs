@@ -10,6 +10,7 @@ public class BaseStat: MonoBehaviour
     protected float _damage;
     protected float _defense;
     protected float _moveSpeed;
+    // 피격 데미지
     protected float _attackedDamage;
 
     #region [ Property ]
@@ -28,8 +29,7 @@ public class BaseStat: MonoBehaviour
     {
         float per = 0.06f;
         float damage = Mathf.Max(0.5f, attacker._damage * ((_defense * per) / (1 + per * _defense)));
-
-        //float damage = Mathf.Max(0.5f, attacker._damage - _defense);
+        
         _attackedDamage = damage;
         if(_hp > damage)
         {

@@ -13,7 +13,8 @@ public class PoolingManager : MonoBehaviour
     public List<GameObject>[] _pooledUnitList;
     public int _defPoolAmount = 5;
     public bool _canPoolExpand = true;
-
+    public Dictionary<string, PoolUnit> _poolingUnitDictionary;
+    public Dictionary<string, Dictionary<int, GameObject>> _pooledUnits;
 
 
     static void Init()
@@ -31,69 +32,84 @@ public class PoolingManager : MonoBehaviour
                 _uniqueInstance = go.GetComponent<PoolingManager>();
             }
         }
-    }
-
-    public void LoadObjectPool()
-    {
-        _pooledUnitList = new List<GameObject>[_poolingUnits.Length];
-        for (int i = 0; i < _poolingUnits.Length; i++)
-        {
-            _pooledUnitList[i] = new List<GameObject>();
-            if (_poolingUnits[i].amount > 0)
-                _poolingUnits[i].CurAmount = _poolingUnits[i].amount;
-            else
-                _poolingUnits[i].CurAmount = _defPoolAmount;
-
-            int index = 0;
-            for (int j = 0; j < _poolingUnits[i].CurAmount; j++)
-            {
-                GameObject newItem = (GameObject)Instantiate(_poolingUnits[i].prefab);
-                string suffix = "_" + index;
-                AddToPooledUnitList(i, newItem, suffix);
-                ++index;
-            }
-        }
-    }
+    }    
 
     public void Clear()
     {
         _uniqueInstance = null;
     }
 
-    void AddToPooledUnitList(int index, GameObject newItem, string suffix, Transform parent = null)
+    public void LoadObjectPool()
     {
-        newItem.name += suffix;
+        _pooledUnits = new Dictionary<string, Dictionary<int, GameObject>>();
+        _poolingUnitDictionary = new Dictionary<string, PoolUnit>();
+        for (int i = 0; i < _poolingUnits.Length; i++)
+        {
+            Dictionary<int, GameObject> objDict = new Dictionary<int, GameObject>();
+            if (_poolingUnits[i].amount > 0)
+                _poolingUnits[i].CurAmount = _poolingUnits[i].amount;
+            else
+                _poolingUnits[i].CurAmount = _defPoolAmount;
+
+            if (_poolingUnitDictionary.ContainsKey(_poolingUnits[i].name) == false)
+            {
+                _poolingUnitDictionary.Add(_poolingUnits[i].name, _poolingUnits[i]);
+            }
+            else
+            {
+                Debug.Log("복수로 풀링매니저에 저장되어있습니다.");
+            }
+
+            int index = 0;
+            for (int j = 0; j < _poolingUnits[i].CurAmount; j++)
+            {
+                GameObject newItem = (GameObject)Instantiate(_poolingUnits[i].prefab);
+                objDict.Add(j, newItem);
+                AddToPooledUnits(newItem);
+                ++index;
+            }
+            _pooledUnits.Add(_poolingUnits[i].name, objDict);
+        }
+    }
+
+    void AddToPooledUnits(GameObject newItem, Transform parent = null)
+    {
         newItem.SetActive(false);
         if (parent == null)
             newItem.transform.SetParent(transform);
         else
             newItem.transform.SetParent(parent);
-        _pooledUnitList[index].Add(newItem);
+
     }
 
     GameObject GetPooledItem(string value)
     {
-        for(int unitIdx = 0; unitIdx < _pooledUnitList.Length; unitIdx++)
-        {
-            if (_poolingUnits[unitIdx].prefab.name == value)
-            {
-                int listIdx = 0;
-                for (; listIdx < _pooledUnitList[unitIdx].Count; listIdx++)
-                {
-                    if (_pooledUnitList[unitIdx][listIdx] == null)
-                        return null;
-                    if (_pooledUnitList[unitIdx][listIdx].activeInHierarchy == false)
-                        return _pooledUnitList[unitIdx][listIdx];
-                }
+        if (_pooledUnits == null)
+            return null;
 
-                if (_canPoolExpand)
+        if (_pooledUnits.ContainsKey(value))
+        {
+            foreach (var Data in _pooledUnits[value])
+            {
+                if (Data.Value.activeInHierarchy == false)
+                    return Data.Value;
+            }
+
+            if (_canPoolExpand)
+            {
+                if (_poolingUnitDictionary.ContainsKey(value))
                 {
-                    GameObject tmpObj = (GameObject)Instantiate(_poolingUnits[unitIdx].prefab);
-                    string suffix = $"_{listIdx}({(listIdx - _poolingUnits[unitIdx].CurAmount + 1)})";
-                    AddToPooledUnitList(unitIdx, tmpObj, suffix);
+                    GameObject prefab = _poolingUnitDictionary[value].prefab;
+                    GameObject tmpObj = (GameObject)Instantiate(prefab);
+
+                    AddToPooledUnits(tmpObj);
+
+                    //Dictionary 추가 해야함
+                    int index = _pooledUnits[value].Count;
+                    _pooledUnits[value].Add(index, tmpObj);
+
                     return tmpObj;
                 }
-                break;
             }
         }
         return null;

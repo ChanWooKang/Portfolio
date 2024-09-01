@@ -4,10 +4,8 @@ using UnityEngine;
 using Define;
 using DataContents;
 
-public class GameManagerEX : MonoBehaviour
-{
-    static GameManagerEX _uniqueInstance;
-    public static GameManagerEX _inst { get { return _uniqueInstance; } }
+public class GameManagerEX : TSingleton<GameManagerEX>
+{    
     public float GameTime { get { return InGameTime; } }
     public int TotalKill { get { SetTotalKill(); return totalKill; } }
     PlayerCtrl player;
@@ -36,11 +34,6 @@ public class GameManagerEX : MonoBehaviour
     public bool endTalk = false;
     public GameObject BlockObj;
     public GameObject ClearObj;
-
-    void Awake()
-    {
-        _uniqueInstance = this;
-    }
 
     void Start()
     {
@@ -302,11 +295,9 @@ public class GameManagerEX : MonoBehaviour
         ObjectData objData = scanObj.GetComponent<ObjectData>();
         if (player.State != PlayerState.Idle) 
             player.Stop();        
+
         if (OnTalk(objData.id, objData.krName) == false)
         {
-            ScanObject = null;
-            ScanType = eInteract.Unknown;
-
             // 진행할거 , 퀘스트 Or 상점 열기
             switch (type)
             {

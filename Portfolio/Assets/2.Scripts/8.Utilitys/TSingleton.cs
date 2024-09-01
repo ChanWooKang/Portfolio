@@ -11,6 +11,9 @@ public class TSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
+            if (_uniqueInstance != null)
+                return _uniqueInstance;
+
             lock (_lock)
             {
                 if(_uniqueInstance == null)

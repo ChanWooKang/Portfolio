@@ -533,7 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6012208535801009072}
   m_Layer: 13
-  m_Name: CactusMeshPBR
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

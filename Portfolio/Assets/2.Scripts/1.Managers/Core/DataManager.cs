@@ -6,12 +6,12 @@ using DataContents;
 
 public class DataManager
 {
-    public Dictionary<int, DataByLevel> Dict_Stat { get; private set; } = new Dictionary<int, DataByLevel>();
-    public Dictionary<eMonster, DataByMonster> Dict_Monster { get; private set; } = new Dictionary<eMonster, DataByMonster>();
-    public PlayerData playerData = new PlayerData();
-    public Inventorydata invenData = new Inventorydata();
-    public KillData killData = new KillData();
-    public QuestSaveData questData = new QuestSaveData();
+    public Dictionary<int, DataByLevel> Dict_Stat { get; private set; }
+    public Dictionary<eMonster, DataByMonster> Dict_Monster { get; private set; }
+    public PlayerData playerData;
+    public Inventorydata invenData;
+    public KillData killData;
+    public QuestSaveData questData;
 
     const string DBL = "DataByLevel";
     const string DBM = "DataByMonster";
@@ -53,6 +53,8 @@ public class DataManager
 
     void LoadData()
     {
+        Dict_Stat = new Dictionary<int, DataByLevel>();
+        Dict_Monster = new Dictionary<eMonster, DataByMonster>();
         Dict_Stat = LoadJson<StatData, int, DataByLevel>(DBL).Make();
         Dict_Monster = LoadJson<MonsterData, eMonster, DataByMonster>(DBM).Make();
     }

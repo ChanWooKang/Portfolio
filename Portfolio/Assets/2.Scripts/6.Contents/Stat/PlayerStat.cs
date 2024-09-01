@@ -138,11 +138,13 @@ public class PlayerStat : BaseStat
             }
             else
             {
+                //DataByLevel 데이터가 없을 경우 초기화
                 Init();
             }
         }
         else
         {
+            //저장 되어있는 플레이어 데이터가 없을 경우 초기화
             Init();
         }
         

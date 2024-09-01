@@ -5,9 +5,6 @@ using UnityEngine;
 public class TalkManager : MonoBehaviour
 {
     Dictionary<int, string[]> talkData;
-    //Dictionary<int, Sprite> portraitDate;
-
-    //public Sprite[] portraitSprite;
 
     private void Awake()
     {

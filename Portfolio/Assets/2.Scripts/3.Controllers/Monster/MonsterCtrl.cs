@@ -120,7 +120,8 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     public bool IsTooFar(float range = 20.0f)
     {
-        Vector3 goalPos = new Vector3(_offSet.x, transform.position.y, _offSet.z);
+        Vector3 goalPos 
+            = new Vector3(_offSet.x, transform.position.y, _offSet.z);
         float dist = Vector3.SqrMagnitude(goalPos - transform.position);
         if (dist > range * range)
             return true;
@@ -210,7 +211,9 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         Vector3 dir = pos - transform.position;
         _agent.SetDestination(pos);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), _rSpeed * Time.deltaTime);
+        //목적지를 향해 회전
+        transform.rotation = Quaternion.Lerp(transform.rotation, 
+            Quaternion.LookRotation(dir), _rSpeed * Time.deltaTime);
     }
 
     public void TurnTowardPlayer()
@@ -299,13 +302,16 @@ public class MonsterCtrl : FSM<MonsterCtrl>
 
     public void OnDeadEvent()
     {      
+        //몬스터 디스폰
         SpawnManager._inst.MonsterDespawn(gameObject);
-        ChangeColor(Color.white);
-        ChangeState(MonsterStateDisable._inst);
+        //몬스터 아이템 드랍 (랜덤), 골드 드랍 (확정)
         _dropTable.ItemDrop(transform, _stat.Gold);
         _dropTable.ItemDrop(transform);
 
-        //GameManager
+        ChangeColor(Color.white);
+        ChangeState(MonsterStateDisable._inst);
+        
+        //GameManager 
         GameManagerEX._inst.KillCount(mType);
     }    
 
